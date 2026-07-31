@@ -98,7 +98,7 @@ export function ContactForm({ variant = "question", packageName }: Props) {
 
   if (success && variant === "contact") {
     return (
-      <div className="text-center p-8 border border-ttw-gold/30 rounded-2xl bg-[#0a0a0a]">
+      <div className="text-center p-8 border border-ttw-gold/30 rounded-2xl theme-surface">
         <h3 className="font-cinzel text-2xl text-ttw-gold mb-2">Thank you!</h3>
         <p className="text-gray-300">
           We received your request
@@ -127,7 +127,7 @@ export function ContactForm({ variant = "question", packageName }: Props) {
               id="contactName"
               name="contactName"
               required
-              className="w-full bg-[#0a0a0a] border border-ttw-gold/30 rounded-lg px-3 py-2 focus:outline-none focus:border-ttw-gold"
+              className="w-full theme-surface theme-input border border-ttw-gold/30 rounded-lg px-3 py-2 focus:outline-none focus:border-ttw-gold"
             />
           </div>
           <div>
@@ -139,7 +139,7 @@ export function ContactForm({ variant = "question", packageName }: Props) {
               name="contactEmail"
               type="email"
               required
-              className="w-full bg-[#0a0a0a] border border-ttw-gold/30 rounded-lg px-3 py-2 focus:outline-none focus:border-ttw-gold"
+              className="w-full theme-surface theme-input border border-ttw-gold/30 rounded-lg px-3 py-2 focus:outline-none focus:border-ttw-gold"
             />
           </div>
           <div>
@@ -150,7 +150,7 @@ export function ContactForm({ variant = "question", packageName }: Props) {
               id="contactPhone"
               name="contactPhone"
               required
-              className="w-full bg-[#0a0a0a] border border-ttw-gold/30 rounded-lg px-3 py-2 focus:outline-none focus:border-ttw-gold"
+              className="w-full theme-surface theme-input border border-ttw-gold/30 rounded-lg px-3 py-2 focus:outline-none focus:border-ttw-gold"
             />
           </div>
           <div>
@@ -161,7 +161,7 @@ export function ContactForm({ variant = "question", packageName }: Props) {
               id="contactMessage"
               name="contactMessage"
               rows={4}
-              className="w-full bg-[#0a0a0a] border border-ttw-gold/30 rounded-lg px-3 py-2 focus:outline-none focus:border-ttw-gold"
+              className="w-full theme-surface theme-input border border-ttw-gold/30 rounded-lg px-3 py-2 focus:outline-none focus:border-ttw-gold"
             />
           </div>
         </>
@@ -176,7 +176,7 @@ export function ContactForm({ variant = "question", packageName }: Props) {
             <input
               id="questionName"
               name="name"
-              className="w-full bg-[#0a0a0a] border border-ttw-gold/30 rounded-lg px-3 py-2 focus:outline-none focus:border-ttw-gold"
+              className="w-full theme-surface theme-input border border-ttw-gold/30 rounded-lg px-3 py-2 focus:outline-none focus:border-ttw-gold"
             />
           </div>
           <div>
@@ -189,7 +189,7 @@ export function ContactForm({ variant = "question", packageName }: Props) {
               required
               minLength={10}
               rows={5}
-              className="w-full bg-[#0a0a0a] border border-ttw-gold/30 rounded-lg px-3 py-2 focus:outline-none focus:border-ttw-gold"
+              className="w-full theme-surface theme-input border border-ttw-gold/30 rounded-lg px-3 py-2 focus:outline-none focus:border-ttw-gold"
             />
           </div>
         </>
@@ -204,7 +204,7 @@ export function ContactForm({ variant = "question", packageName }: Props) {
             <input
               id="prayerName"
               name="name"
-              className="w-full bg-[#0a0a0a] border border-ttw-gold/30 rounded-lg px-3 py-2 focus:outline-none focus:border-ttw-gold"
+              className="w-full theme-surface theme-input border border-ttw-gold/30 rounded-lg px-3 py-2 focus:outline-none focus:border-ttw-gold"
             />
           </div>
           <div>
@@ -217,7 +217,7 @@ export function ContactForm({ variant = "question", packageName }: Props) {
               required
               minLength={10}
               rows={5}
-              className="w-full bg-[#0a0a0a] border border-ttw-gold/30 rounded-lg px-3 py-2 focus:outline-none focus:border-ttw-gold"
+              className="w-full theme-surface theme-input border border-ttw-gold/30 rounded-lg px-3 py-2 focus:outline-none focus:border-ttw-gold"
             />
           </div>
           <label className="flex items-center gap-2 text-sm text-gray-400">

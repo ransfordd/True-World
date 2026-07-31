@@ -26,7 +26,7 @@ export function FaqAccordion() {
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           placeholder="Search questions…"
-          className="faq-search-input w-full bg-[#0a0a0a] border border-ttw-gold/30 rounded-xl px-4 py-3 focus:outline-none focus:border-ttw-gold"
+          className="faq-search-input w-full theme-surface theme-input border border-ttw-gold/30 rounded-xl px-4 py-3 focus:outline-none focus:border-ttw-gold"
           onKeyDown={(e) => {
             if (e.key === "Escape") setQuery("");
           }}
@@ -43,7 +43,7 @@ export function FaqAccordion() {
             const open = openIndex === index;
             return (
               <FadeIn key={item.question}>
-                <div className="border border-ttw-gold/20 rounded-xl overflow-hidden bg-[#0a0a0a]">
+                <div className="border border-ttw-gold/20 rounded-xl overflow-hidden theme-surface">
                   <button
                     type="button"
                     className="w-full text-left px-5 py-4 flex justify-between gap-4 items-center"

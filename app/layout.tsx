@@ -39,7 +39,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark" suppressHydrationWarning>
       <body
-        className={`${inter.variable} ${cinzel.variable} font-sans bg-black text-white min-h-screen antialiased overflow-x-hidden`}
+        className={`${inter.variable} ${cinzel.variable} font-sans min-h-screen antialiased overflow-x-hidden`}
       >
         <ThemeProvider>
           <ToastProvider>

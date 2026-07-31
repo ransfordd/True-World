@@ -88,7 +88,7 @@ export function CoachingModal({ packageName, onClose }: Props) {
             role="dialog"
             aria-modal="true"
             aria-label="Coaching enrollment"
-            className="w-full max-w-lg bg-[#0a0a0a] border border-ttw-gold/30 rounded-2xl p-6 md:p-8 relative"
+            className="w-full max-w-lg theme-surface border border-ttw-gold/30 rounded-2xl p-6 md:p-8 relative"
             initial={{ scale: 0.95, y: 20 }}
             animate={{ scale: 1, y: 0 }}
             exit={{ scale: 0.95, y: 20 }}
@@ -130,7 +130,7 @@ export function CoachingModal({ packageName, onClose }: Props) {
                     id="contactName"
                     name="contactName"
                     required
-                    className="w-full bg-black border border-ttw-gold/30 rounded-lg px-3 py-2 focus:outline-none focus:border-ttw-gold"
+                    className="w-full theme-input border border-ttw-gold/30 rounded-lg px-3 py-2 focus:outline-none focus:border-ttw-gold"
                   />
                 </div>
                 <div>
@@ -142,7 +142,7 @@ export function CoachingModal({ packageName, onClose }: Props) {
                     name="contactEmail"
                     type="email"
                     required
-                    className="w-full bg-black border border-ttw-gold/30 rounded-lg px-3 py-2 focus:outline-none focus:border-ttw-gold"
+                    className="w-full theme-input border border-ttw-gold/30 rounded-lg px-3 py-2 focus:outline-none focus:border-ttw-gold"
                   />
                 </div>
                 <div>
@@ -153,7 +153,7 @@ export function CoachingModal({ packageName, onClose }: Props) {
                     id="contactPhone"
                     name="contactPhone"
                     required
-                    className="w-full bg-black border border-ttw-gold/30 rounded-lg px-3 py-2 focus:outline-none focus:border-ttw-gold"
+                    className="w-full theme-input border border-ttw-gold/30 rounded-lg px-3 py-2 focus:outline-none focus:border-ttw-gold"
                   />
                 </div>
                 <div>
@@ -164,7 +164,7 @@ export function CoachingModal({ packageName, onClose }: Props) {
                     id="contactMessage"
                     name="contactMessage"
                     rows={3}
-                    className="w-full bg-black border border-ttw-gold/30 rounded-lg px-3 py-2 focus:outline-none focus:border-ttw-gold"
+                    className="w-full theme-input border border-ttw-gold/30 rounded-lg px-3 py-2 focus:outline-none focus:border-ttw-gold"
                   />
                 </div>
                 <button

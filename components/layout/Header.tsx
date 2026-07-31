@@ -19,7 +19,7 @@ export function Header() {
 
   return (
     <nav
-      className="premium-nav fixed w-full top-0 z-50 bg-black/95 backdrop-blur-md border-b border-ttw-gold/10"
+      className="premium-nav theme-nav fixed w-full top-0 z-50 backdrop-blur-md border-b border-ttw-gold/10"
       aria-label="Main navigation"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -86,7 +86,7 @@ export function Header() {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
-            className="lg:hidden bg-black/95 border-t border-ttw-gold/10 overflow-hidden"
+            className="lg:hidden theme-nav border-t border-ttw-gold/10 overflow-hidden"
           >
             <div className="flex flex-col items-center py-4 gap-1">
               {NAV_LINKS.map((link) => (

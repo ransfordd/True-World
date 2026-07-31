@@ -44,7 +44,7 @@ export function HomeWelcomeGate({ children }: { children: ReactNode }) {
           role="dialog"
           aria-modal="true"
           aria-label="Welcome"
-          className="fixed inset-0 z-[9999] bg-black flex items-center justify-center"
+          className="fixed inset-0 z-[9999] welcome-scrim flex items-center justify-center"
           initial={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.7 }}
@@ -80,7 +80,7 @@ export function HomeWelcomeGate({ children }: { children: ReactNode }) {
       {/* SSR + first paint: solid cover so homepage never paints under the loader */}
       {!contentReady && (
         <div
-          className="fixed inset-0 z-[9998] bg-black"
+          className="fixed inset-0 z-[9998] welcome-scrim"
           aria-hidden="true"
         />
       )}

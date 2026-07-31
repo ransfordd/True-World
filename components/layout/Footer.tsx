@@ -42,7 +42,7 @@ export function Footer() {
   }
 
   return (
-    <footer className="border-t border-ttw-gold/20 mt-20 bg-black/80">
+    <footer className="border-t border-ttw-gold/20 mt-20 theme-footer">
       <div className="max-w-7xl mx-auto px-6 py-14 grid grid-cols-1 md:grid-cols-3 gap-10">
         <div>
           <Image
@@ -52,14 +52,14 @@ export function Footer() {
             height={128}
             className="w-32 mb-4 opacity-90"
           />
-          <p className="text-gray-400 text-sm leading-relaxed">
+          <p className="theme-muted text-sm leading-relaxed">
             {SITE.tagline}. Awakening the Divine Within Humanity.
           </p>
         </div>
 
         <div>
           <h3 className="font-cinzel text-ttw-gold mb-4">Quick Links</h3>
-          <ul className="space-y-2 text-sm text-gray-300">
+          <ul className="space-y-2 text-sm theme-muted">
             {NAV_LINKS.slice(0, 6).map((link) => (
               <li key={link.href}>
                 <Link href={link.href} className="hover:text-ttw-gold transition">
@@ -72,7 +72,7 @@ export function Footer() {
 
         <div>
           <h3 className="font-cinzel text-ttw-gold mb-4">Stay Connected</h3>
-          <p className="text-sm text-gray-400 mb-2">
+          <p className="text-sm theme-muted mb-2">
             Instagram:{" "}
             <a
               href={SITE.instagram}
@@ -83,7 +83,7 @@ export function Footer() {
               {SITE.instagramHandle}
             </a>
           </p>
-          <p className="text-sm text-gray-400 mb-4">
+          <p className="text-sm theme-muted mb-4">
             Email:{" "}
             <a href={`mailto:${SITE.email}`} className="text-ttw-gold hover:underline">
               {SITE.email}
@@ -95,7 +95,7 @@ export function Footer() {
               name="email"
               required
               placeholder="Your email"
-              className="flex-1 bg-[#0a0a0a] border border-ttw-gold/30 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-ttw-gold"
+              className="flex-1 theme-input border border-ttw-gold/30 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-ttw-gold"
             />
             <button
               type="submit"
@@ -107,7 +107,7 @@ export function Footer() {
           </form>
         </div>
       </div>
-      <div className="border-t border-ttw-gold/10 py-4 text-center text-xs text-gray-500">
+      <div className="border-t border-ttw-gold/10 py-4 text-center text-xs theme-muted">
         © {new Date().getFullYear()} {SITE.name}. All rights reserved.{" "}
         <Link href="/faq" className="text-ttw-gold/70 hover:text-ttw-gold">
           Privacy

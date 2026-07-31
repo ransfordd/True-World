@@ -17,24 +17,29 @@ type ThemeContextValue = {
 };
 
 const ThemeContext = createContext<ThemeContextValue | null>(null);
+const STORAGE_KEY = "ttw-theme";
+
+function applyThemeClass(theme: Theme) {
+  const root = document.documentElement;
+  root.classList.remove("light", "dark");
+  root.classList.add(theme);
+}
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
   const [theme, setTheme] = useState<Theme>("dark");
 
   useEffect(() => {
-    const saved = localStorage.getItem("ttw-theme") as Theme | null;
+    const saved = localStorage.getItem(STORAGE_KEY) as Theme | null;
     const initial = saved === "light" || saved === "dark" ? saved : "dark";
     setTheme(initial);
-    document.documentElement.classList.toggle("light", initial === "light");
-    document.documentElement.classList.toggle("dark", initial === "dark");
+    applyThemeClass(initial);
   }, []);
 
   const toggleTheme = useCallback(() => {
     setTheme((prev) => {
-      const next = prev === "dark" ? "light" : "dark";
-      localStorage.setItem("ttw-theme", next);
-      document.documentElement.classList.toggle("light", next === "light");
-      document.documentElement.classList.toggle("dark", next === "dark");
+      const next: Theme = prev === "dark" ? "light" : "dark";
+      localStorage.setItem(STORAGE_KEY, next);
+      applyThemeClass(next);
       return next;
     });
   }, []);
