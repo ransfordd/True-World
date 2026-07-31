@@ -1,0 +1,205 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --premium-gold: #c0a04c;
+  --premium-black: #030303;
+  --premium-gray: #1a1a1a;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: linear-gradient(to bottom, var(--premium-black), #050505);
+  color: #fff;
+  min-height: 100vh;
+}
+
+.font-cinzel {
+  font-family: var(--font-cinzel), serif;
+}
+
+.gold-glow {
+  text-shadow: 0 0 15px rgba(192, 160, 76, 0.3);
+}
+
+.anchor-offset {
+  scroll-margin-top: 96px;
+}
+
+.nav-link {
+  font-family: var(--font-cinzel), serif;
+  color: white;
+  padding: 0.5rem;
+  transition: color 0.3s ease;
+  position: relative;
+}
+
+.nav-link::after {
+  content: "";
+  position: absolute;
+  bottom: -2px;
+  left: 50%;
+  width: 0;
+  height: 1px;
+  background: var(--premium-gold);
+  transition: all 0.3s ease;
+  transform: translateX(-50%);
+}
+
+.nav-link:hover,
+.nav-link.active {
+  color: var(--premium-gold);
+}
+
+.nav-link:hover::after,
+.nav-link.active::after {
+  width: 100%;
+}
+
+.mobile-nav-link {
+  display: inline-block;
+  padding: 0.625rem 1.25rem;
+  font-family: var(--font-cinzel), serif;
+  color: white;
+  transition: all 0.3s ease;
+  text-align: center;
+  border-bottom: 2px solid transparent;
+  font-size: 0.95rem;
+  letter-spacing: 0.5px;
+}
+
+.mobile-nav-link:hover,
+.mobile-nav-link.active {
+  color: var(--premium-gold);
+  background: rgba(192, 160, 76, 0.1);
+  border-bottom-color: var(--premium-gold);
+}
+
+.btn-modern {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.btn-modern:hover {
+  transform: translateY(-2px);
+}
+
+.card-modern {
+  transition: border-color 0.3s ease, transform 0.3s ease;
+}
+
+.card-modern:hover {
+  transform: translateY(-4px);
+}
+
+.page-hero-prayer {
+  background-image: linear-gradient(rgba(8, 8, 8, 0.6), rgba(12, 12, 12, 0.75)),
+    url("/images/pr.jpg");
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+}
+
+.page-hero-articles {
+  background-image: linear-gradient(rgba(8, 8, 8, 0.65), rgba(12, 12, 12, 0.8)),
+    url("/images/ar.jpg");
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+}
+
+.page-hero-resources {
+  background-image: linear-gradient(rgba(8, 8, 8, 0.65), rgba(12, 12, 12, 0.8)),
+    url("/images/rr.jpg");
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+}
+
+.page-hero-journey {
+  background-image: linear-gradient(rgba(8, 8, 8, 0.65), rgba(12, 12, 12, 0.8)),
+    url("/images/jj.png");
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+}
+
+.video-player-shadow {
+  box-shadow: 0 20px 60px rgba(192, 160, 76, 0.15);
+}
+
+.toast {
+  position: fixed;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  z-index: 10000;
+  padding: 0.875rem 1.25rem;
+  border-radius: 0.75rem;
+  border: 1px solid rgba(192, 160, 76, 0.35);
+  background: #0a0a0a;
+  color: #fff;
+  max-width: 22rem;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+}
+
+.toast.success {
+  border-color: rgba(34, 197, 94, 0.5);
+}
+
+.toast.error {
+  border-color: rgba(239, 68, 68, 0.5);
+}
+
+.toast.warning {
+  border-color: rgba(234, 179, 8, 0.5);
+}
+
+.reading-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3px;
+  background: var(--premium-gold);
+  z-index: 10001;
+  transform-origin: left;
+}
+
+.back-to-top {
+  position: fixed;
+  bottom: 1.5rem;
+  left: 1.5rem;
+  z-index: 50;
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 9999px;
+  background: var(--premium-gold);
+  color: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8px 24px rgba(192, 160, 76, 0.35);
+}
+
+.faq-highlight {
+  background: rgba(192, 160, 76, 0.35);
+  color: #fff;
+  padding: 0 0.15em;
+  border-radius: 0.15em;
+}
+
+.prose-article p {
+  margin-bottom: 1rem;
+  line-height: 1.75;
+  color: #d1d5db;
+}
+
+.prose-article h2,
+.prose-article h3 {
+  color: var(--premium-gold);
+  font-family: var(--font-cinzel), serif;
+  margin-top: 1.5rem;
+  margin-bottom: 0.75rem;
+}

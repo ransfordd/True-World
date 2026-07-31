@@ -1,0 +1,295 @@
+/* Coaching Package Enrollment Modal Styles */
+
+.coaching-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.9);
+    backdrop-filter: blur(8px);
+    z-index: 10000;
+    align-items: flex-start; /* Changed from center to better handle tall content */
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    padding: 2.5vh 0; /* Add some padding to ensure modal doesn't touch screen edges */
+    overflow-y: auto; /* Allow scrolling on the modal itself */
+}
+
+.coaching-modal.active {
+    display: flex;
+    opacity: 1;
+}
+
+.coaching-modal-content {
+    background: linear-gradient(145deg, #0f0f0f, #080808);
+    border: 2px solid rgba(192, 160, 76, 0.3);
+    border-radius: 24px;
+    padding: 2.5rem;
+    max-width: 600px;
+    width: 90%;
+    max-height: 85vh;
+    overflow-y: auto;
+    position: relative;
+    box-shadow: 0 20px 60px rgba(192, 160, 76, 0.3);
+    transform: scale(0.9);
+    transition: transform 0.3s ease;
+    -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+    overscroll-behavior: contain; /* Prevent scroll chaining */
+}
+
+.coaching-modal.active .coaching-modal-content {
+    transform: scale(1);
+}
+
+.coaching-modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 2px solid rgba(192, 160, 76, 0.2);
+}
+
+.coaching-modal-title {
+    font-family: 'Cinzel', serif;
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--premium-gold);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.coaching-modal-close {
+    background: transparent;
+    border: 2px solid rgba(192, 160, 76, 0.3);
+    color: var(--premium-gold);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    flex-shrink: 0;
+}
+
+.coaching-modal-close:hover {
+    border-color: var(--premium-gold);
+    background: rgba(192, 160, 76, 0.1);
+    transform: rotate(90deg);
+}
+
+.coaching-modal-close svg {
+    width: 24px;
+    height: 24px;
+}
+
+.coaching-modal-package-info {
+    background: rgba(192, 160, 76, 0.1);
+    border: 1px solid rgba(192, 160, 76, 0.2);
+    border-radius: 12px;
+    padding: 1.25rem;
+    margin-bottom: 2rem;
+}
+
+.coaching-modal-package-name {
+    font-family: 'Cinzel', serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--premium-gold);
+    margin-bottom: 0.5rem;
+}
+
+.coaching-modal-package-subtitle {
+    color: #aaa;
+    font-size: 1rem;
+}
+
+.coaching-modal-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.coaching-form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.coaching-form-label {
+    color: var(--premium-gold);
+    font-weight: 600;
+    font-size: 0.95rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.coaching-form-label .required {
+    color: #f44336;
+    margin-left: 4px;
+}
+
+.coaching-form-input,
+.coaching-form-textarea,
+.coaching-form-select {
+    background: rgba(255, 255, 255, 0.05);
+    border: 2px solid rgba(192, 160, 76, 0.2);
+    border-radius: 10px;
+    padding: 0.875rem 1.25rem;
+    color: #fff;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    font-family: inherit;
+}
+
+.coaching-form-input:focus,
+.coaching-form-textarea:focus,
+.coaching-form-select:focus {
+    outline: none;
+    border-color: var(--premium-gold);
+    background: rgba(255, 255, 255, 0.08);
+    box-shadow: 0 0 0 3px rgba(192, 160, 76, 0.1);
+}
+
+.coaching-form-input::placeholder,
+.coaching-form-textarea::placeholder {
+    color: #666;
+}
+
+.coaching-form-textarea {
+    min-height: 120px;
+    resize: vertical;
+}
+
+.coaching-form-error {
+    color: #f44336;
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
+    display: none;
+}
+
+.coaching-form-error.show {
+    display: block;
+}
+
+.coaching-form-input.error,
+.coaching-form-textarea.error,
+.coaching-form-select.error {
+    border-color: #f44336;
+}
+
+.coaching-modal-submit {
+    background: linear-gradient(135deg, var(--premium-gold), #A88A3F);
+    color: #000;
+    padding: 1.125rem 2rem;
+    border-radius: 12px;
+    font-weight: 700;
+    font-size: 1.1rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    margin-top: 0.5rem;
+}
+
+.coaching-modal-submit:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(192, 160, 76, 0.4);
+}
+
+.coaching-modal-submit:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.coaching-modal-submit.loading {
+    position: relative;
+    color: transparent;
+}
+
+.coaching-modal-submit.loading::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 20px;
+    height: 20px;
+    border: 3px solid rgba(0, 0, 0, 0.3);
+    border-radius: 50%;
+    border-top-color: #000;
+    animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+.coaching-modal-success {
+    display: none;
+    text-align: center;
+    padding: 2rem;
+}
+
+.coaching-modal-success.active {
+    display: block;
+}
+
+.coaching-modal-success-icon {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 1.5rem;
+    background: rgba(76, 175, 80, 0.2);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.coaching-modal-success-icon svg {
+    width: 50px;
+    height: 50px;
+    color: #4CAF50;
+}
+
+.coaching-modal-success-title {
+    font-family: 'Cinzel', serif;
+    font-size: 1.75rem;
+    color: var(--premium-gold);
+    margin-bottom: 1rem;
+}
+
+.coaching-modal-success-message {
+    color: #ddd;
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin-bottom: 2rem;
+}
+
+@media (max-width: 768px) {
+    .coaching-modal-content {
+        padding: 1.5rem;
+        border-radius: 16px;
+    }
+
+    .coaching-modal-title {
+        font-size: 1.5rem;
+    }
+
+    .coaching-form-input,
+    .coaching-form-textarea,
+    .coaching-form-select {
+        padding: 0.75rem 1rem;
+    }
+}
+

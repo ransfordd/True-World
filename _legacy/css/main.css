@@ -1,0 +1,473 @@
+/* Custom font import for a slight spiritual/clean touch */
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&display=swap');
+.font-cinzel {
+    font-family: 'Cinzel', serif;
+}
+
+/* Premium Navigation Styles */
+.premium-nav {
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.nav-link {
+    font-family: 'Cinzel', serif;
+    color: white;
+    padding: 0.5rem;
+    transition: color 0.3s ease, transform 0.2s ease;
+    position: relative;
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 50%;
+    width: 0;
+    height: 1px;
+    background: var(--premium-gold);
+    transition: all 0.3s ease;
+    transform: translateX(-50%);
+}
+
+.nav-link:hover {
+    color: var(--premium-gold);
+}
+
+.nav-link:hover::after {
+    width: 100%;
+}
+
+.mobile-nav-link {
+    display: inline-block !important;
+    padding: 0.625rem 1.25rem !important;
+    font-family: 'Cinzel', serif !important;
+    color: white !important;
+    transition: all 0.3s ease !important;
+    border: none !important;
+    text-align: center !important;
+    border-bottom: 2px solid transparent !important;
+    min-width: auto !important;
+    font-size: 0.95rem !important;
+    letter-spacing: 0.5px !important;
+}
+
+.mobile-nav-link:hover {
+    color: var(--premium-gold);
+    background: rgba(192, 160, 76, 0.1);
+    border-bottom: 2px solid var(--premium-gold);
+}
+
+.mobile-menu {
+    transform-origin: top;
+    transition: all 0.3s ease;
+    width: 100%;
+    display: none;
+}
+
+.mobile-menu.active {
+    display: block !important;
+    animation: slideDown 0.3s ease forwards;
+}
+
+.mobile-menu > div {
+    width: 100% !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-end !important;
+    justify-content: center !important;
+    text-align: right !important;
+    padding-right: 1rem !important;
+}
+
+.menu-open, .menu-close {
+    transition: opacity 0.3s ease;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Custom Glow Effect for Premium Look - REDUCED SHADOWS FOR CLEANER LOOK */
+.gold-glow {
+    text-shadow: 0 0 15px rgba(192, 160, 76, 0.3);
+}
+
+/* Anchor offset for fixed nav: gives space when jumping to anchors */
+.anchor-offset { scroll-margin-top: 96px; }
+
+/* Page heading spacing - reduce size and add breathing room so headings don't sit under fixed nav */
+/* These rules gently reduce h1/h2 font sizes and add top margin so they don't overlap the fixed menu */
+h1.font-cinzel, h2.font-cinzel {
+    margin-top: 1.5rem;
+    margin-bottom: 1rem;
+    font-size: 1.75rem; /* base smaller size for better spacing */
+    line-height: 1.1;
+}
+
+/* Larger screens - slightly bigger but controlled so headings don't sit too close to the menu */
+@media (min-width: 1024px) {
+    h1.font-cinzel, h2.font-cinzel {
+        font-size: 2.5rem;
+    }
+}
+
+/* Mobile: provide extra top spacing so the mobile overlay menu doesn't cover the heading */
+@media (max-width: 768px) {
+    h1.font-cinzel, h2.font-cinzel {
+        margin-top: 3rem;
+    }
+}
+
+/* Premium styling updates */
+:root {
+    --premium-gold: #C0A04C;
+    --premium-black: #030303;
+    --premium-gray: #1a1a1a;
+}
+
+body {
+    background: linear-gradient(to bottom, var(--premium-black), #050505);
+}
+
+body.prayer-page {
+    background-image:
+        linear-gradient(rgba(8, 8, 8, 0.6), rgba(12, 12, 12, 0.75)),
+        url('../images/pr.jpg');
+    background-size: cover, cover;
+    background-repeat: no-repeat;
+    background-position: center center, center center;
+    background-attachment: fixed, fixed;
+}
+
+body.articles-page {
+    background-image:
+        linear-gradient(rgba(8, 8, 8, 0.62), rgba(10, 10, 10, 0.78)),
+        url('../images/ar.jpg');
+    background-size: cover, cover;
+    background-repeat: no-repeat;
+    background-position: center center, center center;
+    background-attachment: fixed, fixed;
+}
+
+body.resources-page {
+    background-image:
+        linear-gradient(rgba(8, 8, 8, 0.58), rgba(11, 11, 11, 0.78)),
+        url('../images/rr.jpg');
+    background-size: cover, cover;
+    background-repeat: no-repeat;
+    background-position: center center, center center;
+    background-attachment: fixed, fixed;
+}
+
+body.journey-page {
+    background-image:
+        linear-gradient(rgba(6, 6, 6, 0.55), rgba(10, 10, 10, 0.75)),
+        url('../images/jj.png');
+    background-size: cover, cover;
+    background-repeat: no-repeat;
+    background-position: center center, center center;
+    background-attachment: fixed, fixed;
+}
+
+/* Premium card styling */
+.premium-card {
+    background: linear-gradient(145deg, #0a0a0a, #080808);
+    border: 1px solid rgba(192, 160, 76, 0.1);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(5px);
+    transition: all 0.4s ease;
+}
+
+.premium-card:hover {
+    transform: translateY(-2px);
+    border-color: rgba(192, 160, 76, 0.2);
+    box-shadow: 0 8px 40px rgba(192, 160, 76, 0.1);
+}
+
+/* Smooth transitions */
+* {
+    transition: all 0.3s ease;
+}
+
+/* Premium buttons */
+.premium-button {
+    background: linear-gradient(135deg, var(--premium-gold), #A88A3F);
+    border: none;
+    padding: 12px 24px;
+    border-radius: 6px;
+    color: #000;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.premium-button:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 15px rgba(192, 160, 76, 0.3);
+}
+
+/* Refined section headers */
+.section-header {
+    letter-spacing: 2px;
+    font-weight: 800;
+    position: relative;
+    display: inline-block;
+}
+
+.section-header::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 0;
+    width: 60px;
+    height: 2px;
+    background: var(--premium-gold);
+}
+
+/* Premium form inputs */
+input, textarea {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(192, 160, 76, 0.1);
+    padding: 12px 16px;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+}
+
+input:focus, textarea:focus {
+    border-color: rgba(192, 160, 76, 0.3);
+    box-shadow: 0 0 0 2px rgba(192, 160, 76, 0.1);
+    outline: none;
+}
+
+/* Premium scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--premium-black);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--premium-gold);
+    border-radius: 4px;
+}
+
+/* Premium navigation */
+.nav-link {
+    position: relative;
+    padding-bottom: 2px;
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background: var(--premium-gold);
+    transition: width 0.3s ease;
+}
+
+.nav-link:hover::after {
+    width: 100%;
+}
+
+/* Menu Styles */
+.menu-container {
+    position: fixed;
+    top: 16px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1000;
+    background: linear-gradient(180deg, rgba(10,10,10,0.85), rgba(6,6,6,0.7));
+    border: 1px solid rgba(192,160,76,0.12);
+    padding: 8px 14px;
+    border-radius: 12px;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.6);
+    backdrop-filter: blur(8px);
+    transition: transform 250ms ease, opacity 200ms ease;
+    width: calc(100% - 32px);
+    max-width: 1120px;
+    box-sizing: border-box;
+}
+
+.menu-wrapper {
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap: 1rem;
+    max-width: 100%;
+    overflow: hidden;
+    min-width: 0;
+}
+
+.menu-logo img { 
+    height:36px; 
+    display: block !important;
+    width: auto;
+    max-width: 200px;
+}
+
+/* Subpage (non-main pages) header adjustments: reduce header height, increase menu length and add suitable spacing */
+.subpage .menu-container {
+    top: 12px;
+    padding: 6px 12px;
+    max-width: 95%;
+}
+
+.subpage .menu-wrapper {
+    gap: 0.5rem;
+    padding-top: 4px;
+    padding-bottom: 4px;
+}
+
+.subpage .menu-logo img {
+    height: 28px;
+    max-width: 160px;
+}
+
+/* Slightly tighter links but more room horizontally (menu length) */
+.subpage .menu-links {
+    gap: 0.5rem;
+}
+
+.subpage .menu-link {
+    font-size: 0.95rem;
+    padding: 6px 8px;
+}
+
+/* Reduce top spacing for mainContent on subpages so header/content spacing is suitable */
+.subpage #mainContent {
+    padding-top: 4rem !important; /* ~64px to match reduced header height */
+}
+/* Ensure all logo images display properly */
+img[src*="logo"] {
+    display: block !important;
+    object-fit: contain;
+}
+
+.header-logo {
+    display: block !important;
+    width: auto;
+    height: auto;
+    max-width: 100%;
+}
+
+.menu-links {
+    display: flex;
+    gap: 0.75rem;
+    align-items: center;
+    margin-left: 12px;
+    flex-wrap: nowrap;
+    max-width: 100%;
+}
+
+.menu-link {
+    color: #e6e6e6;
+    text-decoration: none;
+    padding: 6px 8px;
+    border-radius: 8px;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+    transition: color 200ms ease, background 200ms ease, transform 120ms ease;
+    white-space: nowrap;
+    font-size: 0.9rem;
+    display: block;
+}
+
+.menu-link:hover {
+    color: var(--premium-gold);
+    background: rgba(192,160,76,0.04);
+    transform: translateY(-2px);
+}
+
+.menu-link.active {
+    color: var(--premium-gold);
+    background: rgba(192,160,76,0.06);
+    box-shadow: 0 6px 18px rgba(192,160,76,0.06);
+}
+
+/* CTA style (if needed later) */
+.menu-cta {
+    background: linear-gradient(90deg,var(--premium-gold),#A88A3F);
+    color:#000;
+    padding:8px 14px;
+    border-radius:8px;
+    font-weight:700;
+}
+
+/* Mobile: hamburger + vertical menu */
+.mobile-menu-toggle {
+    display: none;
+    background: transparent;
+    border: 1px solid rgba(255,255,255,0.04);
+    color: var(--premium-gold);
+    padding:6px 8px;
+    border-radius:8px;
+    z-index: 1001;
+    position: relative;
+    cursor: pointer;
+}
+
+@media (max-width: 768px) {
+    .menu-container { top: 12px; padding: 6px 10px; }
+    .menu-wrapper { position: relative; overflow: visible; }
+    .menu-links { 
+        display: none; 
+        position: absolute; 
+        top: calc(100% + 12px); 
+        left: 8px; 
+        right: 8px;
+        background: rgba(6,6,6,0.98); 
+        flex-direction: column; 
+        gap:0.5rem; 
+        padding: 12px; 
+        border-radius:10px;
+        border: 1px solid rgba(192,160,76,0.06); 
+        overflow: visible;
+        z-index: 1002;
+        box-shadow: 0 8px 30px rgba(0,0,0,0.8);
+        margin-left: 0;
+        max-width: calc(100vw - 32px);
+    }
+    .menu-links.active { 
+        display: flex !important; 
+    }
+    .menu-link { 
+        display: block; 
+        padding:10px 12px; 
+        font-size: 1rem; 
+        width: 100%;
+        text-align: left;
+    }
+    .mobile-menu-toggle { 
+        display: inline-flex !important; 
+        align-items: center; 
+        justify-content: center;
+        gap: 0;
+        cursor: pointer;
+        z-index: 1001;
+        position: relative;
+    }
+    .menu-wrapper {
+        width: 100%;
+        justify-content: space-between;
+        /* ensure absolute mobile menu isn't clipped */
+        overflow: visible;
+    }
+}
+
+/* ensure floating nav doesn't overlap when opened */
+body.has-open-menu { overflow: hidden; }
+
+/* Hide known legacy nav classes just in case */
+.legacy-nav, .old-nav, .legacy-menu, .floating-nav { display: none !important; }
+

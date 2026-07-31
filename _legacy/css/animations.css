@@ -1,0 +1,40 @@
+/* Smooth section reveals */
+section {
+    will-change: opacity, transform;
+}
+section.revealed {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Floating nav blur effect */
+.backdrop-blur-md {
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+}
+
+/* Prevent scroll while welcome overlay is visible */
+.no-scroll { overflow: hidden !important; height: 100vh !important; }
+/* Centering helper for the welcome overlay */
+#welcomeOverlay { display:flex; align-items:center; justify-content:center; }
+#welcomeOverlay .welcome-inner { max-width:880px; padding:24px; text-align:center; }
+
+/* Welcome overlay logo styles */
+#welcomeOverlay .welcome-logo,
+#welcomeOverlay img[src*="logo"] {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    max-width: 200px;
+    width: auto;
+    height: auto;
+    margin: 0 auto 24px auto;
+    object-fit: contain;
+}
+
+#welcomeOverlay .welcome-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+

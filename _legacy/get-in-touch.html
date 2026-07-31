@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Get In Touch | THE TRUE WORD</title>
+    <meta name="description" content="Get in touch with us about our coaching packages - Start your spiritual awakening journey with personalized guidance">
+    <meta name="keywords" content="spiritual coaching, contact, enrollment, coaching packages, spiritual guidance">
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <noscript>
+        <link rel="stylesheet" href="./css/noscript.css">
+        <p>JavaScript is required to load styles. Please enable JavaScript in your browser.</p>
+    </noscript>
+    <!-- Load Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- Configure Tailwind for custom gold color and font -->
+    <script src="./js/tailwind-config.js"></script>
+    <!-- External CSS Files -->
+    <link rel="stylesheet" href="./css/main.css">
+    <link rel="stylesheet" href="./css/animations.css">
+    <link rel="stylesheet" href="./css/coaching.css">
+    <link rel="stylesheet" href="./css/enhancements.css">
+</head>
+<body class="bg-black text-white font-sans min-h-screen overflow-x-hidden subpage">
+
+    <!-- Premium Navigation Menu -->
+    <nav class="premium-nav fixed w-full top-0 z-50 bg-black/95 backdrop-blur-md border-b border-premium-gold/10" aria-label="Main navigation">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo -->
+                <div class="flex-shrink-0">
+                    <a href="#mainContent" class="block" aria-label="Home">
+                        <img src="./images/logo.png.png" alt="The True Word logo" class="h-8 w-auto">
+                    </a>
+                </div>
+                
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex md:items-center md:space-x-6">
+                    <a href="#" onclick="window.scrollTo({top: 0, behavior: 'smooth'}); return false;" class="nav-link">Home</a>
+                    <a href="./about.html" class="nav-link">About</a>
+                    <a href="./journey.html" class="nav-link">Journey</a>
+                    <a href="./coaching.html" class="nav-link">Coaching</a>
+                    <a href="./testimonials.html" class="nav-link">Testimonials</a>
+                    <a href="./articles.html" class="nav-link">Articles</a>
+                    <a href="./resources.html" class="nav-link">Resources</a>
+                    <a href="./prayer-requests.html" class="nav-link">Prayer</a>
+                    <a href="./contact.html" class="nav-link">Contact</a>
+                    <a href="./faq.html" class="nav-link">FAQ</a>
+                </div>
+
+                <!-- Mobile menu button -->
+                <div class="flex md:hidden">
+                    <button type="button" class="mobile-menu-toggle inline-flex items-center justify-center p-2 rounded-md text-premium-gold hover:text-premium-gold hover:bg-black/50" aria-expanded="false" aria-label="Toggle menu">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="menu-open">
+                            <path d="M3 6h18M3 12h18M3 18h18" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="menu-close hidden">
+                            <path d="M18 6L6 18M6 6l12 12" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile menu -->
+        <div class="mobile-menu md:hidden hidden">
+            <div class="px-2 pt-2 pb-3 space-y-1 bg-black/95 backdrop-blur-md border-t border-premium-gold/10">
+                <a href="#" onclick="window.scrollTo({top: 0, behavior: 'smooth'}); return false;" class="mobile-nav-link">Home</a>
+                <a href="./about.html" class="mobile-nav-link">About</a>
+                <a href="./journey.html" class="mobile-nav-link">Journey</a>
+                <a href="./coaching.html" class="mobile-nav-link">Coaching</a>
+                <a href="./testimonials.html" class="mobile-nav-link">Testimonials</a>
+                <a href="./articles.html" class="mobile-nav-link">Articles</a>
+                <a href="./resources.html" class="mobile-nav-link">Resources</a>
+                <a href="./prayer-requests.html" class="mobile-nav-link">Prayer</a>
+                <a href="./contact.html" class="mobile-nav-link">Contact</a>
+                <a href="./faq.html" class="mobile-nav-link">FAQ</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-6 py-16 sm:py-24">
+        <div class="max-w-3xl mx-auto">
+            <h1 class="text-4xl sm:text-5xl font-cinzel text-center mb-4 text-ttw-gold">Get In Touch</h1>
+            <p class="text-center text-lg mb-12 text-gray-300">We're excited to help you begin your spiritual journey</p>
+
+            <!-- Package Info Section -->
+            <div class="bg-gradient-to-br from-[#0f0f0f] to-[#080808] border border-ttw-gold/20 rounded-2xl p-6 mb-8 w-full overflow-hidden">
+                <h2 class="font-cinzel text-2xl mb-2 text-ttw-gold break-words whitespace-normal" id="selected-package-name">Selected Package</h2>
+                <p class="text-gray-300 break-words whitespace-normal" id="selected-package-details">Package details will appear here</p>
+            </div>
+
+            <!-- Contact Form -->
+            <form id="contactForm" class="space-y-6">
+                <input type="hidden" id="selectedPackage" name="selectedPackage">
+                <input type="hidden" id="actionType" name="actionType" value="enroll">
+
+                <!-- Name Field -->
+                <div>
+                    <label for="contactName" class="block text-sm font-medium text-gray-300 mb-2">Your Name</label>
+                    <input type="text" id="contactName" name="contactName" 
+                           class="w-full px-4 py-3 bg-[#0f0f0f] border border-ttw-gold/20 rounded-lg text-white focus:border-ttw-gold focus:ring-1 focus:ring-ttw-gold transition">
+                    <div id="nameError" class="text-red-500 text-sm mt-1 hidden"></div>
+                </div>
+
+                <!-- Email Field -->
+                <div>
+                    <label for="contactEmail" class="block text-sm font-medium text-gray-300 mb-2">Email Address</label>
+                    <input type="email" id="contactEmail" name="contactEmail"
+                           class="w-full px-4 py-3 bg-[#0f0f0f] border border-ttw-gold/20 rounded-lg text-white focus:border-ttw-gold focus:ring-1 focus:ring-ttw-gold transition">
+                    <div id="emailError" class="text-red-500 text-sm mt-1 hidden"></div>
+                </div>
+
+                <!-- Phone Field -->
+                <div>
+                    <label for="contactPhone" class="block text-sm font-medium text-gray-300 mb-2">Phone Number</label>
+                    <input type="tel" id="contactPhone" name="contactPhone"
+                           class="w-full px-4 py-3 bg-[#0f0f0f] border border-ttw-gold/20 rounded-lg text-white focus:border-ttw-gold focus:ring-1 focus:ring-ttw-gold transition">
+                    <div id="phoneError" class="text-red-500 text-sm mt-1 hidden"></div>
+                </div>
+
+                <!-- Message Field -->
+                <div>
+                    <label for="contactMessage" class="block text-sm font-medium text-gray-300 mb-2">Your Message (Optional)</label>
+                    <textarea id="contactMessage" name="contactMessage" rows="4"
+                            class="w-full px-4 py-3 bg-[#0f0f0f] border border-ttw-gold/20 rounded-lg text-white focus:border-ttw-gold focus:ring-1 focus:ring-ttw-gold transition"></textarea>
+                </div>
+
+                <!-- Submit Button -->
+                <div class="text-center">
+                    <button type="submit" class="inline-flex items-center justify-center px-8 py-4 bg-gradient-to-r from-ttw-gold to-[#A88A3F] text-black font-medium rounded-lg hover:from-[#A88A3F] hover:to-ttw-gold transition-all duration-300">
+                        <span>Send Message</span>
+                    </button>
+                </div>
+            </form>
+
+            <!-- Success Message -->
+            <div id="successMessage" class="hidden text-center py-12">
+                <i data-lucide="check-circle" class="w-16 h-16 text-green-500 mx-auto mb-4"></i>
+                <h2 class="text-2xl font-cinzel text-ttw-gold mb-4">Thank You!</h2>
+                <p class="text-gray-300">We've received your request and will contact you soon about the <span id="success-package-name"></span> package.</p>
+                <a href="coaching.html" class="inline-block mt-8 px-6 py-3 text-sm text-ttw-gold hover:text-white transition">
+                    ← Back to Coaching Packages
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <!-- Scripts -->
+    <script src="./js/menu.js"></script>
+    <script>
+        // Initialize Lucide Icons
+        lucide.createIcons();
+    </script>
+    <script src="./js/forms.js"></script>
+    <script>
+        // Handle URL parameters
+        document.addEventListener('DOMContentLoaded', function() {
+            const params = new URLSearchParams(window.location.search);
+            const packageName = params.get('package');
+            const packageInfo = {
+                'Awakening Coaching': {
+                    subtitle: 'Seeker\'s Path - Beginner Level',
+                    duration: '4 Weeks'
+                },
+                'Transformation Coaching': {
+                    subtitle: 'Disciple\'s Path - Intermediate Level',
+                    duration: '8 Weeks'
+                },
+                'Impact Mentorship': {
+                    subtitle: 'Master\'s Path - Advanced Level',
+                    duration: '12 Weeks'
+                }
+            };
+
+            if (packageName && packageInfo[packageName]) {
+                const info = packageInfo[packageName];
+                document.getElementById('selected-package-name').textContent = packageName;
+                document.getElementById('selected-package-details').textContent = 
+                    `${info.subtitle} (${info.duration})`;
+                document.getElementById('selectedPackage').value = packageName;
+                document.getElementById('success-package-name').textContent = packageName;
+            } else {
+                window.location.href = 'coaching.html';
+            }
+        });
+
+        // Form handling
+        const form = document.getElementById('contactForm');
+        const successMessage = document.getElementById('successMessage');
+
+        form.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            // Basic validation
+            const name = document.getElementById('contactName').value.trim();
+            const email = document.getElementById('contactEmail').value.trim();
+            const phone = document.getElementById('contactPhone').value.trim();
+            
+            let isValid = true;
+            
+            // Validate fields
+            if (!name) {
+                showError('nameError', 'Please enter your name');
+                isValid = false;
+            }
+            
+            if (!email || !email.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)) {
+                showError('emailError', 'Please enter a valid email address');
+                isValid = false;
+            }
+            
+            if (!phone) {
+                showError('phoneError', 'Please enter your phone number');
+                isValid = false;
+            }
+            
+            if (!isValid) return;
+
+            // Show success message
+            form.style.display = 'none';
+            successMessage.classList.remove('hidden');
+        });
+
+        function showError(elementId, message) {
+            const errorElement = document.getElementById(elementId);
+            errorElement.textContent = message;
+            errorElement.classList.remove('hidden');
+        }
+    </script>
+</body>
+</html>

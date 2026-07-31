@@ -1,0 +1,45 @@
+import type { Metadata } from "next";
+import { CourseCards } from "@/components/journey/CourseCards";
+import { FadeIn } from "@/components/ui/FadeIn";
+
+export const metadata: Metadata = {
+  title: "The Awakening Journey",
+  description:
+    "A three-tiered self-paced course for spiritual awakening: Seekers, Disciples, and Masters.",
+};
+
+export default function JourneyPage() {
+  return (
+    <div className="page-hero-journey min-h-screen">
+      <div className="max-w-5xl mx-auto px-6 py-16 md:py-24">
+        <FadeIn className="text-center mb-14">
+          <h1 className="font-cinzel text-4xl sm:text-5xl font-extrabold text-ttw-gold uppercase gold-glow mb-6">
+            The True Word Awakening Journey
+          </h1>
+          <p className="text-xl text-gray-300 mb-3">
+            A Three-Tiered Self-Paced Course for Spiritual Awakening
+          </p>
+          <p className="text-gray-400 max-w-2xl mx-auto">
+            Transform through three paths: seeking → embodying → lasting impact.
+          </p>
+        </FadeIn>
+
+        <CourseCards showCta={false} />
+
+        <FadeIn className="mt-16 p-8 rounded-2xl border border-ttw-gold/20 bg-black/70 text-center">
+          <h2 className="font-cinzel text-2xl text-ttw-gold mb-6">How The Course Works</h2>
+          <ul className="text-gray-300 space-y-2 max-w-md mx-auto text-left list-decimal list-inside mb-8">
+            <li>Self-paced modules</li>
+            <li>Reflection & journaling</li>
+            <li>Practical challenges</li>
+            <li>Optional circles (online/offline)</li>
+            <li>Certification of Path Completion</li>
+          </ul>
+          <p className="font-cinzel text-ttw-gold text-lg">
+            Seekers awaken. Disciples transform. Masters impact.
+          </p>
+        </FadeIn>
+      </div>
+    </div>
+  );
+}

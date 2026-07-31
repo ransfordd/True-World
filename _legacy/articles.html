@@ -1,0 +1,950 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Latest Articles | THE TRUE WORD</title>
+    <meta name="description" content="Discover powerful teachings, revelations, and spiritual insights from The True Word ministry">
+    <meta name="keywords" content="articles, teachings, spiritual insights, divine purpose, authority, devotion">
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <noscript>
+        <link rel="stylesheet" href="./css/noscript.css">
+        <p>JavaScript is required to load styles. Please enable JavaScript in your browser.</p>
+    </noscript>
+    <!-- Load Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- Configure Tailwind for custom gold color and font -->
+    <script src="./js/tailwind-config.js"></script>
+    <!-- External CSS Files -->
+    <link rel="stylesheet" href="./css/main.css">
+    <link rel="stylesheet" href="./css/animations.css">
+    <link rel="stylesheet" href="./css/enhancements.css">
+</head>
+<body class="bg-black text-white font-sans min-h-screen overflow-x-hidden subpage articles-page">
+
+    <!-- Menu Navigation -->
+<nav class="menu-container bg-[#040404] border-b border-ttw-gold/6" aria-label="Main navigation">
+    <div class="menu-wrapper max-w-7xl mx-auto px-6 flex items-center justify-between py-4">
+        <a href="index.html" class="menu-logo flex items-center gap-3" aria-label="Home">
+            <img src="./images/logo.png.png" alt="The True Word logo" class="h-9" />
+            <span class="hidden sm:inline text-ttw-gold font-cinzel font-semibold">THE TRUE WORD</span>
+        </a>
+
+        <!-- Desktop Links -->
+        <div class="hidden md:flex menu-links items-center gap-6" role="menubar">
+            <a href="index.html" class="menu-link text-sm hover:text-ttw-gold transition" role="menuitem">Home</a>
+            <a href="./about.html" class="menu-link text-sm hover:text-ttw-gold transition" role="menuitem">About</a>
+            <a href="./journey.html" class="menu-link text-sm hover:text-ttw-gold transition" role="menuitem">Journey</a>
+            <a href="./coaching.html" class="menu-link text-sm hover:text-ttw-gold transition" role="menuitem">Coaching</a>
+            <a href="./testimonials.html" class="menu-link text-sm hover:text-ttw-gold transition" role="menuitem">Testimonials</a>
+            <a href="./articles.html" class="menu-link text-sm hover:text-ttw-gold transition" role="menuitem">Articles</a>
+            <a href="./resources.html" class="menu-link text-sm hover:text-ttw-gold transition" role="menuitem">Resources</a>
+            <a href="./prayer-requests.html" class="menu-link text-sm hover:text-ttw-gold transition" role="menuitem">Prayer</a>
+            <a href="./contact.html" class="menu-link text-sm hover:text-ttw-gold transition" role="menuitem">Contact</a>
+            <a href="./faq.html" class="menu-link text-sm hover:text-ttw-gold transition" role="menuitem">FAQ</a>
+        </div>
+
+        <!-- Mobile toggle -->
+        <button class="mobile-menu-toggle md:hidden p-2" aria-expanded="false" aria-label="Toggle menu">
+            <span class="menu-open inline-block">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+            </span>
+            <span class="menu-close hidden inline-block">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6l12 12M6 18L18 6"/></svg>
+            </span>
+        </button>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu hidden md:hidden bg-[#040404] border-t border-ttw-gold/6">
+        <ul class="flex flex-col p-4 space-y-2">
+            <li><a href="index.html" class="mobile-nav-link block py-2 px-3 rounded hover:bg-ttw-gold/5">Home</a></li>
+            <li><a href="./about.html" class="mobile-nav-link block py-2 px-3 rounded hover:bg-ttw-gold/5">About</a></li>
+            <li><a href="./journey.html" class="mobile-nav-link block py-2 px-3 rounded hover:bg-ttw-gold/5">Journey</a></li>
+            <li><a href="./coaching.html" class="mobile-nav-link block py-2 px-3 rounded hover:bg-ttw-gold/5">Coaching</a></li>
+            <li><a href="./testimonials.html" class="mobile-nav-link block py-2 px-3 rounded hover:bg-ttw-gold/5">Testimonials</a></li>
+            <li><a href="./articles.html" class="mobile-nav-link block py-2 px-3 rounded hover:bg-ttw-gold/5">Articles</a></li>
+            <li><a href="./resources.html" class="mobile-nav-link block py-2 px-3 rounded hover:bg-ttw-gold/5">Resources</a></li>
+            <li><a href="./prayer-requests.html" class="mobile-nav-link block py-2 px-3 rounded hover:bg-ttw-gold/5">Prayer</a></li>
+            <li><a href="./contact.html" class="mobile-nav-link block py-2 px-3 rounded hover:bg-ttw-gold/5">Contact</a></li>
+            <li><a href="./faq.html" class="mobile-nav-link block py-2 px-3 rounded hover:bg-ttw-gold/5">FAQ</a></li>
+        </ul>
+    </div>
+</nav>
+<!-- External JavaScript Files -->
+<script src="./js/menu.js"></script>
+
+    <div id="mainContent" class="min-h-screen pt-24 pb-16">
+        <!-- Hero Section -->
+        <div class="max-w-7xl mx-auto px-6 mb-16 text-center fade-in-up">
+            <h1 class="font-cinzel text-4xl sm:text-5xl lg:text-7xl font-extrabold mb-6 text-ttw-gold uppercase gold-glow">
+                Latest Articles
+            </h1>
+            <p class="text-xl sm:text-2xl text-gray-300 max-w-3xl mx-auto leading-relaxed mb-8">
+                Powerful teachings, revelations, and spiritual insights
+            </p>
+            <p class="text-lg text-gray-400 max-w-2xl mx-auto">
+                Explore divine wisdom and practical guidance to deepen your spiritual journey.
+            </p>
+        </div>
+
+<!-- Blog / Articles Preview -->
+<section id="blog" class="max-w-6xl mx-auto my-12 px-6">
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <article class="p-6 bg-gradient-to-br from-[#0b0b0b] to-[#080808] rounded-xl border border-ttw-gold/10 hover:border-ttw-gold/30 card-modern transition-all group">
+            <div class="mb-4 h-48 rounded-lg relative overflow-hidden border border-ttw-gold/20 group-hover:border-ttw-gold/40 transition-all">
+                <img src="./images/A Biblical story that still speaks.jpg" alt="A Biblical Story That Still Speaks" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+            </div>
+            <div class="mb-3">
+                <span class="text-xs text-ttw-gold/70 uppercase tracking-wider font-semibold">FAITH</span>
+            </div>
+            <h3 class="font-bold text-xl lg:text-2xl text-ttw-gold mb-3 group-hover:text-ttw-gold/90 transition line-clamp-2">A Biblical Story That Still Speaks</h3>
+            <p class="text-gray-300 mb-4 text-base leading-relaxed line-clamp-3">
+                Discover profound insights and spiritual wisdom in this powerful teaching.
+            </p>
+            <a href="./articles-pages/a-biblical-story-that-still-speaks.html" class="inline-flex items-center gap-2 text-ttw-gold font-semibold hover:gap-3 transition-all group/link">
+                <span>Read more</span>
+                <svg class="w-4 h-4 group-hover/link:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                </svg>
+            </a>
+        </article>        <article class="p-6 bg-gradient-to-br from-[#0b0b0b] to-[#080808] rounded-xl border border-ttw-gold/10 hover:border-ttw-gold/30 card-modern transition-all group">
+            <div class="mb-4 h-48 rounded-lg relative overflow-hidden border border-ttw-gold/20 group-hover:border-ttw-gold/40 transition-all">
+                <img src="./images/public warning to humanity.jpg" alt="A Public Warning to Humanity" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+            </div>
+            <div class="mb-3">
+                <span class="text-xs text-ttw-gold/70 uppercase tracking-wider font-semibold">TEACHING</span>
+            </div>
+            <h3 class="font-bold text-xl lg:text-2xl text-ttw-gold mb-3 group-hover:text-ttw-gold/90 transition line-clamp-2">A Public Warning to Humanity</h3>
+            <p class="text-gray-300 mb-4 text-base leading-relaxed line-clamp-3">
+                Discover profound insights and spiritual wisdom in this powerful teaching.
+            </p>
+            <a href="./articles-pages/a-public-warning-to-humanity.html" class="inline-flex items-center gap-2 text-ttw-gold font-semibold hover:gap-3 transition-all group/link">
+                <span>Read more</span>
+                <svg class="w-4 h-4 group-hover/link:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                </svg>
+            </a>
+        </article>        <article class="p-6 bg-gradient-to-br from-[#0b0b0b] to-[#080808] rounded-xl border border-ttw-gold/10 hover:border-ttw-gold/30 card-modern transition-all group">
+            <div class="mb-4 h-48 rounded-lg relative overflow-hidden border border-ttw-gold/20 group-hover:border-ttw-gold/40 transition-all">
+                <img src="./images/Are you living in a way that prepares you for eternity.png" alt="Are You Living in a Way That Prepares You for Eternity" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+            </div>
+            <div class="mb-3">
+                <span class="text-xs text-ttw-gold/70 uppercase tracking-wider font-semibold">SPIRITUAL</span>
+            </div>
+            <h3 class="font-bold text-xl lg:text-2xl text-ttw-gold mb-3 group-hover:text-ttw-gold/90 transition line-clamp-2">Are You Living in a Way That Prepares You for Eternity</h3>
+            <p class="text-gray-300 mb-4 text-base leading-relaxed line-clamp-3">
+                Discover profound insights and spiritual wisdom in this powerful teaching.
+            </p>
+            <a href="./articles-pages/are-you-living-in-a-way-that-prepares-you-for-eternity.html" class="inline-flex items-center gap-2 text-ttw-gold font-semibold hover:gap-3 transition-all group/link">
+                <span>Read more</span>
+                <svg class="w-4 h-4 group-hover/link:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                </svg>
+            </a>
+        </article>        <article class="p-6 bg-gradient-to-br from-[#0b0b0b] to-[#080808] rounded-xl border border-ttw-gold/10 hover:border-ttw-gold/30 card-modern transition-all group">
+            <div class="mb-4 h-48 rounded-lg relative overflow-hidden border border-ttw-gold/20 group-hover:border-ttw-gold/40 transition-all">
+                <img src="./images/Authenticity and wellbeing.jpg" alt="AUTHENTICITY AND WELL-research work" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+            </div>
+            <div class="mb-3">
+                <span class="text-xs text-ttw-gold/70 uppercase tracking-wider font-semibold">RESEARCH</span>
+            </div>
+            <h3 class="font-bold text-xl lg:text-2xl text-ttw-gold mb-3 group-hover:text-ttw-gold/90 transition line-clamp-2">AUTHENTICITY AND WELL-research work</h3>
+            <p class="text-gray-300 mb-4 text-base leading-relaxed line-clamp-3">
+                Discover profound insights and spiritual wisdom in this powerful teaching.
+            </p>
+            <a href="./articles-pages/authenticity-and-well-research-work.html" class="inline-flex items-center gap-2 text-ttw-gold font-semibold hover:gap-3 transition-all group/link">
+                <span>Read more</span>
+                <svg class="w-4 h-4 group-hover/link:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                </svg>
+            </a>
+        </article>        <article class="p-6 bg-gradient-to-br from-[#0b0b0b] to-[#080808] rounded-xl border border-ttw-gold/10 hover:border-ttw-gold/30 card-modern transition-all group">
+            <div class="mb-4 h-48 rounded-lg relative overflow-hidden border border-ttw-gold/20 group-hover:border-ttw-gold/40 transition-all">
+                <img src="./images/Before you arise.jpg" alt="BEFORE YOU ARISE" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+            </div>
+            <div class="mb-3">
+                <span class="text-xs text-ttw-gold/70 uppercase tracking-wider font-semibold">TEACHING</span>
+            </div>
+            <h3 class="font-bold text-xl lg:text-2xl text-ttw-gold mb-3 group-hover:text-ttw-gold/90 transition line-clamp-2">BEFORE YOU ARISE</h3>
+            <p class="text-gray-300 mb-4 text-base leading-relaxed line-clamp-3">
+                Discover profound insights and spiritual wisdom in this powerful teaching.
+            </p>
+            <a href="./articles-pages/before-you-arise.html" class="inline-flex items-center gap-2 text-ttw-gold font-semibold hover:gap-3 transition-all group/link">
+                <span>Read more</span>
+                <svg class="w-4 h-4 group-hover/link:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                </svg>
+            </a>
+        </article>        <article class="p-6 bg-gradient-to-br from-[#0b0b0b] to-[#080808] rounded-xl border border-ttw-gold/10 hover:border-ttw-gold/30 card-modern transition-all group">
+            <div class="mb-4 h-48 rounded-lg relative overflow-hidden border border-ttw-gold/20 group-hover:border-ttw-gold/40 transition-all">
+                <img src="./images/Beware of hidden tricks.jpg" alt="Beware of the Hidden Tricks of a Narcissist" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+            </div>
+            <div class="mb-3">
+                <span class="text-xs text-ttw-gold/70 uppercase tracking-wider font-semibold">PSYCHOLOGY</span>
+            </div>
+            <h3 class="font-bold text-xl lg:text-2xl text-ttw-gold mb-3 group-hover:text-ttw-gold/90 transition line-clamp-2">Beware of the Hidden Tricks of a Narcissist</h3>
+            <p class="text-gray-300 mb-4 text-base leading-relaxed line-clamp-3">
+                Discover profound insights and spiritual wisdom in this powerful teaching.
+            </p>
+            <a href="./articles-pages/beware-of-the-hidden-tricks-of-a-narcissist.html" class="inline-flex items-center gap-2 text-ttw-gold font-semibold hover:gap-3 transition-all group/link">
+                <span>Read more</span>
+                <svg class="w-4 h-4 group-hover/link:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                </svg>
+            </a>
+        </article>        <article class="p-6 bg-gradient-to-br from-[#0b0b0b] to-[#080808] rounded-xl border border-ttw-gold/10 hover:border-ttw-gold/30 card-modern transition-all group">
+            <div class="mb-4 h-48 rounded-lg relative overflow-hidden border border-ttw-gold/20 group-hover:border-ttw-gold/40 transition-all">
+                <img src="./images/Beyound the icewall.jpg" alt="BEYOND THE ICEWALL" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+            </div>
+            <div class="mb-3">
+                <span class="text-xs text-ttw-gold/70 uppercase tracking-wider font-semibold">TEACHING</span>
+            </div>
+            <h3 class="font-bold text-xl lg:text-2xl text-ttw-gold mb-3 group-hover:text-ttw-gold/90 transition line-clamp-2">BEYOND THE ICEWALL</h3>
+            <p class="text-gray-300 mb-4 text-base leading-relaxed line-clamp-3">
+                Discover profound insights and spiritual wisdom in this powerful teaching.
+            </p>
+            <a href="./articles-pages/beyond-the-icewall.html" class="inline-flex items-center gap-2 text-ttw-gold font-semibold hover:gap-3 transition-all group/link">
+                <span>Read more</span>
+                <svg class="w-4 h-4 group-hover/link:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                </svg>
+            </a>
+        </article>        <article class="p-6 bg-gradient-to-br from-[#0b0b0b] to-[#080808] rounded-xl border border-ttw-gold/10 hover:border-ttw-gold/30 card-modern transition-all group">
+            <div class="mb-4 h-48 rounded-lg relative overflow-hidden border border-ttw-gold/20 group-hover:border-ttw-gold/40 transition-all">
+                <img src="./images/breaking the frequency trap.jpg" alt="Breaking the Frequency Trap" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+            </div>
+            <div class="mb-3">
+                <span class="text-xs text-ttw-gold/70 uppercase tracking-wider font-semibold">SPIRITUAL</span>
+            </div>
+            <h3 class="font-bold text-xl lg:text-2xl text-ttw-gold mb-3 group-hover:text-ttw-gold/90 transition line-clamp-2">Breaking the Frequency Trap</h3>
+            <p class="text-gray-300 mb-4 text-base leading-relaxed line-clamp-3">
+                Discover profound insights and spiritual wisdom in this powerful teaching.
+            </p>
+            <a href="./articles-pages/breaking-the-frequency-trap.html" class="inline-flex items-center gap-2 text-ttw-gold font-semibold hover:gap-3 transition-all group/link">
+                <span>Read more</span>
+                <svg class="w-4 h-4 group-hover/link:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                </svg>
+            </a>
+        </article>        <article class="p-6 bg-gradient-to-br from-[#0b0b0b] to-[#080808] rounded-xl border border-ttw-gold/10 hover:border-ttw-gold/30 card-modern transition-all group">
+            <div class="mb-4 h-48 rounded-lg relative overflow-hidden border border-ttw-gold/20 group-hover:border-ttw-gold/40 transition-all">
+                <img src="./images/briging the gap.jpg" alt="Bridging the Gap, forensic" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+            </div>
+            <div class="mb-3">
+                <span class="text-xs text-ttw-gold/70 uppercase tracking-wider font-semibold">RESEARCH</span>
+            </div>
+            <h3 class="font-bold text-xl lg:text-2xl text-ttw-gold mb-3 group-hover:text-ttw-gold/90 transition line-clamp-2">Bridging the Gap, forensic</h3>
+            <p class="text-gray-300 mb-4 text-base leading-relaxed line-clamp-3">
+                Discover profound insights and spiritual wisdom in this powerful teaching.
+            </p>
+            <a href="./articles-pages/bridging-the-gap-forensic.html" class="inline-flex items-center gap-2 text-ttw-gold font-semibold hover:gap-3 transition-all group/link">
+                <span>Read more</span>
+                <svg class="w-4 h-4 group-hover/link:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                </svg>
+            </a>
+        </article>        <article class="p-6 bg-gradient-to-br from-[#0b0b0b] to-[#080808] rounded-xl border border-ttw-gold/10 hover:border-ttw-gold/30 card-modern transition-all group">
+            <div class="mb-4 h-48 rounded-lg relative overflow-hidden border border-ttw-gold/20 group-hover:border-ttw-gold/40 transition-all">
+                <img src="./images/CHARMIS BEING USED.jpg" alt="CHARM IS BEING USED THAN EVER A Modern Handbook for Men" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+            </div>
+            <div class="mb-3">
+                <span class="text-xs text-ttw-gold/70 uppercase tracking-wider font-semibold">RELATIONSHIPS</span>
+            </div>
+            <h3 class="font-bold text-xl lg:text-2xl text-ttw-gold mb-3 group-hover:text-ttw-gold/90 transition line-clamp-2">CHARM IS BEING USED THAN EVER A Modern Handbook for Men</h3>
+            <p class="text-gray-300 mb-4 text-base leading-relaxed line-clamp-3">
+                Discover profound insights and spiritual wisdom in this powerful teaching.
+            </p>
+            <a href="./articles-pages/charm-is-being-used-than-ever-a-modern-handbook-for-men.html" class="inline-flex items-center gap-2 text-ttw-gold font-semibold hover:gap-3 transition-all group/link">
+                <span>Read more</span>
+                <svg class="w-4 h-4 group-hover/link:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                </svg>
+            </a>
+        </article>        <article class="p-6 bg-gradient-to-br from-[#0b0b0b] to-[#080808] rounded-xl border border-ttw-gold/10 hover:border-ttw-gold/30 card-modern transition-all group">
+            <div class="mb-4 h-48 rounded-lg relative overflow-hidden border border-ttw-gold/20 group-hover:border-ttw-gold/40 transition-all">
+                <img src="./images/CHILDERN IN CHAINS.jpg" alt="Children in Chains" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+            </div>
+            <div class="mb-3">
+                <span class="text-xs text-ttw-gold/70 uppercase tracking-wider font-semibold">TEACHING</span>
+            </div>
+            <h3 class="font-bold text-xl lg:text-2xl text-ttw-gold mb-3 group-hover:text-ttw-gold/90 transition line-clamp-2">Children in Chains</h3>
+            <p class="text-gray-300 mb-4 text-base leading-relaxed line-clamp-3">
+                Discover profound insights and spiritual wisdom in this powerful teaching.
+            </p>
+            <a href="./articles-pages/children-in-chains.html" class="inline-flex items-center gap-2 text-ttw-gold font-semibold hover:gap-3 transition-all group/link">
+                <span>Read more</span>
+                <svg class="w-4 h-4 group-hover/link:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                </svg>
+            </a>
+        </article>        <article class="p-6 bg-gradient-to-br from-[#0b0b0b] to-[#080808] rounded-xl border border-ttw-gold/10 hover:border-ttw-gold/30 card-modern transition-all group">
+            <div class="mb-4 h-48 rounded-lg relative overflow-hidden border border-ttw-gold/20 group-hover:border-ttw-gold/40 transition-all">
+                <img src="./images/CRITICAL THINKING.jpeg" alt="CRITICAL THINKING biases and assumptions" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+            </div>
+            <div class="mb-3">
+                <span class="text-xs text-ttw-gold/70 uppercase tracking-wider font-semibold">RESEARCH</span>
+            </div>
+            <h3 class="font-bold text-xl lg:text-2xl text-ttw-gold mb-3 group-hover:text-ttw-gold/90 transition line-clamp-2">CRITICAL THINKING biases and assumptions</h3>
+            <p class="text-gray-300 mb-4 text-base leading-relaxed line-clamp-3">
+                Discover profound insights and spiritual wisdom in this powerful teaching.
+            </p>
+            <a href="./articles-pages/critical-thinking-biases-and-assumptions.html" class="inline-flex items-center gap-2 text-ttw-gold font-semibold hover:gap-3 transition-all group/link">
+                <span>Read more</span>
+                <svg class="w-4 h-4 group-hover/link:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                </svg>
+            </a>
+        </article>        <article class="p-6 bg-gradient-to-br from-[#0b0b0b] to-[#080808] rounded-xl border border-ttw-gold/10 hover:border-ttw-gold/30 card-modern transition-all group">
+            <div class="mb-4 h-48 rounded-lg relative overflow-hidden border border-ttw-gold/20 group-hover:border-ttw-gold/40 transition-all">
+                <img src="./images/FAITH AND KWAMLAVI.jpg" alt="Faith and kwamlavi" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+            </div>
+            <div class="mb-3">
+                <span class="text-xs text-ttw-gold/70 uppercase tracking-wider font-semibold">FAITH</span>
+            </div>
+            <h3 class="font-bold text-xl lg:text-2xl text-ttw-gold mb-3 group-hover:text-ttw-gold/90 transition line-clamp-2">Faith and kwamlavi</h3>
+            <p class="text-gray-300 mb-4 text-base leading-relaxed line-clamp-3">
+                Discover profound insights and spiritual wisdom in this powerful teaching.
+            </p>
+            <a href="./articles-pages/faith-and-kwamlavi.html" class="inline-flex items-center gap-2 text-ttw-gold font-semibold hover:gap-3 transition-all group/link">
+                <span>Read more</span>
+                <svg class="w-4 h-4 group-hover/link:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                </svg>
+            </a>
+        </article>        <article class="p-6 bg-gradient-to-br from-[#0b0b0b] to-[#080808] rounded-xl border border-ttw-gold/10 hover:border-ttw-gold/30 card-modern transition-all group">
+            <div class="mb-4 h-48 rounded-lg relative overflow-hidden border border-ttw-gold/20 group-hover:border-ttw-gold/40 transition-all">
+                <img src="./images/FREEDOM OF WANT.jpg" alt="FREEDOM OF WANT" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+            </div>
+            <div class="mb-3">
+                <span class="text-xs text-ttw-gold/70 uppercase tracking-wider font-semibold">TEACHING</span>
+            </div>
+            <h3 class="font-bold text-xl lg:text-2xl text-ttw-gold mb-3 group-hover:text-ttw-gold/90 transition line-clamp-2">FREEDOM OF WANT</h3>
+            <p class="text-gray-300 mb-4 text-base leading-relaxed line-clamp-3">
+                Discover profound insights and spiritual wisdom in this powerful teaching.
+            </p>
+            <a href="./articles-pages/freedom-of-want.html" class="inline-flex items-center gap-2 text-ttw-gold font-semibold hover:gap-3 transition-all group/link">
+                <span>Read more</span>
+                <svg class="w-4 h-4 group-hover/link:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                </svg>
+            </a>
+        </article>        <article class="p-6 bg-gradient-to-br from-[#0b0b0b] to-[#080808] rounded-xl border border-ttw-gold/10 hover:border-ttw-gold/30 card-modern transition-all group">
+            <div class="mb-4 h-48 rounded-lg relative overflow-hidden border border-ttw-gold/20 group-hover:border-ttw-gold/40 transition-all">
+                <img src="./images/FROM BANDANA TO SHATA WALE.png" alt="From Bandana to Shatta Wale" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+            </div>
+            <div class="mb-3">
+                <span class="text-xs text-ttw-gold/70 uppercase tracking-wider font-semibold">TEACHING</span>
+            </div>
+            <h3 class="font-bold text-xl lg:text-2xl text-ttw-gold mb-3 group-hover:text-ttw-gold/90 transition line-clamp-2">From Bandana to Shatta Wale</h3>
+            <p class="text-gray-300 mb-4 text-base leading-relaxed line-clamp-3">
+                Discover profound insights and spiritual wisdom in this powerful teaching.
+            </p>
+            <a href="./articles-pages/from-bandana-to-shatta-wale.html" class="inline-flex items-center gap-2 text-ttw-gold font-semibold hover:gap-3 transition-all group/link">
+                <span>Read more</span>
+                <svg class="w-4 h-4 group-hover/link:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                </svg>
+            </a>
+        </article>        <article class="p-6 bg-gradient-to-br from-[#0b0b0b] to-[#080808] rounded-xl border border-ttw-gold/10 hover:border-ttw-gold/30 card-modern transition-all group">
+            <div class="mb-4 h-48 rounded-lg relative overflow-hidden border border-ttw-gold/20 group-hover:border-ttw-gold/40 transition-all">
+                <img src="./images/FROM PARTY POLICY TO STATE POLICY.jpg" alt="From Party Policy to State Policy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+            </div>
+            <div class="mb-3">
+                <span class="text-xs text-ttw-gold/70 uppercase tracking-wider font-semibold">RESEARCH</span>
+            </div>
+            <h3 class="font-bold text-xl lg:text-2xl text-ttw-gold mb-3 group-hover:text-ttw-gold/90 transition line-clamp-2">From Party Policy to State Policy</h3>
+            <p class="text-gray-300 mb-4 text-base leading-relaxed line-clamp-3">
+                Discover profound insights and spiritual wisdom in this powerful teaching.
+            </p>
+            <a href="./articles-pages/from-party-policy-to-state-policy.html" class="inline-flex items-center gap-2 text-ttw-gold font-semibold hover:gap-3 transition-all group/link">
+                <span>Read more</span>
+                <svg class="w-4 h-4 group-hover/link:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                </svg>
+            </a>
+        </article>        <article class="p-6 bg-gradient-to-br from-[#0b0b0b] to-[#080808] rounded-xl border border-ttw-gold/10 hover:border-ttw-gold/30 card-modern transition-all group">
+            <div class="mb-4 h-48 rounded-lg relative overflow-hidden border border-ttw-gold/20 group-hover:border-ttw-gold/40 transition-all">
+                <img src="./images/HOW TO KNOW IF A MAN IS TRUELY FOR YOU.jpg" alt="How to Know If a Man Is Truly for You" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+            </div>
+            <div class="mb-3">
+                <span class="text-xs text-ttw-gold/70 uppercase tracking-wider font-semibold">RELATIONSHIPS</span>
+            </div>
+            <h3 class="font-bold text-xl lg:text-2xl text-ttw-gold mb-3 group-hover:text-ttw-gold/90 transition line-clamp-2">How to Know If a Man Is Truly for You</h3>
+            <p class="text-gray-300 mb-4 text-base leading-relaxed line-clamp-3">
+                Discover profound insights and spiritual wisdom in this powerful teaching.
+            </p>
+            <a href="./articles-pages/how-to-know-if-a-man-is-truly-for-you.html" class="inline-flex items-center gap-2 text-ttw-gold font-semibold hover:gap-3 transition-all group/link">
+                <span>Read more</span>
+                <svg class="w-4 h-4 group-hover/link:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                </svg>
+            </a>
+        </article>        <article class="p-6 bg-gradient-to-br from-[#0b0b0b] to-[#080808] rounded-xl border border-ttw-gold/10 hover:border-ttw-gold/30 card-modern transition-all group">
+            <div class="mb-4 h-48 rounded-lg relative overflow-hidden border border-ttw-gold/20 group-hover:border-ttw-gold/40 transition-all">
+                <img src="./images/HOW TO LIVE LONG.jpg" alt="How to Live Long" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+            </div>
+            <div class="mb-3">
+                <span class="text-xs text-ttw-gold/70 uppercase tracking-wider font-semibold">TEACHING</span>
+            </div>
+            <h3 class="font-bold text-xl lg:text-2xl text-ttw-gold mb-3 group-hover:text-ttw-gold/90 transition line-clamp-2">How to Live Long</h3>
+            <p class="text-gray-300 mb-4 text-base leading-relaxed line-clamp-3">
+                Discover profound insights and spiritual wisdom in this powerful teaching.
+            </p>
+            <a href="./articles-pages/how-to-live-long.html" class="inline-flex items-center gap-2 text-ttw-gold font-semibold hover:gap-3 transition-all group/link">
+                <span>Read more</span>
+                <svg class="w-4 h-4 group-hover/link:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                </svg>
+            </a>
+        </article>        <article class="p-6 bg-gradient-to-br from-[#0b0b0b] to-[#080808] rounded-xl border border-ttw-gold/10 hover:border-ttw-gold/30 card-modern transition-all group">
+            <div class="mb-4 h-48 rounded-lg relative overflow-hidden border border-ttw-gold/20 group-hover:border-ttw-gold/40 transition-all">
+                <img src="./images/HUMANITY AND SELF IDENTITY.png" alt="humanity and Self identity" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+            </div>
+            <div class="mb-3">
+                <span class="text-xs text-ttw-gold/70 uppercase tracking-wider font-semibold">TEACHING</span>
+            </div>
+            <h3 class="font-bold text-xl lg:text-2xl text-ttw-gold mb-3 group-hover:text-ttw-gold/90 transition line-clamp-2">humanity and Self identity</h3>
+            <p class="text-gray-300 mb-4 text-base leading-relaxed line-clamp-3">
+                Discover profound insights and spiritual wisdom in this powerful teaching.
+            </p>
+            <a href="./articles-pages/humanity-and-self-identity.html" class="inline-flex items-center gap-2 text-ttw-gold font-semibold hover:gap-3 transition-all group/link">
+                <span>Read more</span>
+                <svg class="w-4 h-4 group-hover/link:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                </svg>
+            </a>
+        </article>        <article class="p-6 bg-gradient-to-br from-[#0b0b0b] to-[#080808] rounded-xl border border-ttw-gold/10 hover:border-ttw-gold/30 card-modern transition-all group">
+            <div class="mb-4 h-48 rounded-lg relative overflow-hidden border border-ttw-gold/20 group-hover:border-ttw-gold/40 transition-all">
+                <img src="./images/KISSING IGNITES IDENTITY AND HUMANITY.jpg" alt="Kissing ignites identity and humanity" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+            </div>
+            <div class="mb-3">
+                <span class="text-xs text-ttw-gold/70 uppercase tracking-wider font-semibold">RELATIONSHIPS</span>
+            </div>
+            <h3 class="font-bold text-xl lg:text-2xl text-ttw-gold mb-3 group-hover:text-ttw-gold/90 transition line-clamp-2">Kissing ignites identity and humanity</h3>
+            <p class="text-gray-300 mb-4 text-base leading-relaxed line-clamp-3">
+                Discover profound insights and spiritual wisdom in this powerful teaching.
+            </p>
+            <a href="./articles-pages/kissing-ignites-identity-and-humanity.html" class="inline-flex items-center gap-2 text-ttw-gold font-semibold hover:gap-3 transition-all group/link">
+                <span>Read more</span>
+                <svg class="w-4 h-4 group-hover/link:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                </svg>
+            </a>
+        </article>        <article class="p-6 bg-gradient-to-br from-[#0b0b0b] to-[#080808] rounded-xl border border-ttw-gold/10 hover:border-ttw-gold/30 card-modern transition-all group">
+            <div class="mb-4 h-48 rounded-lg relative overflow-hidden border border-ttw-gold/20 group-hover:border-ttw-gold/40 transition-all">
+                <img src="./images/LOST IN THE ILLUSION WOMAN DESTINY.jpg" alt="Lost In The Illusion, woman destiny" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+            </div>
+            <div class="mb-3">
+                <span class="text-xs text-ttw-gold/70 uppercase tracking-wider font-semibold">RELATIONSHIPS</span>
+            </div>
+            <h3 class="font-bold text-xl lg:text-2xl text-ttw-gold mb-3 group-hover:text-ttw-gold/90 transition line-clamp-2">Lost In The Illusion, woman destiny</h3>
+            <p class="text-gray-300 mb-4 text-base leading-relaxed line-clamp-3">
+                Discover profound insights and spiritual wisdom in this powerful teaching.
+            </p>
+            <a href="./articles-pages/lost-in-the-illusion-woman-destiny.html" class="inline-flex items-center gap-2 text-ttw-gold font-semibold hover:gap-3 transition-all group/link">
+                <span>Read more</span>
+                <svg class="w-4 h-4 group-hover/link:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                </svg>
+            </a>
+        </article>        <article class="p-6 bg-gradient-to-br from-[#0b0b0b] to-[#080808] rounded-xl border border-ttw-gold/10 hover:border-ttw-gold/30 card-modern transition-all group">
+            <div class="mb-4 h-48 rounded-lg relative overflow-hidden border border-ttw-gold/20 group-hover:border-ttw-gold/40 transition-all">
+                <img src="./images/LOVE YOUR FIRST.jpg" alt="Love Yourself First" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+            </div>
+            <div class="mb-3">
+                <span class="text-xs text-ttw-gold/70 uppercase tracking-wider font-semibold">RELATIONSHIPS</span>
+            </div>
+            <h3 class="font-bold text-xl lg:text-2xl text-ttw-gold mb-3 group-hover:text-ttw-gold/90 transition line-clamp-2">Love Yourself First</h3>
+            <p class="text-gray-300 mb-4 text-base leading-relaxed line-clamp-3">
+                Discover profound insights and spiritual wisdom in this powerful teaching.
+            </p>
+            <a href="./articles-pages/love-yourself-first.html" class="inline-flex items-center gap-2 text-ttw-gold font-semibold hover:gap-3 transition-all group/link">
+                <span>Read more</span>
+                <svg class="w-4 h-4 group-hover/link:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                </svg>
+            </a>
+        </article>        <article class="p-6 bg-gradient-to-br from-[#0b0b0b] to-[#080808] rounded-xl border border-ttw-gold/10 hover:border-ttw-gold/30 card-modern transition-all group">
+            <div class="mb-4 h-48 rounded-lg relative overflow-hidden border border-ttw-gold/20 group-hover:border-ttw-gold/40 transition-all">
+                <img src="./images/MINDSET.jpg" alt="Mindset" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+            </div>
+            <div class="mb-3">
+                <span class="text-xs text-ttw-gold/70 uppercase tracking-wider font-semibold">PSYCHOLOGY</span>
+            </div>
+            <h3 class="font-bold text-xl lg:text-2xl text-ttw-gold mb-3 group-hover:text-ttw-gold/90 transition line-clamp-2">Mindset</h3>
+            <p class="text-gray-300 mb-4 text-base leading-relaxed line-clamp-3">
+                Discover profound insights and spiritual wisdom in this powerful teaching.
+            </p>
+            <a href="./articles-pages/mindset.html" class="inline-flex items-center gap-2 text-ttw-gold font-semibold hover:gap-3 transition-all group/link">
+                <span>Read more</span>
+                <svg class="w-4 h-4 group-hover/link:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                </svg>
+            </a>
+        </article>        <article class="p-6 bg-gradient-to-br from-[#0b0b0b] to-[#080808] rounded-xl border border-ttw-gold/10 hover:border-ttw-gold/30 card-modern transition-all group">
+            <div class="mb-4 h-48 rounded-lg relative overflow-hidden border border-ttw-gold/20 group-hover:border-ttw-gold/40 transition-all">
+                <img src="./images/NO MORE BROKE LOVE.jpg" alt="No More Broke Love" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+            </div>
+            <div class="mb-3">
+                <span class="text-xs text-ttw-gold/70 uppercase tracking-wider font-semibold">RELATIONSHIPS</span>
+            </div>
+            <h3 class="font-bold text-xl lg:text-2xl text-ttw-gold mb-3 group-hover:text-ttw-gold/90 transition line-clamp-2">No More Broke Love</h3>
+            <p class="text-gray-300 mb-4 text-base leading-relaxed line-clamp-3">
+                Discover profound insights and spiritual wisdom in this powerful teaching.
+            </p>
+            <a href="./articles-pages/no-more-broke-love.html" class="inline-flex items-center gap-2 text-ttw-gold font-semibold hover:gap-3 transition-all group/link">
+                <span>Read more</span>
+                <svg class="w-4 h-4 group-hover/link:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                </svg>
+            </a>
+        </article>        <article class="p-6 bg-gradient-to-br from-[#0b0b0b] to-[#080808] rounded-xl border border-ttw-gold/10 hover:border-ttw-gold/30 card-modern transition-all group">
+            <div class="mb-4 h-48 rounded-lg relative overflow-hidden border border-ttw-gold/20 group-hover:border-ttw-gold/40 transition-all">
+                <img src="./images/no selling of sou;l.jpeg" alt="no selling of soul" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+            </div>
+            <div class="mb-3">
+                <span class="text-xs text-ttw-gold/70 uppercase tracking-wider font-semibold">SPIRITUAL</span>
+            </div>
+            <h3 class="font-bold text-xl lg:text-2xl text-ttw-gold mb-3 group-hover:text-ttw-gold/90 transition line-clamp-2">no selling of soul</h3>
+            <p class="text-gray-300 mb-4 text-base leading-relaxed line-clamp-3">
+                Discover profound insights and spiritual wisdom in this powerful teaching.
+            </p>
+            <a href="./articles-pages/no-selling-of-soul.html" class="inline-flex items-center gap-2 text-ttw-gold font-semibold hover:gap-3 transition-all group/link">
+                <span>Read more</span>
+                <svg class="w-4 h-4 group-hover/link:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                </svg>
+            </a>
+        </article>        <article class="p-6 bg-gradient-to-br from-[#0b0b0b] to-[#080808] rounded-xl border border-ttw-gold/10 hover:border-ttw-gold/30 card-modern transition-all group">
+            <div class="mb-4 h-48 rounded-lg relative overflow-hidden border border-ttw-gold/20 group-hover:border-ttw-gold/40 transition-all">
+                <img src="./images/priceless role of a woman in marriage.jpg" alt="Priceless role of a woman in marriage" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+            </div>
+            <div class="mb-3">
+                <span class="text-xs text-ttw-gold/70 uppercase tracking-wider font-semibold">RELATIONSHIPS</span>
+            </div>
+            <h3 class="font-bold text-xl lg:text-2xl text-ttw-gold mb-3 group-hover:text-ttw-gold/90 transition line-clamp-2">Priceless role of a woman in marriage</h3>
+            <p class="text-gray-300 mb-4 text-base leading-relaxed line-clamp-3">
+                Discover profound insights and spiritual wisdom in this powerful teaching.
+            </p>
+            <a href="./articles-pages/priceless-role-of-a-woman-in-marriage.html" class="inline-flex items-center gap-2 text-ttw-gold font-semibold hover:gap-3 transition-all group/link">
+                <span>Read more</span>
+                <svg class="w-4 h-4 group-hover/link:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                </svg>
+            </a>
+        </article>        <article class="p-6 bg-gradient-to-br from-[#0b0b0b] to-[#080808] rounded-xl border border-ttw-gold/10 hover:border-ttw-gold/30 card-modern transition-all group">
+            <div class="mb-4 h-48 rounded-lg relative overflow-hidden border border-ttw-gold/20 group-hover:border-ttw-gold/40 transition-all">
+                <img src="./images/reassessing build.jpeg" alt="Reassessing Build" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+            </div>
+            <div class="mb-3">
+                <span class="text-xs text-ttw-gold/70 uppercase tracking-wider font-semibold">TEACHING</span>
+            </div>
+            <h3 class="font-bold text-xl lg:text-2xl text-ttw-gold mb-3 group-hover:text-ttw-gold/90 transition line-clamp-2">Reassessing Build</h3>
+            <p class="text-gray-300 mb-4 text-base leading-relaxed line-clamp-3">
+                Discover profound insights and spiritual wisdom in this powerful teaching.
+            </p>
+            <a href="./articles-pages/reassessing-build.html" class="inline-flex items-center gap-2 text-ttw-gold font-semibold hover:gap-3 transition-all group/link">
+                <span>Read more</span>
+                <svg class="w-4 h-4 group-hover/link:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                </svg>
+            </a>
+        </article>        <article class="p-6 bg-gradient-to-br from-[#0b0b0b] to-[#080808] rounded-xl border border-ttw-gold/10 hover:border-ttw-gold/30 card-modern transition-all group">
+            <div class="mb-4 h-48 rounded-lg relative overflow-hidden border border-ttw-gold/20 group-hover:border-ttw-gold/40 transition-all">
+                <img src="./images/REDISCOVERING THRUTH.jpg" alt="Rediscovering Truth in a Noisy World" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+            </div>
+            <div class="mb-3">
+                <span class="text-xs text-ttw-gold/70 uppercase tracking-wider font-semibold">TEACHING</span>
+            </div>
+            <h3 class="font-bold text-xl lg:text-2xl text-ttw-gold mb-3 group-hover:text-ttw-gold/90 transition line-clamp-2">Rediscovering Truth in a Noisy World</h3>
+            <p class="text-gray-300 mb-4 text-base leading-relaxed line-clamp-3">
+                Discover profound insights and spiritual wisdom in this powerful teaching.
+            </p>
+            <a href="./articles-pages/rediscovering-truth-in-a-noisy-world.html" class="inline-flex items-center gap-2 text-ttw-gold font-semibold hover:gap-3 transition-all group/link">
+                <span>Read more</span>
+                <svg class="w-4 h-4 group-hover/link:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                </svg>
+            </a>
+        </article>        <article class="p-6 bg-gradient-to-br from-[#0b0b0b] to-[#080808] rounded-xl border border-ttw-gold/10 hover:border-ttw-gold/30 card-modern transition-all group">
+            <div class="mb-4 h-48 rounded-lg relative overflow-hidden border border-ttw-gold/20 group-hover:border-ttw-gold/40 transition-all">
+                <img src="./images/RELIGION A SYSTEM OF CONTROL.jpeg" alt="Religion a system of control" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+            </div>
+            <div class="mb-3">
+                <span class="text-xs text-ttw-gold/70 uppercase tracking-wider font-semibold">FAITH</span>
+            </div>
+            <h3 class="font-bold text-xl lg:text-2xl text-ttw-gold mb-3 group-hover:text-ttw-gold/90 transition line-clamp-2">Religion a system of control</h3>
+            <p class="text-gray-300 mb-4 text-base leading-relaxed line-clamp-3">
+                Discover profound insights and spiritual wisdom in this powerful teaching.
+            </p>
+            <a href="./articles-pages/religion-a-system-of-control.html" class="inline-flex items-center gap-2 text-ttw-gold font-semibold hover:gap-3 transition-all group/link">
+                <span>Read more</span>
+                <svg class="w-4 h-4 group-hover/link:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                </svg>
+            </a>
+        </article>        <article class="p-6 bg-gradient-to-br from-[#0b0b0b] to-[#080808] rounded-xl border border-ttw-gold/10 hover:border-ttw-gold/30 card-modern transition-all group">
+            <div class="mb-4 h-48 rounded-lg relative overflow-hidden border border-ttw-gold/20 group-hover:border-ttw-gold/40 transition-all">
+                <img src="./images/RELIGION AND CULTURE.jpeg" alt="Religion and Cultrues Research Work E. P. Boso" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+            </div>
+            <div class="mb-3">
+                <span class="text-xs text-ttw-gold/70 uppercase tracking-wider font-semibold">RESEARCH</span>
+            </div>
+            <h3 class="font-bold text-xl lg:text-2xl text-ttw-gold mb-3 group-hover:text-ttw-gold/90 transition line-clamp-2">Religion and Cultrues Research Work E. P. Boso</h3>
+            <p class="text-gray-300 mb-4 text-base leading-relaxed line-clamp-3">
+                Discover profound insights and spiritual wisdom in this powerful teaching.
+            </p>
+            <a href="./articles-pages/religion-and-cultrues-research-work-e-p-boso.html" class="inline-flex items-center gap-2 text-ttw-gold font-semibold hover:gap-3 transition-all group/link">
+                <span>Read more</span>
+                <svg class="w-4 h-4 group-hover/link:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                </svg>
+            </a>
+        </article>        <article class="p-6 bg-gradient-to-br from-[#0b0b0b] to-[#080808] rounded-xl border border-ttw-gold/10 hover:border-ttw-gold/30 card-modern transition-all group">
+            <div class="mb-4 h-48 rounded-lg relative overflow-hidden border border-ttw-gold/20 group-hover:border-ttw-gold/40 transition-all">
+                <img src="./images/RESEARCH WORK CHURCH FAITH.jpeg" alt="RESEARCH WORK church faith" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+            </div>
+            <div class="mb-3">
+                <span class="text-xs text-ttw-gold/70 uppercase tracking-wider font-semibold">RESEARCH</span>
+            </div>
+            <h3 class="font-bold text-xl lg:text-2xl text-ttw-gold mb-3 group-hover:text-ttw-gold/90 transition line-clamp-2">RESEARCH WORK church faith</h3>
+            <p class="text-gray-300 mb-4 text-base leading-relaxed line-clamp-3">
+                Discover profound insights and spiritual wisdom in this powerful teaching.
+            </p>
+            <a href="./articles-pages/research-work-church-faith.html" class="inline-flex items-center gap-2 text-ttw-gold font-semibold hover:gap-3 transition-all group/link">
+                <span>Read more</span>
+                <svg class="w-4 h-4 group-hover/link:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                </svg>
+            </a>
+        </article>        <article class="p-6 bg-gradient-to-br from-[#0b0b0b] to-[#080808] rounded-xl border border-ttw-gold/10 hover:border-ttw-gold/30 card-modern transition-all group">
+            <div class="mb-4 h-48 rounded-lg relative overflow-hidden border border-ttw-gold/20 group-hover:border-ttw-gold/40 transition-all">
+                <img src="./images/RESEARCH WORK CHURCH FAITH.jpeg" alt="Research Work false spiritualist" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+            </div>
+            <div class="mb-3">
+                <span class="text-xs text-ttw-gold/70 uppercase tracking-wider font-semibold">RESEARCH</span>
+            </div>
+            <h3 class="font-bold text-xl lg:text-2xl text-ttw-gold mb-3 group-hover:text-ttw-gold/90 transition line-clamp-2">Research Work false spiritualist</h3>
+            <p class="text-gray-300 mb-4 text-base leading-relaxed line-clamp-3">
+                Discover profound insights and spiritual wisdom in this powerful teaching.
+            </p>
+            <a href="./articles-pages/research-work-false-spiritualist.html" class="inline-flex items-center gap-2 text-ttw-gold font-semibold hover:gap-3 transition-all group/link">
+                <span>Read more</span>
+                <svg class="w-4 h-4 group-hover/link:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                </svg>
+            </a>
+        </article>        <article class="p-6 bg-gradient-to-br from-[#0b0b0b] to-[#080808] rounded-xl border border-ttw-gold/10 hover:border-ttw-gold/30 card-modern transition-all group">
+            <div class="mb-4 h-48 rounded-lg relative overflow-hidden border border-ttw-gold/20 group-hover:border-ttw-gold/40 transition-all">
+                <img src="./images/SEX FOR FAVOUR.jpg" alt="SEX FOR FAVOUR" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+            </div>
+            <div class="mb-3">
+                <span class="text-xs text-ttw-gold/70 uppercase tracking-wider font-semibold">RELATIONSHIPS</span>
+            </div>
+            <h3 class="font-bold text-xl lg:text-2xl text-ttw-gold mb-3 group-hover:text-ttw-gold/90 transition line-clamp-2">SEX FOR FAVOUR</h3>
+            <p class="text-gray-300 mb-4 text-base leading-relaxed line-clamp-3">
+                Discover profound insights and spiritual wisdom in this powerful teaching.
+            </p>
+            <a href="./articles-pages/sex-for-favour.html" class="inline-flex items-center gap-2 text-ttw-gold font-semibold hover:gap-3 transition-all group/link">
+                <span>Read more</span>
+                <svg class="w-4 h-4 group-hover/link:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                </svg>
+            </a>
+        </article>        <article class="p-6 bg-gradient-to-br from-[#0b0b0b] to-[#080808] rounded-xl border border-ttw-gold/10 hover:border-ttw-gold/30 card-modern transition-all group">
+            <div class="mb-4 h-48 rounded-lg relative overflow-hidden border border-ttw-gold/20 group-hover:border-ttw-gold/40 transition-all">
+                <img src="./images/SLEEPING WITH A MARRIED PERSON IS SPIRITUAL DEATH.jpg" alt="Sleeping with a Married Person Is Spiritual Death" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+            </div>
+            <div class="mb-3">
+                <span class="text-xs text-ttw-gold/70 uppercase tracking-wider font-semibold">SPIRITUAL</span>
+            </div>
+            <h3 class="font-bold text-xl lg:text-2xl text-ttw-gold mb-3 group-hover:text-ttw-gold/90 transition line-clamp-2">Sleeping with a Married Person Is Spiritual Death</h3>
+            <p class="text-gray-300 mb-4 text-base leading-relaxed line-clamp-3">
+                Discover profound insights and spiritual wisdom in this powerful teaching.
+            </p>
+            <a href="./articles-pages/sleeping-with-a-married-person-is-spiritual-death.html" class="inline-flex items-center gap-2 text-ttw-gold font-semibold hover:gap-3 transition-all group/link">
+                <span>Read more</span>
+                <svg class="w-4 h-4 group-hover/link:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                </svg>
+            </a>
+        </article>        <article class="p-6 bg-gradient-to-br from-[#0b0b0b] to-[#080808] rounded-xl border border-ttw-gold/10 hover:border-ttw-gold/30 card-modern transition-all group">
+            <div class="mb-4 h-48 rounded-lg relative overflow-hidden border border-ttw-gold/20 group-hover:border-ttw-gold/40 transition-all">
+                <img src="./images/SOUL TIES.jpeg" alt="Soul Ties, seduction and witchcraft 1" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+            </div>
+            <div class="mb-3">
+                <span class="text-xs text-ttw-gold/70 uppercase tracking-wider font-semibold">SPIRITUAL</span>
+            </div>
+            <h3 class="font-bold text-xl lg:text-2xl text-ttw-gold mb-3 group-hover:text-ttw-gold/90 transition line-clamp-2">Soul Ties, seduction and witchcraft 1</h3>
+            <p class="text-gray-300 mb-4 text-base leading-relaxed line-clamp-3">
+                Discover profound insights and spiritual wisdom in this powerful teaching.
+            </p>
+            <a href="./articles-pages/soul-ties-seduction-and-witchcraft-1.html" class="inline-flex items-center gap-2 text-ttw-gold font-semibold hover:gap-3 transition-all group/link">
+                <span>Read more</span>
+                <svg class="w-4 h-4 group-hover/link:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                </svg>
+            </a>
+        </article>        <article class="p-6 bg-gradient-to-br from-[#0b0b0b] to-[#080808] rounded-xl border border-ttw-gold/10 hover:border-ttw-gold/30 card-modern transition-all group">
+            <div class="mb-4 h-48 rounded-lg relative overflow-hidden border border-ttw-gold/20 group-hover:border-ttw-gold/40 transition-all">
+                <img src="./images/spirituality vs idol worshipng.jpg" alt="Spirituality vs Idol Worshipping" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+            </div>
+            <div class="mb-3">
+                <span class="text-xs text-ttw-gold/70 uppercase tracking-wider font-semibold">SPIRITUAL</span>
+            </div>
+            <h3 class="font-bold text-xl lg:text-2xl text-ttw-gold mb-3 group-hover:text-ttw-gold/90 transition line-clamp-2">Spirituality vs Idol Worshipping</h3>
+            <p class="text-gray-300 mb-4 text-base leading-relaxed line-clamp-3">
+                Discover profound insights and spiritual wisdom in this powerful teaching.
+            </p>
+            <a href="./articles-pages/spirituality-vs-idol-worshipping.html" class="inline-flex items-center gap-2 text-ttw-gold font-semibold hover:gap-3 transition-all group/link">
+                <span>Read more</span>
+                <svg class="w-4 h-4 group-hover/link:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                </svg>
+            </a>
+        </article>        <article class="p-6 bg-gradient-to-br from-[#0b0b0b] to-[#080808] rounded-xl border border-ttw-gold/10 hover:border-ttw-gold/30 card-modern transition-all group">
+            <div class="mb-4 h-48 rounded-lg relative overflow-hidden border border-ttw-gold/20 group-hover:border-ttw-gold/40 transition-all">
+                <img src="./images/the blood of the cross and the end of occultic initiations.jpg" alt="The Blood of the Cross and the End of Occultic Initiations" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+            </div>
+            <div class="mb-3">
+                <span class="text-xs text-ttw-gold/70 uppercase tracking-wider font-semibold">SPIRITUAL</span>
+            </div>
+            <h3 class="font-bold text-xl lg:text-2xl text-ttw-gold mb-3 group-hover:text-ttw-gold/90 transition line-clamp-2">The Blood of the Cross and the End of Occultic Initiations</h3>
+            <p class="text-gray-300 mb-4 text-base leading-relaxed line-clamp-3">
+                Discover profound insights and spiritual wisdom in this powerful teaching.
+            </p>
+            <a href="./articles-pages/the-blood-of-the-cross-and-the-end-of-occultic-initiations.html" class="inline-flex items-center gap-2 text-ttw-gold font-semibold hover:gap-3 transition-all group/link">
+                <span>Read more</span>
+                <svg class="w-4 h-4 group-hover/link:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                </svg>
+            </a>
+        </article>        <article class="p-6 bg-gradient-to-br from-[#0b0b0b] to-[#080808] rounded-xl border border-ttw-gold/10 hover:border-ttw-gold/30 card-modern transition-all group">
+            <div class="mb-4 h-48 rounded-lg relative overflow-hidden border border-ttw-gold/20 group-hover:border-ttw-gold/40 transition-all">
+                <img src="./images/the dark obsession of narcissist.jpg" alt="The Dark Obsession of Narcissists" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+            </div>
+            <div class="mb-3">
+                <span class="text-xs text-ttw-gold/70 uppercase tracking-wider font-semibold">PSYCHOLOGY</span>
+            </div>
+            <h3 class="font-bold text-xl lg:text-2xl text-ttw-gold mb-3 group-hover:text-ttw-gold/90 transition line-clamp-2">The Dark Obsession of Narcissists</h3>
+            <p class="text-gray-300 mb-4 text-base leading-relaxed line-clamp-3">
+                Discover profound insights and spiritual wisdom in this powerful teaching.
+            </p>
+            <a href="./articles-pages/the-dark-obsession-of-narcissists.html" class="inline-flex items-center gap-2 text-ttw-gold font-semibold hover:gap-3 transition-all group/link">
+                <span>Read more</span>
+                <svg class="w-4 h-4 group-hover/link:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                </svg>
+            </a>
+        </article>        <article class="p-6 bg-gradient-to-br from-[#0b0b0b] to-[#080808] rounded-xl border border-ttw-gold/10 hover:border-ttw-gold/30 card-modern transition-all group">
+            <div class="mb-4 h-48 rounded-lg relative overflow-hidden border border-ttw-gold/20 group-hover:border-ttw-gold/40 transition-all">
+                <img src="./images/the hidden architects of control.jpg" alt="The Hidden Architects of Control" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+            </div>
+            <div class="mb-3">
+                <span class="text-xs text-ttw-gold/70 uppercase tracking-wider font-semibold">TEACHING</span>
+            </div>
+            <h3 class="font-bold text-xl lg:text-2xl text-ttw-gold mb-3 group-hover:text-ttw-gold/90 transition line-clamp-2">The Hidden Architects of Control</h3>
+            <p class="text-gray-300 mb-4 text-base leading-relaxed line-clamp-3">
+                Discover profound insights and spiritual wisdom in this powerful teaching.
+            </p>
+            <a href="./articles-pages/the-hidden-architects-of-control.html" class="inline-flex items-center gap-2 text-ttw-gold font-semibold hover:gap-3 transition-all group/link">
+                <span>Read more</span>
+                <svg class="w-4 h-4 group-hover/link:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                </svg>
+            </a>
+        </article>        <article class="p-6 bg-gradient-to-br from-[#0b0b0b] to-[#080808] rounded-xl border border-ttw-gold/10 hover:border-ttw-gold/30 card-modern transition-all group">
+            <div class="mb-4 h-48 rounded-lg relative overflow-hidden border border-ttw-gold/20 group-hover:border-ttw-gold/40 transition-all">
+                <img src="./images/the lost city beneath.jpg" alt="The Lost City Beneath" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+            </div>
+            <div class="mb-3">
+                <span class="text-xs text-ttw-gold/70 uppercase tracking-wider font-semibold">TEACHING</span>
+            </div>
+            <h3 class="font-bold text-xl lg:text-2xl text-ttw-gold mb-3 group-hover:text-ttw-gold/90 transition line-clamp-2">The Lost City Beneath</h3>
+            <p class="text-gray-300 mb-4 text-base leading-relaxed line-clamp-3">
+                Discover profound insights and spiritual wisdom in this powerful teaching.
+            </p>
+            <a href="./articles-pages/the-lost-city-beneath.html" class="inline-flex items-center gap-2 text-ttw-gold font-semibold hover:gap-3 transition-all group/link">
+                <span>Read more</span>
+                <svg class="w-4 h-4 group-hover/link:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                </svg>
+            </a>
+        </article>        <article class="p-6 bg-gradient-to-br from-[#0b0b0b] to-[#080808] rounded-xl border border-ttw-gold/10 hover:border-ttw-gold/30 card-modern transition-all group">
+            <div class="mb-4 h-48 rounded-lg relative overflow-hidden border border-ttw-gold/20 group-hover:border-ttw-gold/40 transition-all">
+                <img src="./images/the magic of authrnticity article.jpg" alt="The Magic of Authenticity article" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+            </div>
+            <div class="mb-3">
+                <span class="text-xs text-ttw-gold/70 uppercase tracking-wider font-semibold">TEACHING</span>
+            </div>
+            <h3 class="font-bold text-xl lg:text-2xl text-ttw-gold mb-3 group-hover:text-ttw-gold/90 transition line-clamp-2">The Magic of Authenticity article</h3>
+            <p class="text-gray-300 mb-4 text-base leading-relaxed line-clamp-3">
+                Discover profound insights and spiritual wisdom in this powerful teaching.
+            </p>
+            <a href="./articles-pages/the-magic-of-authenticity-article.html" class="inline-flex items-center gap-2 text-ttw-gold font-semibold hover:gap-3 transition-all group/link">
+                <span>Read more</span>
+                <svg class="w-4 h-4 group-hover/link:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                </svg>
+            </a>
+        </article>        <article class="p-6 bg-gradient-to-br from-[#0b0b0b] to-[#080808] rounded-xl border border-ttw-gold/10 hover:border-ttw-gold/30 card-modern transition-all group">
+            <div class="mb-4 h-48 rounded-lg relative overflow-hidden border border-ttw-gold/20 group-hover:border-ttw-gold/40 transition-all">
+                <img src="./images/the old world is passing.jpg" alt="The Old World is Passing" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+            </div>
+            <div class="mb-3">
+                <span class="text-xs text-ttw-gold/70 uppercase tracking-wider font-semibold">TEACHING</span>
+            </div>
+            <h3 class="font-bold text-xl lg:text-2xl text-ttw-gold mb-3 group-hover:text-ttw-gold/90 transition line-clamp-2">The Old World is Passing</h3>
+            <p class="text-gray-300 mb-4 text-base leading-relaxed line-clamp-3">
+                Discover profound insights and spiritual wisdom in this powerful teaching.
+            </p>
+            <a href="./articles-pages/the-old-world-is-passing.html" class="inline-flex items-center gap-2 text-ttw-gold font-semibold hover:gap-3 transition-all group/link">
+                <span>Read more</span>
+                <svg class="w-4 h-4 group-hover/link:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                </svg>
+            </a>
+        </article>        <article class="p-6 bg-gradient-to-br from-[#0b0b0b] to-[#080808] rounded-xl border border-ttw-gold/10 hover:border-ttw-gold/30 card-modern transition-all group">
+            <div class="mb-4 h-48 rounded-lg relative overflow-hidden border border-ttw-gold/20 group-hover:border-ttw-gold/40 transition-all">
+                <img src="./images/the perils of over.jpg" alt="The Perils of Over" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+            </div>
+            <div class="mb-3">
+                <span class="text-xs text-ttw-gold/70 uppercase tracking-wider font-semibold">TEACHING</span>
+            </div>
+            <h3 class="font-bold text-xl lg:text-2xl text-ttw-gold mb-3 group-hover:text-ttw-gold/90 transition line-clamp-2">The Perils of Over</h3>
+            <p class="text-gray-300 mb-4 text-base leading-relaxed line-clamp-3">
+                Discover profound insights and spiritual wisdom in this powerful teaching.
+            </p>
+            <a href="./articles-pages/the-perils-of-over.html" class="inline-flex items-center gap-2 text-ttw-gold font-semibold hover:gap-3 transition-all group/link">
+                <span>Read more</span>
+                <svg class="w-4 h-4 group-hover/link:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                </svg>
+            </a>
+        </article>        <article class="p-6 bg-gradient-to-br from-[#0b0b0b] to-[#080808] rounded-xl border border-ttw-gold/10 hover:border-ttw-gold/30 card-modern transition-all group">
+            <div class="mb-4 h-48 rounded-lg relative overflow-hidden border border-ttw-gold/20 group-hover:border-ttw-gold/40 transition-all">
+                <img src="./images/the timeline of biblical codes.jpg" alt="Timeline and Biblical Codes" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+            </div>
+            <div class="mb-3">
+                <span class="text-xs text-ttw-gold/70 uppercase tracking-wider font-semibold">FAITH</span>
+            </div>
+            <h3 class="font-bold text-xl lg:text-2xl text-ttw-gold mb-3 group-hover:text-ttw-gold/90 transition line-clamp-2">Timeline and Biblical Codes</h3>
+            <p class="text-gray-300 mb-4 text-base leading-relaxed line-clamp-3">
+                Discover profound insights and spiritual wisdom in this powerful teaching.
+            </p>
+            <a href="./articles-pages/timeline-and-biblical-codes.html" class="inline-flex items-center gap-2 text-ttw-gold font-semibold hover:gap-3 transition-all group/link">
+                <span>Read more</span>
+                <svg class="w-4 h-4 group-hover/link:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                </svg>
+            </a>
+        </article>        <article class="p-6 bg-gradient-to-br from-[#0b0b0b] to-[#080808] rounded-xl border border-ttw-gold/10 hover:border-ttw-gold/30 card-modern transition-all group">
+            <div class="mb-4 h-48 rounded-lg relative overflow-hidden border border-ttw-gold/20 group-hover:border-ttw-gold/40 transition-all">
+                <img src="./images/when loyalty becomes idolatry.jpeg" alt="When Loyalty Becomes Idolatry" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+            </div>
+            <div class="mb-3">
+                <span class="text-xs text-ttw-gold/70 uppercase tracking-wider font-semibold">SPIRITUAL</span>
+            </div>
+            <h3 class="font-bold text-xl lg:text-2xl text-ttw-gold mb-3 group-hover:text-ttw-gold/90 transition line-clamp-2">When Loyalty Becomes Idolatry</h3>
+            <p class="text-gray-300 mb-4 text-base leading-relaxed line-clamp-3">
+                Discover profound insights and spiritual wisdom in this powerful teaching.
+            </p>
+            <a href="./articles-pages/when-loyalty-becomes-idolatry.html" class="inline-flex items-center gap-2 text-ttw-gold font-semibold hover:gap-3 transition-all group/link">
+                <span>Read more</span>
+                <svg class="w-4 h-4 group-hover/link:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                </svg>
+            </a>
+        </article>    </div>
+</section>
+
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gradient-to-b from-[#060606] to-[#040404] border-t border-ttw-gold/20 text-gray-300 footer-modern">
+        <div class="max-w-7xl mx-auto px-6 py-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
+            <!-- About -->
+            <div class="space-y-4">
+                <img src="./images/logo.png.png" alt="The True Word logo" class="w-32 mb-6 opacity-90 hover:opacity-100 transition-opacity duration-300">
+                <p class="text-gray-400 text-sm leading-relaxed max-w-xs">
+                    A movement of souls awakening to the True Word within.
+                </p>
+            </div>
+
+            <!-- Quick Links -->
+            <div>
+                <h3 class="text-ttw-gold font-cinzel text-base font-semibold mb-6 tracking-wide uppercase">Quick Links</h3>
+                <ul class="space-y-3">
+                    <li><a href="./index.html#video-section" class="text-gray-400 hover:text-ttw-gold transition-all duration-300 inline-block hover:translate-x-1 text-sm">Latest Message</a></li>
+                    <li><a href="./resources.html" class="text-gray-400 hover:text-ttw-gold transition-all duration-300 inline-block hover:translate-x-1 text-sm">Resources</a></li>
+                    <li><a href="./articles.html" class="text-gray-400 hover:text-ttw-gold transition-all duration-300 inline-block hover:translate-x-1 text-sm">Articles</a></li>
+                    <li><a href="./index.html#ask-question" class="text-gray-400 hover:text-ttw-gold transition-all duration-300 inline-block hover:translate-x-1 text-sm">Ask a Question</a></li>
+                    <li><a href="./faq.html" class="text-gray-400 hover:text-ttw-gold transition-all duration-300 inline-block hover:translate-x-1 text-sm">FAQ</a></li>
+                </ul>
+            </div>
+
+            <!-- Contact -->
+            <div>
+                <h3 class="text-ttw-gold font-cinzel text-base font-semibold mb-6 tracking-wide uppercase">Contact</h3>
+                <ul class="space-y-4">
+                    <li>
+                        <a href="http://www.thetrueword-gh.com" target="_blank" rel="noopener noreferrer" 
+                           class="text-gray-400 hover:text-ttw-gold transition-all duration-300 text-sm group">
+                            <span class="group-hover:underline">www.thetrueword-gh.com</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.instagram.com/thetrueword2025" target="_blank" rel="noopener noreferrer" 
+                           class="text-gray-400 hover:text-ttw-gold transition-all duration-300 text-sm group">
+                            <span class="group-hover:underline">@thetrueword2025</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="mailto:info@thetrueword.com" class="text-gray-400 hover:text-ttw-gold transition-all duration-300 text-sm group">
+                            <span class="group-hover:underline">info@thetrueword.com</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Connect -->
+            <div>
+                <h3 class="text-ttw-gold font-cinzel text-base font-semibold mb-6 tracking-wide uppercase">Stay Connected</h3>
+                <form id="footer-subscribe" class="space-y-3">
+                    <input type="email" id="footerEmail" placeholder="Enter your email" required
+                           class="w-full px-4 py-3 bg-[#0a0a0a] border border-gray-800 rounded-lg text-white text-sm placeholder-gray-500 focus:outline-none focus:border-ttw-gold/50 focus:ring-1 focus:ring-ttw-gold/30 transition-all duration-300">
+                    <button type="submit" class="w-full bg-gradient-to-r from-ttw-gold to-ttw-gold/90 text-black px-6 py-3 rounded-lg font-semibold text-sm hover:from-ttw-gold/90 hover:to-ttw-gold/80 hover:shadow-lg hover:shadow-ttw-gold/20 transition-all duration-300 transform hover:scale-[1.02]">
+                        Subscribe
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <div class="border-t border-gray-800/50 text-center py-6 bg-[#030303]">
+            <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between text-xs text-gray-500">
+                <div>&copy; 2025 The True Word. All rights reserved.</div>
+                <div class="mt-3 md:mt-0 flex items-center gap-2">
+                    <span>Made with reverence</span>
+                    <span class="text-gray-600">â€¢</span>
+                    <a href="./faq.html" class="text-gray-400 hover:text-ttw-gold transition-colors duration-300">Privacy</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- External JavaScript Files -->
+    <script src="./js/forms.js"></script>
+    <script src="./js/theme.js"></script>
+    <script src="./js/enhancements.js"></script>
+    <script src="./js/scroll-effects.js"></script>
+</body>
+</html>
+
+
+
+
+
+
+

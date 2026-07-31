@@ -1,0 +1,403 @@
+/* Course Interface Styles */
+.course-container {
+    position: relative;
+    overflow: hidden;
+}
+
+.course-header {
+    text-align: center;
+    margin-bottom: 3rem;
+    padding-bottom: 2rem;
+    border-bottom: 2px solid rgba(192, 160, 76, 0.2);
+}
+
+.course-progress-overview {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin-top: 2rem;
+    flex-wrap: wrap;
+}
+
+.progress-stat {
+    text-align: center;
+    padding: 1rem;
+    background: rgba(192, 160, 76, 0.05);
+    border-radius: 12px;
+    border: 1px solid rgba(192, 160, 76, 0.1);
+    min-width: 120px;
+}
+
+.progress-stat-number {
+    font-size: 2rem;
+    font-weight: bold;
+    color: var(--premium-gold);
+    font-family: 'Cinzel', serif;
+}
+
+.progress-stat-label {
+    font-size: 0.875rem;
+    color: #888;
+    margin-top: 0.5rem;
+}
+
+/* Course Tier Cards */
+.course-tier-card {
+    background: linear-gradient(145deg, #0f0f0f, #080808);
+    border: 2px solid rgba(192, 160, 76, 0.1);
+    border-radius: 16px;
+    padding: 0;
+    margin-bottom: 2rem;
+    overflow: hidden;
+    transition: all 0.4s ease;
+    cursor: pointer;
+    position: relative;
+}
+
+.course-tier-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(192, 160, 76, 0.3);
+    box-shadow: 0 12px 40px rgba(192, 160, 76, 0.15);
+}
+
+.course-tier-card.active {
+    border-color: var(--premium-gold);
+    box-shadow: 0 8px 30px rgba(192, 160, 76, 0.2);
+}
+
+.tier-header {
+    padding: 1.5rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(192, 160, 76, 0.03);
+    cursor: pointer;
+}
+
+.tier-header-content {
+    flex: 1;
+}
+
+.tier-number {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--premium-gold), #A88A3F);
+    color: #000;
+    font-weight: bold;
+    font-size: 1.25rem;
+    margin-right: 1rem;
+    font-family: 'Cinzel', serif;
+}
+
+.tier-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--premium-gold);
+    font-family: 'Cinzel', serif;
+    margin-bottom: 0.5rem;
+}
+
+.tier-subtitle {
+    color: #888;
+    font-size: 0.9rem;
+    font-style: italic;
+}
+
+.tier-level-badge {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    background: rgba(192, 160, 76, 0.15);
+    border: 1px solid rgba(192, 160, 76, 0.3);
+    border-radius: 20px;
+    color: var(--premium-gold);
+    font-size: 0.875rem;
+    font-weight: 600;
+    margin-top: 0.5rem;
+}
+
+.tier-toggle-icon {
+    width: 24px;
+    height: 24px;
+    color: var(--premium-gold);
+    transition: transform 0.3s ease;
+}
+
+.course-tier-card.active .tier-toggle-icon {
+    transform: rotate(180deg);
+}
+
+.tier-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease, padding 0.4s ease;
+    padding: 0 2rem;
+}
+
+.course-tier-card.active .tier-content {
+    max-height: 2000px;
+    padding: 2rem;
+}
+
+.tier-description {
+    color: #ccc;
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+}
+
+.tier-modules {
+    display: grid;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.module-card {
+    background: rgba(192, 160, 76, 0.05);
+    border: 1px solid rgba(192, 160, 76, 0.1);
+    border-radius: 12px;
+    padding: 1.25rem;
+    transition: all 0.3s ease;
+}
+
+.module-card:hover {
+    background: rgba(192, 160, 76, 0.08);
+    border-color: rgba(192, 160, 76, 0.2);
+    transform: translateX(4px);
+}
+
+.module-title {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 0.75rem;
+}
+
+.module-icon {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    background: linear-gradient(135deg, var(--premium-gold), #A88A3F);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #000;
+    font-weight: bold;
+    flex-shrink: 0;
+}
+
+.module-name {
+    font-weight: 600;
+    color: var(--premium-gold);
+    font-size: 1.1rem;
+}
+
+.module-items {
+    list-style: none;
+    padding-left: 0;
+    margin-top: 0.75rem;
+}
+
+.module-items li {
+    padding: 0.5rem 0 0.5rem 2rem;
+    color: #ccc;
+    position: relative;
+    line-height: 1.5;
+}
+
+.module-items li::before {
+    content: "→";
+    position: absolute;
+    left: 0;
+    color: var(--premium-gold);
+    font-weight: bold;
+}
+
+.tier-outcome {
+    background: rgba(192, 160, 76, 0.1);
+    border-left: 4px solid var(--premium-gold);
+    padding: 1rem 1.5rem;
+    border-radius: 8px;
+    margin-top: 1.5rem;
+}
+
+.tier-outcome-title {
+    font-weight: bold;
+    color: var(--premium-gold);
+    margin-bottom: 0.5rem;
+}
+
+.tier-outcome-text {
+    color: #ddd;
+}
+
+/* Enrollment/CTA Buttons */
+.tier-actions {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1.5rem;
+    flex-wrap: wrap;
+}
+
+.enroll-btn {
+    background: linear-gradient(135deg, var(--premium-gold), #A88A3F);
+    color: #000;
+    padding: 0.875rem 2rem;
+    border-radius: 8px;
+    font-weight: 700;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
+}
+
+.enroll-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(192, 160, 76, 0.4);
+}
+
+.view-details-btn {
+    background: transparent;
+    color: var(--premium-gold);
+    padding: 0.875rem 2rem;
+    border: 2px solid var(--premium-gold);
+    border-radius: 8px;
+    font-weight: 600;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.view-details-btn:hover {
+    background: rgba(192, 160, 76, 0.1);
+}
+
+/* Course Flow Section */
+.course-flow {
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 2px solid rgba(192, 160, 76, 0.2);
+}
+
+.course-flow-title {
+    font-size: 1.5rem;
+    color: var(--premium-gold);
+    font-family: 'Cinzel', serif;
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+.flow-steps {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+.flow-step {
+    text-align: center;
+    padding: 1.5rem;
+    background: rgba(192, 160, 76, 0.05);
+    border-radius: 12px;
+    border: 1px solid rgba(192, 160, 76, 0.1);
+    position: relative;
+}
+
+.flow-step-number {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--premium-gold), #A88A3F);
+    color: #000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    margin: 0 auto 1rem;
+    font-family: 'Cinzel', serif;
+}
+
+.flow-step-text {
+    color: #ccc;
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+
+/* Progress Bar */
+.tier-progress-bar {
+    width: 100%;
+    height: 6px;
+    background: rgba(192, 160, 76, 0.1);
+    border-radius: 3px;
+    overflow: hidden;
+    margin-top: 1rem;
+}
+
+.tier-progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--premium-gold), #A88A3F);
+    border-radius: 3px;
+    transition: width 0.5s ease;
+    width: 0%;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    .tier-header {
+        padding: 1.25rem 1.5rem;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+
+    .tier-header-content {
+        width: 100%;
+    }
+
+    .course-tier-card.active .tier-content {
+        padding: 1.5rem;
+    }
+
+    .tier-actions {
+        flex-direction: column;
+    }
+
+    .enroll-btn,
+    .view-details-btn {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .flow-steps {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Completion Badge */
+.completed-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    background: rgba(76, 175, 80, 0.2);
+    border: 1px solid rgba(76, 175, 80, 0.4);
+    border-radius: 20px;
+    color: #4CAF50;
+    font-size: 0.875rem;
+    font-weight: 600;
+    margin-left: auto;
+}
+
+.completed-badge::before {
+    content: "✓";
+    font-weight: bold;
+}
+
