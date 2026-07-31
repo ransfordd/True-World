@@ -9,6 +9,8 @@ FROM node:20-alpine AS builder
 WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
+# Bust cache when welcome gate changes
+ARG CACHE_BUST=welcome-gate-v2
 ENV NEXT_TELEMETRY_DISABLED=1
 RUN npm run build
 
@@ -29,3 +31,5 @@ COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
 USER nextjs
 EXPOSE 3000
 CMD ["node", "server.js"]
+
+# welcome-overlay-fix 2026-07-31T18:39:53.2730035+00:00

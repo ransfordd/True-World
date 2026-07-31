@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { BookOpen, Globe, Sparkles, Star, User } from "lucide-react";
-import { WelcomeOverlay } from "@/components/home/WelcomeOverlay";
+import { HomeWelcomeGate } from "@/components/home/HomeWelcomeGate";
 import { DailyTruth } from "@/components/home/DailyTruth";
 import { CourseCards } from "@/components/journey/CourseCards";
 import { CoachingPackages } from "@/components/coaching/CoachingPackages";
@@ -14,9 +14,7 @@ export default function HomePage() {
   const featured = getFeaturedArticles(3);
 
   return (
-    <>
-      <WelcomeOverlay />
-
+    <HomeWelcomeGate>
       <header className="py-16 md:py-28 text-center px-4 border-b border-ttw-gold/20">
         <FadeIn>
           <div className="max-w-4xl mx-auto">
@@ -295,6 +293,6 @@ export default function HomePage() {
           </p>
         </FadeIn>
       </div>
-    </>
+    </HomeWelcomeGate>
   );
 }
