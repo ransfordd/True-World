@@ -12,7 +12,7 @@ const schema = z.object({
       message: "Invalid email",
     }),
   phone: z.string().optional().default(""),
-  message: z.string().min(1),
+  message: z.string().optional().default(""),
   package: z.string().optional().default(""),
   type: z.enum(["question", "enrollment"]).optional().default("question"),
 });
@@ -22,10 +22,23 @@ export async function POST(request: Request) {
     const body = await request.json();
     const data = schema.parse(body);
 
+    if (data.type === "question" && data.message.trim().length < 1) {
+      return NextResponse.json(
+        { ok: false, error: "Invalid input", details: { message: ["Required"] } },
+        { status: 400 }
+      );
+    }
+
     const subject =
       data.type === "enrollment"
         ? `Enrollment: ${data.package || "Coaching"}`
         : "Ask a Question";
+
+    const messageBody =
+      data.message.trim() ||
+      (data.type === "enrollment"
+        ? "(No additional message provided)"
+        : data.message);
 
     await sendMail({
       subject,
@@ -37,7 +50,7 @@ export async function POST(request: Request) {
         `Phone: ${data.phone || "(not provided)"}`,
         data.package ? `Package: ${data.package}` : "",
         "",
-        data.message,
+        messageBody,
       ]
         .filter(Boolean)
         .join("\n"),

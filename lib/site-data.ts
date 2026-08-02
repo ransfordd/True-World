@@ -6,6 +6,8 @@ export const SITE = {
   instagram: "https://www.instagram.com/thetrueword2025",
   instagramHandle: "@thetrueword2025",
   youtube: "https://www.youtube.com/@THETRUEWORDBYERICPADDYBOSO",
+  /** Optional watch?v= ID for homepage “Latest Message” thumbnail */
+  youtubeFeaturedVideoId: "",
   logo: "/images/logo.png.png",
 };
 

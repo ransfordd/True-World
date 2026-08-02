@@ -135,15 +135,30 @@ export default function HomePage() {
                 href={SITE.youtube}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="relative block pb-[56.25%] h-0 overflow-hidden rounded-2xl border-2 border-ttw-gold/30 video-player-shadow group"
+                className="relative block pb-[56.25%] h-0 overflow-hidden rounded-2xl border-2 border-ttw-gold/30 video-player-shadow group bg-[#0a0a0a]"
               >
-                <Image
-                  src="https://placehold.co/1280x720/0a0a0a/C0A04C?text=Visit+Our+YouTube+Channel"
-                  alt="Visit The True Word on YouTube"
-                  fill
-                  className="object-cover transition-transform duration-300 group-hover:scale-105"
-                  unoptimized
-                />
+                {SITE.youtubeFeaturedVideoId ? (
+                  <Image
+                    src={`https://i.ytimg.com/vi/${SITE.youtubeFeaturedVideoId}/hqdefault.jpg`}
+                    alt="Latest message on The True Word YouTube channel"
+                    fill
+                    className="object-cover transition-transform duration-300 group-hover:scale-105"
+                    unoptimized
+                  />
+                ) : (
+                  <div className="absolute inset-0 flex flex-col items-center justify-center gap-4 bg-gradient-to-br from-[#0a0a0a] to-[#141414]">
+                    <Image
+                      src={SITE.logo}
+                      alt=""
+                      width={96}
+                      height={96}
+                      className="opacity-90 transition-transform duration-300 group-hover:scale-105"
+                    />
+                    <p className="font-cinzel text-ttw-gold text-sm tracking-wide uppercase">
+                      Visit our YouTube channel
+                    </p>
+                  </div>
+                )}
                 <div className="absolute inset-0 flex items-center justify-center bg-black/20">
                   <div className="w-20 h-20 rounded-full bg-ttw-gold/90 flex items-center justify-center">
                     <svg className="w-10 h-10 text-black ml-1" fill="currentColor" viewBox="0 0 24 24">

@@ -7,21 +7,34 @@ import { AnimatePresence, motion } from "framer-motion";
 import { SITE } from "@/lib/site-data";
 
 const DISPLAY_MS = 2800;
+const SEEN_KEY = "ttw-welcome-seen";
 
 /**
- * Shows the welcome overlay alone first, then reveals homepage content
- * only after the overlay has fully faded out (matches legacy UX).
+ * Shows the welcome overlay alone first (once per browser session),
+ * then reveals homepage content after the overlay has fully faded out.
  */
 export function HomeWelcomeGate({ children }: { children: ReactNode }) {
   const [mounted, setMounted] = useState(false);
-  const [overlayVisible, setOverlayVisible] = useState(true);
+  const [overlayVisible, setOverlayVisible] = useState(false);
   const [contentReady, setContentReady] = useState(false);
+  const [showOverlay, setShowOverlay] = useState(false);
 
   useEffect(() => {
     setMounted(true);
+
+    const seen = sessionStorage.getItem(SEEN_KEY);
+    if (seen) {
+      setContentReady(true);
+      setShowOverlay(false);
+      return;
+    }
+
+    setShowOverlay(true);
+    setOverlayVisible(true);
     document.body.classList.add("overflow-hidden");
 
     const timer = window.setTimeout(() => {
+      sessionStorage.setItem(SEEN_KEY, "1");
       setOverlayVisible(false);
     }, DISPLAY_MS);
 
@@ -36,6 +49,7 @@ export function HomeWelcomeGate({ children }: { children: ReactNode }) {
       onExitComplete={() => {
         document.body.classList.remove("overflow-hidden");
         setContentReady(true);
+        setShowOverlay(false);
       }}
     >
       {overlayVisible && (
@@ -77,7 +91,6 @@ export function HomeWelcomeGate({ children }: { children: ReactNode }) {
 
   return (
     <>
-      {/* SSR + first paint: solid cover so homepage never paints under the loader */}
       {!contentReady && (
         <div
           className="fixed inset-0 z-[9998] welcome-scrim"
@@ -85,7 +98,7 @@ export function HomeWelcomeGate({ children }: { children: ReactNode }) {
         />
       )}
 
-      {mounted ? createPortal(overlay, document.body) : null}
+      {mounted && showOverlay ? createPortal(overlay, document.body) : null}
 
       <div
         className={
