@@ -10,7 +10,7 @@ WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 # Bust cache when welcome gate changes
-ARG CACHE_BUST=theme-css-20260802224629
+ARG CACHE_BUST=latest-message-20260804201600
 ENV NEXT_TELEMETRY_DISABLED=1
 RUN npm run build
 

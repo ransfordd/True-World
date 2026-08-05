@@ -128,44 +128,81 @@ export default function HomePage() {
           </FadeIn>
           <FadeIn delay={0.1}>
             <section id="video-section" className="anchor-offset">
-              <h2 className="font-cinzel text-4xl font-extrabold mb-8 text-ttw-gold uppercase border-b-4 border-ttw-gold/50 pb-4 gold-glow">
+              <h2 className="font-cinzel text-4xl font-extrabold mb-8 text-ttw-gold uppercase border-b border-ttw-gold/60 pb-4 gold-glow">
                 Latest Message
               </h2>
               <a
                 href={SITE.youtube}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="relative block pb-[56.25%] h-0 overflow-hidden rounded-2xl border-2 border-ttw-gold/30 video-player-shadow group bg-[#0a0a0a]"
+                className="relative block pb-[56.25%] h-0 overflow-hidden rounded-2xl border border-white/10 shadow-[0_20px_50px_rgba(255,60,0,0.12)] group bg-[#1a0a08]"
+                aria-label="Visit our YouTube channel — THE TRUE WORD"
               >
                 {SITE.youtubeFeaturedVideoId ? (
-                  <Image
-                    src={`https://i.ytimg.com/vi/${SITE.youtubeFeaturedVideoId}/hqdefault.jpg`}
-                    alt="Latest message on The True Word YouTube channel"
-                    fill
-                    className="object-cover transition-transform duration-300 group-hover:scale-105"
-                    unoptimized
-                  />
-                ) : (
-                  <div className="absolute inset-0 flex flex-col items-center justify-center gap-4 bg-gradient-to-br from-[#0a0a0a] to-[#141414]">
+                  <>
                     <Image
-                      src={SITE.logo}
-                      alt=""
-                      width={96}
-                      height={96}
-                      className="opacity-90 transition-transform duration-300 group-hover:scale-105"
+                      src={`https://i.ytimg.com/vi/${SITE.youtubeFeaturedVideoId}/hqdefault.jpg`}
+                      alt="Latest message on The True Word YouTube channel"
+                      fill
+                      className="object-cover transition-transform duration-500 group-hover:scale-105"
+                      unoptimized
                     />
-                    <p className="font-cinzel text-ttw-gold text-sm tracking-wide uppercase">
-                      Visit our YouTube channel
-                    </p>
-                  </div>
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-black/20" />
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      <div className="flex h-16 w-16 sm:h-20 sm:w-20 items-center justify-center rounded-full bg-[#FF0000] shadow-[0_0_28px_rgba(255,0,0,0.45)] transition-transform duration-300 group-hover:scale-110">
+                        <svg className="ml-1 h-8 w-8 sm:h-10 sm:w-10 text-white" fill="currentColor" viewBox="0 0 24 24" aria-hidden>
+                          <path d="M8 5v14l11-7z" />
+                        </svg>
+                      </div>
+                    </div>
+                  </>
+                ) : (
+                  <>
+                    <Image
+                      src="/images/pr.jpg"
+                      alt=""
+                      fill
+                      className="object-cover transition-transform duration-500 group-hover:scale-105"
+                      sizes="(max-width: 1024px) 100vw, 50vw"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#0c0604]/90 via-[#3a1a0c]/35 to-amber-200/15" />
+                    <div className="absolute inset-0 bg-gradient-to-br from-orange-400/10 via-transparent to-rose-900/20" />
+
+                    <div className="absolute left-0 right-0 top-0 z-10 flex items-center gap-3 p-3 sm:p-4">
+                      <div className="relative h-10 w-10 shrink-0 overflow-hidden rounded-full border-2 border-white/80 bg-black shadow-md sm:h-12 sm:w-12">
+                        <Image
+                          src={SITE.logo}
+                          alt=""
+                          fill
+                          className="object-cover"
+                          sizes="48px"
+                        />
+                      </div>
+                      <div className="min-w-0 text-left">
+                        <p className="truncate font-cinzel text-sm font-semibold tracking-wide text-white drop-shadow sm:text-base">
+                          {SITE.name}
+                        </p>
+                        <p className="truncate text-xs text-white/75 sm:text-sm">
+                          @THETRUEWORDBYERICPADDYBOSO
+                        </p>
+                      </div>
+                    </div>
+
+                    <div className="absolute inset-0 z-10 flex flex-col items-center justify-center gap-3 px-6 pt-8 sm:gap-4">
+                      <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-full bg-[#FF0000] shadow-[0_0_32px_rgba(255,0,0,0.5)] transition-transform duration-300 group-hover:scale-110 sm:h-20 sm:w-20">
+                        <svg className="ml-1 h-8 w-8 text-white sm:h-10 sm:w-10" fill="currentColor" viewBox="0 0 24 24" aria-hidden>
+                          <path d="M8 5v14l11-7z" />
+                        </svg>
+                      </div>
+                      <p className="text-center text-base font-semibold tracking-wide text-white drop-shadow-md sm:text-lg">
+                        Visit Our YouTube Channel
+                      </p>
+                      <p className="text-center text-xs font-medium tracking-wide text-white/80 sm:text-sm">
+                        Teachings · Prophetic insight
+                      </p>
+                    </div>
+                  </>
                 )}
-                <div className="absolute inset-0 flex items-center justify-center bg-black/20">
-                  <div className="w-20 h-20 rounded-full bg-ttw-gold/90 flex items-center justify-center">
-                    <svg className="w-10 h-10 text-black ml-1" fill="currentColor" viewBox="0 0 24 24">
-                      <path d="M8 5v14l11-7z" />
-                    </svg>
-                  </div>
-                </div>
               </a>
             </section>
           </FadeIn>
