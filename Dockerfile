@@ -10,7 +10,7 @@ WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 # Bust cache when welcome gate changes
-ARG CACHE_BUST=latest-message-20260804201600
+ARG CACHE_BUST=lively-youtube-20260805143100
 ENV NEXT_TELEMETRY_DISABLED=1
 RUN npm run build
 
