@@ -139,19 +139,28 @@ export default function AboutPage() {
         </div>
       </FadeIn>
 
-      <FadeIn className="text-center flex flex-col sm:flex-row gap-4 justify-center">
-        <Link
-          href="/journey"
-          className="bg-ttw-gold text-black py-3 px-8 rounded-full font-bold"
-        >
-          Start Your Journey
-        </Link>
-        <Link
-          href="/coaching"
-          className="border border-ttw-gold text-ttw-gold py-3 px-8 rounded-full font-bold hover:bg-ttw-gold/10"
-        >
-          Explore Coaching
-        </Link>
+      <FadeIn className="p-10 md:p-14 rounded-2xl border border-ttw-gold/30 bg-gradient-to-br from-ttw-gold/10 to-[var(--surface)] text-center">
+        <h2 className="font-cinzel text-3xl text-ttw-gold uppercase gold-glow mb-4">
+          Join the Movement
+        </h2>
+        <p className="text-gray-300 max-w-xl mx-auto mb-8 leading-relaxed">
+          Step into the path of awakening—whether through the Journey, coaching, or the
+          wider community. Your identity and destiny are waiting.
+        </p>
+        <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <Link
+            href="/journey"
+            className="bg-ttw-gold text-black py-3 px-8 rounded-full font-bold"
+          >
+            Start Your Journey
+          </Link>
+          <Link
+            href="/coaching"
+            className="border border-ttw-gold text-ttw-gold py-3 px-8 rounded-full font-bold hover:bg-ttw-gold/10"
+          >
+            Explore Coaching
+          </Link>
+        </div>
       </FadeIn>
     </div>
   );

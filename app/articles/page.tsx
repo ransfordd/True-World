@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
 import { getAllArticles } from "@/lib/articles";
 import { FadeIn } from "@/components/ui/FadeIn";
+import { ArticleCover } from "@/components/ui/ArticleCover";
 
 export const metadata: Metadata = {
   title: "Articles",
@@ -31,15 +31,7 @@ export default function ArticlesPage() {
                 href={`/articles/${article.slug}`}
                 className="group block h-full rounded-2xl border border-ttw-gold/20 overflow-hidden bg-black/70 card-modern"
               >
-                <div className="relative h-48">
-                  <Image
-                    src={article.image}
-                    alt={article.title}
-                    fill
-                    className="object-cover group-hover:scale-105 transition-transform duration-300"
-                    unoptimized
-                  />
-                </div>
+                <ArticleCover src={article.image} alt={article.title} />
                 <div className="p-5">
                   <p className="text-xs text-ttw-gold/70 uppercase tracking-wider mb-2">
                     {article.category}
@@ -47,7 +39,8 @@ export default function ArticlesPage() {
                   <h2 className="font-cinzel text-lg text-ttw-gold mb-2 line-clamp-2">
                     {article.title}
                   </h2>
-                  <p className="text-gray-400 text-sm line-clamp-2">{article.excerpt}</p>
+                  <p className="text-gray-400 text-sm line-clamp-2 mb-3">{article.excerpt}</p>
+                  <span className="text-ttw-gold text-sm">Read more →</span>
                 </div>
               </Link>
             </FadeIn>

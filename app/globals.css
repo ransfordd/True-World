@@ -162,7 +162,7 @@ html.light .gold-glow {
     url("/images/pr.jpg");
   background-size: cover;
   background-position: center;
-  background-attachment: fixed;
+  background-attachment: scroll;
 }
 
 .page-hero-articles {
@@ -170,7 +170,7 @@ html.light .gold-glow {
     url("/images/ar.jpg");
   background-size: cover;
   background-position: center;
-  background-attachment: fixed;
+  background-attachment: scroll;
 }
 
 .page-hero-resources {
@@ -178,7 +178,7 @@ html.light .gold-glow {
     url("/images/rr.jpg");
   background-size: cover;
   background-position: center;
-  background-attachment: fixed;
+  background-attachment: scroll;
 }
 
 .page-hero-journey {
@@ -186,7 +186,16 @@ html.light .gold-glow {
     url("/images/jj.png");
   background-size: cover;
   background-position: center;
-  background-attachment: fixed;
+  background-attachment: scroll;
+}
+
+@media (min-width: 1024px) {
+  .page-hero-prayer,
+  .page-hero-articles,
+  .page-hero-resources,
+  .page-hero-journey {
+    background-attachment: fixed;
+  }
 }
 
 .video-player-shadow {

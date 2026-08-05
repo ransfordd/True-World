@@ -35,9 +35,23 @@ export default function JourneyPage() {
             <li>Optional circles (online/offline)</li>
             <li>Certification of Path Completion</li>
           </ul>
-          <p className="font-cinzel text-ttw-gold text-lg">
+          <p className="font-cinzel text-ttw-gold text-lg mb-8">
             Seekers awaken. Disciples transform. Masters impact.
           </p>
+          <div className="flex flex-col sm:flex-row gap-3 justify-center">
+            <a
+              href="/get-in-touch"
+              className="bg-ttw-gold text-black py-3 px-8 rounded-full font-bold"
+            >
+              Enroll / Get in Touch
+            </a>
+            <a
+              href="/coaching"
+              className="border border-ttw-gold text-ttw-gold py-3 px-8 rounded-full font-bold hover:bg-ttw-gold/10"
+            >
+              View Coaching Packages
+            </a>
+          </div>
         </FadeIn>
       </div>
     </div>

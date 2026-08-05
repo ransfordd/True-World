@@ -8,7 +8,7 @@ import { FadeIn } from "@/components/ui/FadeIn";
 const STORAGE_KEY = "ttw-course-progress";
 
 export function CourseCards({ showCta = true }: { showCta?: boolean }) {
-  const [expanded, setExpanded] = useState<string | null>(null);
+  const [expanded, setExpanded] = useState<string | null>(COURSE_TIERS[0]?.id ?? null);
   const [progress, setProgress] = useState<Record<string, boolean>>({});
 
   useEffect(() => {
@@ -34,7 +34,7 @@ export function CourseCards({ showCta = true }: { showCta?: boolean }) {
         const open = expanded === tier.id;
         return (
           <FadeIn key={tier.id} delay={i * 0.08}>
-            <div className="rounded-2xl border border-ttw-gold/20 bg-gradient-to-br from-[#0a0a0a] to-[#080808] overflow-hidden">
+            <div className="rounded-2xl border border-ttw-gold/20 bg-gradient-to-br from-[var(--surface)] to-[var(--surface-elevated)] overflow-hidden">
               <button
                 type="button"
                 className="w-full text-left p-6 md:p-8 flex flex-col md:flex-row md:items-center md:justify-between gap-4"
@@ -46,11 +46,14 @@ export function CourseCards({ showCta = true }: { showCta?: boolean }) {
                     {tier.level} · {tier.theme}
                   </p>
                   <h3 className="font-cinzel text-2xl text-ttw-gold">{tier.name}</h3>
+                  {!open ? (
+                    <p className="text-gray-400 text-sm mt-2 line-clamp-1">{tier.outcome}</p>
+                  ) : null}
                 </div>
                 <div className="flex items-center gap-3">
                   {progress[tier.id] && (
                     <span className="text-xs bg-ttw-gold/20 text-ttw-gold px-3 py-1 rounded-full">
-                      In progress
+                      Started
                     </span>
                   )}
                   <span className="text-ttw-gold text-sm">{open ? "Hide" : "Details"}</span>
@@ -78,19 +81,31 @@ export function CourseCards({ showCta = true }: { showCta?: boolean }) {
                     <strong className="text-ttw-gold">Outcome:</strong> {tier.outcome}
                   </p>
                   <div className="md:col-span-2 flex flex-wrap gap-3">
+                    <Link
+                      href="/get-in-touch"
+                      className="bg-ttw-gold text-black px-4 py-2 rounded-full text-sm font-bold hover:shadow-md hover:shadow-ttw-gold/30 transition"
+                    >
+                      Begin / Enroll
+                    </Link>
+                    <Link
+                      href="/coaching"
+                      className="border border-ttw-gold text-ttw-gold px-4 py-2 rounded-full text-sm hover:bg-ttw-gold/10"
+                    >
+                      View Coaching
+                    </Link>
                     <button
                       type="button"
                       onClick={() => toggleComplete(tier.id)}
-                      className="border border-ttw-gold text-ttw-gold px-4 py-2 rounded-full text-sm hover:bg-ttw-gold/10"
+                      className="border border-ttw-gold/40 text-gray-300 px-4 py-2 rounded-full text-sm hover:bg-ttw-gold/10"
                     >
-                      {progress[tier.id] ? "Mark incomplete" : "Mark as started"}
+                      {progress[tier.id] ? "Clear started" : "Mark as started"}
                     </button>
                     {showCta && (
                       <Link
                         href="/journey"
-                        className="bg-ttw-gold text-black px-4 py-2 rounded-full text-sm font-bold"
+                        className="text-ttw-gold text-sm px-2 py-2 underline-offset-4 hover:underline"
                       >
-                        View Full Journey
+                        Full journey page →
                       </Link>
                     )}
                   </div>

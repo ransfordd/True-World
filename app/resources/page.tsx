@@ -17,10 +17,10 @@ export default function ResourcesPage() {
             Resources
           </h1>
           <p className="text-xl text-gray-300 mb-3">
-            Free study guides, eBooks, and sermon notes
+            Books and teachings by Eric Paddy Boso
           </p>
           <p className="text-gray-400">
-            Resources to deepen understanding and accelerate growth
+            Store links to deepen understanding and accelerate growth
           </p>
         </FadeIn>
 
@@ -44,7 +44,8 @@ export default function ResourcesPage() {
                 </div>
                 <div className="p-5">
                   <h2 className="font-cinzel text-xl text-ttw-gold mb-2">{book.title}</h2>
-                  <p className="text-gray-400 text-sm">{book.description}</p>
+                  <p className="text-gray-400 text-sm mb-3">{book.description}</p>
+                  <span className="text-ttw-gold text-sm font-semibold">Read now →</span>
                 </div>
               </a>
             </FadeIn>

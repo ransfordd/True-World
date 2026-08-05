@@ -7,6 +7,12 @@ import { NAV_LINKS, SITE } from "@/lib/site-data";
 import { useToast } from "@/components/providers/ToastProvider";
 import { mailtoFallbackUrl } from "@/lib/client-mail";
 
+const FOOTER_LINKS = [
+  ...NAV_LINKS.slice(0, 6),
+  { href: "/prayer-requests", label: "Prayer" },
+  { href: "/contact", label: "Contact" },
+] as const;
+
 export function Footer() {
   const { showToast } = useToast();
   const [loading, setLoading] = useState(false);
@@ -60,7 +66,7 @@ export function Footer() {
         <div>
           <h3 className="font-cinzel text-ttw-gold mb-4">Quick Links</h3>
           <ul className="space-y-2 text-sm theme-muted">
-            {NAV_LINKS.slice(0, 6).map((link) => (
+            {FOOTER_LINKS.map((link) => (
               <li key={link.href}>
                 <Link href={link.href} className="hover:text-ttw-gold transition">
                   {link.label}
@@ -72,6 +78,17 @@ export function Footer() {
 
         <div>
           <h3 className="font-cinzel text-ttw-gold mb-4">Stay Connected</h3>
+          <p className="text-sm theme-muted mb-2">
+            YouTube:{" "}
+            <a
+              href={SITE.youtube}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-ttw-gold hover:underline"
+            >
+              @THETRUEWORDBYERICPADDYBOSO
+            </a>
+          </p>
           <p className="text-sm theme-muted mb-2">
             Instagram:{" "}
             <a
