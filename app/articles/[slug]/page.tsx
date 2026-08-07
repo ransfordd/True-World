@@ -5,14 +5,22 @@ import { notFound } from "next/navigation";
 import { getAllArticles, getArticle } from "@/lib/articles";
 import { FadeIn } from "@/components/ui/FadeIn";
 
-type Props = { params: { slug: string } };
+type Props = { params: Promise<{ slug: string }> };
 
-export function generateStaticParams() {
-  return getAllArticles().map((a) => ({ slug: a.slug }));
+export const dynamic = "force-dynamic";
+
+export async function generateStaticParams() {
+  try {
+    const articles = await getAllArticles();
+    return articles.map((a) => ({ slug: a.slug }));
+  } catch {
+    return [];
+  }
 }
 
-export function generateMetadata({ params }: Props): Metadata {
-  const article = getArticle(params.slug);
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { slug } = await params;
+  const article = await getArticle(slug);
   if (!article) return { title: "Article" };
   return {
     title: article.title,
@@ -27,8 +35,9 @@ function toHtml(content: string): string {
     .replace(/className=/g, "class=");
 }
 
-export default function ArticlePage({ params }: Props) {
-  const article = getArticle(params.slug);
+export default async function ArticlePage({ params }: Props) {
+  const { slug } = await params;
+  const article = await getArticle(slug);
   if (!article) notFound();
 
   return (

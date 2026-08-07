@@ -2,13 +2,28 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { COURSE_TIERS } from "@/lib/site-data";
 import { FadeIn } from "@/components/ui/FadeIn";
+
+export type CourseTierView = {
+  id: string;
+  name: string;
+  theme: string;
+  level: string;
+  focus: string[];
+  practices: string[];
+  outcome: string;
+};
 
 const STORAGE_KEY = "ttw-course-progress";
 
-export function CourseCards({ showCta = true }: { showCta?: boolean }) {
-  const [expanded, setExpanded] = useState<string | null>(COURSE_TIERS[0]?.id ?? null);
+export function CourseCards({
+  tiers,
+  showCta = true,
+}: {
+  tiers: CourseTierView[];
+  showCta?: boolean;
+}) {
+  const [expanded, setExpanded] = useState<string | null>(tiers[0]?.id ?? null);
   const [progress, setProgress] = useState<Record<string, boolean>>({});
 
   useEffect(() => {
@@ -30,7 +45,7 @@ export function CourseCards({ showCta = true }: { showCta?: boolean }) {
 
   return (
     <div className="space-y-6">
-      {COURSE_TIERS.map((tier, i) => {
+      {tiers.map((tier, i) => {
         const open = expanded === tier.id;
         return (
           <FadeIn key={tier.id} delay={i * 0.08}>

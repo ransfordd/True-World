@@ -2,20 +2,23 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ContactForm } from "@/components/forms/ContactForm";
 import { FadeIn } from "@/components/ui/FadeIn";
-import { COACHING_PACKAGES } from "@/lib/site-data";
+import { getCmsCoachingPackages } from "@/lib/cms/queries";
 
 export const metadata: Metadata = {
   title: "Get In Touch",
   description: "Enroll in a True Word coaching package.",
 };
 
+export const dynamic = "force-dynamic";
+
 type Props = {
-  searchParams: { package?: string };
+  searchParams: Promise<{ package?: string }>;
 };
 
-export default function GetInTouchPage({ searchParams }: Props) {
-  const packageName = searchParams.package || "";
-  const pkg = COACHING_PACKAGES.find((p) => p.name === packageName);
+export default async function GetInTouchPage({ searchParams }: Props) {
+  const { package: packageName = "" } = await searchParams;
+  const packages = await getCmsCoachingPackages();
+  const pkg = packages.find((p) => p.name === packageName);
 
   if (packageName && !pkg) {
     return (

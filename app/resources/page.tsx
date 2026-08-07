@@ -1,14 +1,18 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import { FadeIn } from "@/components/ui/FadeIn";
-import { RESOURCES } from "@/lib/site-data";
+import { getCmsResources } from "@/lib/cms/queries";
 
 export const metadata: Metadata = {
   title: "Resources",
   description: "Books, study guides, and resources from The True Word.",
 };
 
-export default function ResourcesPage() {
+export const dynamic = "force-dynamic";
+
+export default async function ResourcesPage() {
+  const resources = await getCmsResources();
+
   return (
     <div className="page-hero-resources min-h-screen">
       <div className="max-w-7xl mx-auto px-6 py-16 md:py-24">
@@ -25,8 +29,8 @@ export default function ResourcesPage() {
         </FadeIn>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-          {RESOURCES.map((book, i) => (
-            <FadeIn key={book.title} delay={i * 0.05}>
+          {resources.map((book, i) => (
+            <FadeIn key={book.id} delay={i * 0.05}>
               <a
                 href={book.link}
                 target="_blank"

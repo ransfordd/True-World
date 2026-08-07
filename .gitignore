@@ -29,6 +29,11 @@ yarn-error.log*
 .env
 .env*.local
 
+# CMS store & uploads (runtime data; volume in Docker)
+/data/cms/
+/public/uploads/
+!/public/uploads/.gitkeep
+
 # legacy HTML archive (optional to commit)
 # _legacy/
 

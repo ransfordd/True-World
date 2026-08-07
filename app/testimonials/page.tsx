@@ -2,12 +2,14 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Star } from "lucide-react";
 import { FadeIn } from "@/components/ui/FadeIn";
-import { TESTIMONIALS } from "@/lib/site-data";
+import { getCmsTestimonials } from "@/lib/cms/queries";
 
 export const metadata: Metadata = {
   title: "Testimonials",
   description: "Real stories of transformation, healing, and awakening from The True Word.",
 };
+
+export const dynamic = "force-dynamic";
 
 const EXALTATION = [
   "Awakened Love, Eternal Union.",
@@ -24,7 +26,9 @@ const EXALTATION = [
   "Marriage is not survival—it is sacred exaltation.",
 ];
 
-export default function TestimonialsPage() {
+export default async function TestimonialsPage() {
+  const testimonials = await getCmsTestimonials();
+
   return (
     <div className="max-w-5xl mx-auto px-6 py-16 md:py-24">
       <FadeIn className="text-center mb-14">
@@ -40,8 +44,8 @@ export default function TestimonialsPage() {
       </FadeIn>
 
       <div className="grid md:grid-cols-2 gap-6 mb-20">
-        {TESTIMONIALS.map((t, i) => (
-          <FadeIn key={t.names} delay={i * 0.1}>
+        {testimonials.map((t, i) => (
+          <FadeIn key={t.id} delay={i * 0.1}>
             <div className="p-8 rounded-2xl border border-ttw-gold/20 bg-[#0a0a0a] h-full">
               <div className="flex gap-1 mb-4 text-ttw-gold">
                 {Array.from({ length: 5 }).map((_, idx) => (

@@ -8,4 +8,14 @@ services:
     environment:
       - NODE_ENV=production
       - PORT=3000
+      - CMS_DATA_DIR=/app/data/cms
+    volumes:
+      # Persist CMS JSON store across redeploys
+      - cms_data:/app/data/cms
+      # Persist staff media uploads
+      - cms_uploads:/app/public/uploads
     restart: unless-stopped
+
+volumes:
+  cms_data:
+  cms_uploads:

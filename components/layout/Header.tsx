@@ -6,13 +6,19 @@ import { usePathname } from "next/navigation";
 import { Menu, Moon, Sun, X } from "lucide-react";
 import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { NAV_LINKS, SITE } from "@/lib/site-data";
+import { NAV_LINKS } from "@/lib/site-data";
 import { useTheme } from "@/components/providers/ThemeProvider";
+import { useSiteSettings } from "@/components/providers/SiteSettingsProvider";
 
 export function Header() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
   const { theme, toggleTheme } = useTheme();
+  const site = useSiteSettings();
+
+  if (pathname?.startsWith("/admin")) {
+    return null;
+  }
 
   const isActive = (href: string) =>
     href === "/" ? pathname === "/" : pathname.startsWith(href);
@@ -26,7 +32,7 @@ export function Header() {
         <div className="flex justify-between items-center h-16">
           <Link href="/" className="flex items-center gap-3" aria-label="Home">
             <Image
-              src={SITE.logo}
+              src={site.logo}
               alt="The True Word logo"
               width={36}
               height={36}
@@ -34,7 +40,7 @@ export function Header() {
               priority
             />
             <span className="hidden sm:inline text-ttw-gold font-cinzel font-semibold text-sm tracking-wide">
-              {SITE.name}
+              {site.name}
             </span>
           </Link>
 

@@ -1,14 +1,18 @@
 import type { Metadata } from "next";
 import { ContactForm } from "@/components/forms/ContactForm";
 import { FadeIn } from "@/components/ui/FadeIn";
-import { SITE } from "@/lib/site-data";
+import { getCmsSettings } from "@/lib/cms/queries";
 
 export const metadata: Metadata = {
   title: "Contact Us",
   description: "Ask a question or connect with The True Word ministry.",
 };
 
-export default function ContactPage() {
+export const dynamic = "force-dynamic";
+
+export default async function ContactPage() {
+  const site = await getCmsSettings();
+
   return (
     <div className="max-w-4xl mx-auto px-6 py-16 md:py-24">
       <FadeIn className="text-center mb-12">
@@ -32,20 +36,20 @@ export default function ContactPage() {
         <div className="space-y-2 text-gray-300">
           <p>
             Website:{" "}
-            <a href={SITE.website} className="text-ttw-gold hover:underline" target="_blank" rel="noopener noreferrer">
-              www.thetrueword-gh.com
+            <a href={site.website} className="text-ttw-gold hover:underline" target="_blank" rel="noopener noreferrer">
+              {site.website.replace(/^https?:\/\//, "")}
             </a>
           </p>
           <p>
             Instagram:{" "}
-            <a href={SITE.instagram} className="text-ttw-gold hover:underline" target="_blank" rel="noopener noreferrer">
-              {SITE.instagramHandle}
+            <a href={site.instagram} className="text-ttw-gold hover:underline" target="_blank" rel="noopener noreferrer">
+              {site.instagramHandle}
             </a>
           </p>
           <p>
             Email:{" "}
-            <a href={`mailto:${SITE.email}`} className="text-ttw-gold hover:underline">
-              {SITE.email}
+            <a href={`mailto:${site.email}`} className="text-ttw-gold hover:underline">
+              {site.email}
             </a>
           </p>
         </div>

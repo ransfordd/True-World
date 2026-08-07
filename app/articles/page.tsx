@@ -9,8 +9,10 @@ export const metadata: Metadata = {
   description: "Teachings and spiritual insights from The True Word ministry.",
 };
 
-export default function ArticlesPage() {
-  const articles = getAllArticles();
+export const dynamic = "force-dynamic";
+
+export default async function ArticlesPage() {
+  const articles = await getAllArticles();
 
   return (
     <div className="page-hero-articles min-h-screen">

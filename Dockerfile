@@ -9,8 +9,8 @@ FROM node:20-alpine AS builder
 WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
-# Bust cache when welcome gate changes
-ARG CACHE_BUST=display-polish-20260805174000
+# Bust cache when CMS / app sources change
+ARG CACHE_BUST=cms-self-hosted-20260807
 ENV NEXT_TELEMETRY_DISABLED=1
 RUN npm run build
 
@@ -20,6 +20,7 @@ ENV NODE_ENV=production
 ENV NEXT_TELEMETRY_DISABLED=1
 ENV PORT=3000
 ENV HOSTNAME=0.0.0.0
+ENV CMS_DATA_DIR=/app/data/cms
 
 RUN addgroup --system --gid 1001 nodejs \
   && adduser --system --uid 1001 nextjs
@@ -27,9 +28,12 @@ RUN addgroup --system --gid 1001 nodejs \
 COPY --from=builder /app/public ./public
 COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
 COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
+# Seed source for first-boot CMS import (MDX + static defaults use these at runtime)
+COPY --from=builder /app/content ./content
+
+RUN mkdir -p /app/data/cms /app/public/uploads \
+  && chown -R nextjs:nodejs /app/data /app/public/uploads
 
 USER nextjs
 EXPOSE 3000
 CMD ["node", "server.js"]
-
-# welcome-overlay-fix 2026-07-31T18:39:53.2730035+00:00

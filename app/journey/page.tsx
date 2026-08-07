@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { CourseCards } from "@/components/journey/CourseCards";
 import { FadeIn } from "@/components/ui/FadeIn";
+import { getCmsCourseTiers } from "@/lib/cms/queries";
 
 export const metadata: Metadata = {
   title: "The Awakening Journey",
@@ -8,7 +9,20 @@ export const metadata: Metadata = {
     "A three-tiered self-paced course for spiritual awakening: Seekers, Disciples, and Masters.",
 };
 
-export default function JourneyPage() {
+export const dynamic = "force-dynamic";
+
+export default async function JourneyPage() {
+  const courseTiers = await getCmsCourseTiers();
+  const tiers = courseTiers.map((t) => ({
+    id: t.slug || t.id,
+    name: t.name,
+    theme: t.theme,
+    level: t.level,
+    focus: t.focus,
+    practices: t.practices,
+    outcome: t.outcome,
+  }));
+
   return (
     <div className="page-hero-journey min-h-screen">
       <div className="max-w-5xl mx-auto px-6 py-16 md:py-24">
@@ -24,7 +38,7 @@ export default function JourneyPage() {
           </p>
         </FadeIn>
 
-        <CourseCards showCta={false} />
+        <CourseCards tiers={tiers} showCta={false} />
 
         <FadeIn className="mt-16 p-8 rounded-2xl border border-ttw-gold/20 bg-black/70 text-center">
           <h2 className="font-cinzel text-2xl text-ttw-gold mb-6">How The Course Works</h2>

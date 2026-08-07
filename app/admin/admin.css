@@ -1,0 +1,72 @@
+.cms-admin input,
+.cms-admin textarea,
+.cms-admin select {
+  width: 100%;
+  background: #121212;
+  border: 1px solid rgba(192, 160, 76, 0.35);
+  border-radius: 0.5rem;
+  padding: 0.55rem 0.75rem;
+  color: #f3f4f6;
+  font-size: 0.9rem;
+}
+
+.cms-admin label {
+  display: block;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: #c0a04c;
+  margin-bottom: 0.35rem;
+}
+
+.cms-admin .field {
+  margin-bottom: 1rem;
+}
+
+.cms-admin .btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9999px;
+  padding: 0.5rem 1.1rem;
+  font-size: 0.875rem;
+  font-weight: 700;
+  cursor: pointer;
+  border: none;
+}
+
+.cms-admin .btn-primary {
+  background: #c0a04c;
+  color: #000;
+}
+
+.cms-admin .btn-ghost {
+  background: transparent;
+  color: #c0a04c;
+  border: 1px solid rgba(192, 160, 76, 0.5);
+}
+
+.cms-admin .btn-danger {
+  background: transparent;
+  color: #f87171;
+  border: 1px solid rgba(248, 113, 113, 0.5);
+}
+
+.cms-admin table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+
+.cms-admin th,
+.cms-admin td {
+  text-align: left;
+  padding: 0.65rem 0.5rem;
+  border-bottom: 1px solid rgba(192, 160, 76, 0.15);
+}
+
+.cms-admin th {
+  color: #c0a04c;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+}

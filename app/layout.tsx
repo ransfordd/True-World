@@ -1,11 +1,9 @@
 import type { Metadata } from "next";
 import { Cinzel, Inter } from "next/font/google";
 import "./globals.css";
-import { Header } from "@/components/layout/Header";
-import { Footer } from "@/components/layout/Footer";
+import { SiteChrome } from "@/components/layout/SiteChrome";
 import { ThemeProvider } from "@/components/providers/ThemeProvider";
 import { ToastProvider } from "@/components/providers/ToastProvider";
-import { BackToTop, ReadingProgress } from "@/components/ui/ScrollExtras";
 import { SITE } from "@/lib/site-data";
 
 const inter = Inter({
@@ -43,11 +41,7 @@ export default function RootLayout({
       >
         <ThemeProvider>
           <ToastProvider>
-            <ReadingProgress />
-            <Header />
-            <main className="pt-16 min-h-screen">{children}</main>
-            <Footer />
-            <BackToTop />
+            <SiteChrome>{children}</SiteChrome>
           </ToastProvider>
         </ThemeProvider>
       </body>

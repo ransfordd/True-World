@@ -3,22 +3,23 @@
 import { FormEvent, useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { X } from "lucide-react";
-import { COACHING_PACKAGES } from "@/lib/site-data";
+import type { CoachingPackageView } from "@/components/coaching/CoachingPackages";
 import { useToast } from "@/components/providers/ToastProvider";
 import { mailtoFallbackUrl } from "@/lib/client-mail";
 
 type Props = {
   packageName: string | null;
+  packages?: CoachingPackageView[];
   onClose: () => void;
 };
 
-export function CoachingModal({ packageName, onClose }: Props) {
+export function CoachingModal({ packageName, packages = [], onClose }: Props) {
   const open = Boolean(packageName);
   const { showToast } = useToast();
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
 
-  const info = COACHING_PACKAGES.find((p) => p.name === packageName);
+  const info = packages.find((p) => p.name === packageName);
 
   useEffect(() => {
     if (!open) {

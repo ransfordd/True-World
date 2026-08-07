@@ -9,7 +9,13 @@ import { ContactForm } from "@/components/forms/ContactForm";
 import { FadeIn } from "@/components/ui/FadeIn";
 import { ArticleCover } from "@/components/ui/ArticleCover";
 import { getFeaturedArticles } from "@/lib/articles";
-import { SITE, TESTIMONIALS } from "@/lib/site-data";
+import {
+  getCmsCoachingPackages,
+  getCmsCourseTiers,
+  getCmsDailyTruths,
+  getCmsSettings,
+  getCmsTestimonials,
+} from "@/lib/cms/queries";
 
 const PILLARS = [
   { name: "Faith", line: "Trust rooted in the living Word", Icon: Cross },
@@ -18,15 +24,53 @@ const PILLARS = [
   { name: "Impact", line: "Awakening that multiplies", Icon: Heart },
 ] as const;
 
-export default function HomePage() {
-  const featured = getFeaturedArticles(3);
-  const videoId = SITE.youtubeFeaturedVideoId.trim();
+export const dynamic = "force-dynamic";
+
+export default async function HomePage() {
+  const [featured, settings, dailyTruths, courseTiers, coaching, testimonials] =
+    await Promise.all([
+      getFeaturedArticles(3),
+      getCmsSettings(),
+      getCmsDailyTruths(),
+      getCmsCourseTiers(),
+      getCmsCoachingPackages(),
+      getCmsTestimonials(),
+    ]);
+
+  const videoId = (settings.youtubeFeaturedVideoId || "").trim();
   const videoHref = videoId
     ? `https://www.youtube.com/watch?v=${videoId}`
-    : SITE.youtube;
+    : settings.youtube;
   const videoAria = videoId
     ? "Watch the latest message on YouTube"
     : "Visit our YouTube channel — THE TRUE WORD";
+
+  const packages = coaching.map((p) => ({
+    id: p.slug || p.id,
+    name: p.name,
+    path: p.path,
+    level: p.level,
+    duration: p.duration,
+    purpose: p.purpose,
+    outcome: p.outcome,
+    featured: p.featured,
+    includes: p.includes,
+  }));
+
+  const tiers = courseTiers.map((t) => ({
+    id: t.slug || t.id,
+    name: t.name,
+    theme: t.theme,
+    level: t.level,
+    focus: t.focus,
+    practices: t.practices,
+    outcome: t.outcome,
+  }));
+
+  const truths = dailyTruths.map((d) => ({
+    text: d.text,
+    ref: d.reference,
+  }));
 
   return (
     <HomeWelcomeGate>
@@ -45,7 +89,7 @@ export default function HomePage() {
           <div className="max-w-4xl mx-auto">
             <div className="mb-8 flex justify-center">
               <Image
-                src={SITE.logo}
+                src={settings.logo}
                 alt="The True Word logo"
                 width={250}
                 height={250}
@@ -164,11 +208,11 @@ export default function HomePage() {
                   <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/40 to-ttw-gold/10" />
                   <div className="absolute left-0 right-0 top-0 z-10 flex items-center gap-3 p-3 sm:p-4">
                     <div className="relative h-10 w-10 shrink-0 overflow-hidden rounded-full border border-ttw-gold/60 bg-black shadow-md sm:h-12 sm:w-12">
-                      <Image src={SITE.logo} alt="" fill className="object-cover" sizes="48px" />
+                      <Image src={settings.logo} alt="" fill className="object-cover" sizes="48px" />
                     </div>
                     <div className="min-w-0 text-left">
                       <p className="truncate font-cinzel text-sm font-semibold tracking-wide text-ttw-gold sm:text-base">
-                        {SITE.name}
+                        {settings.name}
                       </p>
                       <p className="truncate text-xs text-gray-300 sm:text-sm">
                         @THETRUEWORDBYERICPADDYBOSO
@@ -197,7 +241,7 @@ export default function HomePage() {
             {videoId ? (
               <p className="mt-4 text-center text-sm text-gray-400">
                 <a
-                  href={SITE.youtube}
+                  href={settings.youtube}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-ttw-gold hover:underline"
@@ -209,7 +253,7 @@ export default function HomePage() {
           </section>
         </FadeIn>
 
-        <DailyTruth />
+        <DailyTruth truths={truths} />
 
         <FadeIn className="mb-24">
           <div className="text-center mb-10">
@@ -243,7 +287,7 @@ export default function HomePage() {
               Seekers awaken. Disciples transform. Masters impact.
             </p>
           </FadeIn>
-          <CourseCards />
+          <CourseCards tiers={tiers} />
         </section>
 
         <section id="coaching" className="anchor-offset mb-24">
@@ -255,7 +299,7 @@ export default function HomePage() {
               Personalized one-on-one guidance for spiritual awakening
             </p>
           </FadeIn>
-          <CoachingPackages />
+          <CoachingPackages packages={packages} />
         </section>
 
         <section id="ask-question" className="anchor-offset mb-24">
@@ -315,9 +359,9 @@ export default function HomePage() {
             Testimonies
           </h2>
           <div className="grid md:grid-cols-2 gap-6">
-            {TESTIMONIALS.map((t) => (
+            {testimonials.map((t) => (
               <div
-                key={t.names}
+                key={t.id}
                 className="p-8 rounded-2xl border border-ttw-gold/20 bg-[var(--surface)]"
               >
                 <div className="flex gap-1 mb-4 text-ttw-gold">
@@ -355,7 +399,7 @@ export default function HomePage() {
           </p>
           <div className="flex flex-wrap justify-center gap-3">
             <a
-              href={SITE.youtube}
+              href={settings.youtube}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 bg-ttw-gold text-black px-5 py-2.5 rounded-full text-sm font-bold"
@@ -363,7 +407,7 @@ export default function HomePage() {
               YouTube
             </a>
             <a
-              href={SITE.instagram}
+              href={settings.instagram}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 border border-ttw-gold text-ttw-gold px-5 py-2.5 rounded-full text-sm font-semibold hover:bg-ttw-gold/10"

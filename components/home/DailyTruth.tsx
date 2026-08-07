@@ -1,18 +1,26 @@
 "use client";
 
 import { useMemo } from "react";
-import { DAILY_TRUTHS } from "@/lib/site-data";
 import { FadeIn } from "@/components/ui/FadeIn";
 
-export function DailyTruth() {
+export type DailyTruthItem = {
+  text: string;
+  ref: string;
+};
+
+export function DailyTruth({ truths }: { truths: DailyTruthItem[] }) {
+  const list = truths.length
+    ? truths
+    : [{ text: "The Truth sets free.", ref: "John 8:32" }];
+
   const truth = useMemo(() => {
     const today = new Date();
     const start = new Date(today.getFullYear(), 0, 0);
     const dayOfYear = Math.floor(
       (today.getTime() - start.getTime()) / (1000 * 60 * 60 * 24)
     );
-    return DAILY_TRUTHS[dayOfYear % DAILY_TRUTHS.length];
-  }, []);
+    return list[dayOfYear % list.length];
+  }, [list]);
 
   const date = useMemo(
     () =>

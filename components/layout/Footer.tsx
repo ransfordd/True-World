@@ -3,9 +3,11 @@
 import Image from "next/image";
 import Link from "next/link";
 import { FormEvent, useState } from "react";
-import { NAV_LINKS, SITE } from "@/lib/site-data";
+import { usePathname } from "next/navigation";
+import { NAV_LINKS } from "@/lib/site-data";
 import { useToast } from "@/components/providers/ToastProvider";
 import { mailtoFallbackUrl } from "@/lib/client-mail";
+import { useSiteSettings } from "@/components/providers/SiteSettingsProvider";
 
 const FOOTER_LINKS = [
   ...NAV_LINKS.slice(0, 6),
@@ -14,8 +16,14 @@ const FOOTER_LINKS = [
 ] as const;
 
 export function Footer() {
+  const pathname = usePathname();
   const { showToast } = useToast();
   const [loading, setLoading] = useState(false);
+  const site = useSiteSettings();
+
+  if (pathname?.startsWith("/admin")) {
+    return null;
+  }
 
   async function onSubscribe(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -52,14 +60,14 @@ export function Footer() {
       <div className="max-w-7xl mx-auto px-6 py-14 grid grid-cols-1 md:grid-cols-3 gap-10">
         <div>
           <Image
-            src={SITE.logo}
+            src={site.logo}
             alt="The True Word logo"
             width={128}
             height={128}
             className="w-32 mb-4 opacity-90"
           />
           <p className="theme-muted text-sm leading-relaxed">
-            {SITE.tagline}. Awakening the Divine Within Humanity.
+            {site.tagline}. Awakening the Divine Within Humanity.
           </p>
         </div>
 
@@ -81,29 +89,29 @@ export function Footer() {
           <p className="text-sm theme-muted mb-2">
             YouTube:{" "}
             <a
-              href={SITE.youtube}
+              href={site.youtube}
               target="_blank"
               rel="noopener noreferrer"
               className="text-ttw-gold hover:underline"
             >
-              @THETRUEWORDBYERICPADDYBOSO
+              Channel
             </a>
           </p>
           <p className="text-sm theme-muted mb-2">
             Instagram:{" "}
             <a
-              href={SITE.instagram}
+              href={site.instagram}
               target="_blank"
               rel="noopener noreferrer"
               className="text-ttw-gold hover:underline"
             >
-              {SITE.instagramHandle}
+              {site.instagramHandle}
             </a>
           </p>
           <p className="text-sm theme-muted mb-4">
             Email:{" "}
-            <a href={`mailto:${SITE.email}`} className="text-ttw-gold hover:underline">
-              {SITE.email}
+            <a href={`mailto:${site.email}`} className="text-ttw-gold hover:underline">
+              {site.email}
             </a>
           </p>
           <form onSubmit={onSubscribe} className="flex gap-2">
@@ -125,7 +133,7 @@ export function Footer() {
         </div>
       </div>
       <div className="border-t border-ttw-gold/10 py-4 text-center text-xs theme-muted">
-        © {new Date().getFullYear()} {SITE.name}. All rights reserved.{" "}
+        © {new Date().getFullYear()} {site.name}. All rights reserved.{" "}
         <Link href="/faq" className="text-ttw-gold/70 hover:text-ttw-gold">
           Privacy
         </Link>

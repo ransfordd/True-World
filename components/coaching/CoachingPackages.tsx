@@ -2,13 +2,26 @@
 
 import Link from "next/link";
 import { useState } from "react";
-import { COACHING_PACKAGES } from "@/lib/site-data";
 import { FadeIn } from "@/components/ui/FadeIn";
 import { CoachingModal } from "@/components/coaching/CoachingModal";
 
+export type CoachingPackageView = {
+  id: string;
+  name: string;
+  path: string;
+  level: string;
+  duration: string;
+  purpose: string;
+  outcome: string;
+  featured?: boolean;
+  includes: string[];
+};
+
 export function CoachingPackages({
+  packages,
   allowModal = true,
 }: {
+  packages: CoachingPackageView[];
   allowModal?: boolean;
 }) {
   const [modalPackage, setModalPackage] = useState<string | null>(null);
@@ -16,7 +29,7 @@ export function CoachingPackages({
   return (
     <>
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        {COACHING_PACKAGES.map((pkg, i) => (
+        {packages.map((pkg, i) => (
           <FadeIn key={pkg.id} delay={i * 0.1}>
             <div
               className={`h-full p-6 md:p-8 rounded-2xl border bg-gradient-to-br from-[#0a0a0a] to-[#080808] flex flex-col ${
@@ -77,6 +90,7 @@ export function CoachingPackages({
       {allowModal && (
         <CoachingModal
           packageName={modalPackage}
+          packages={packages}
           onClose={() => setModalPackage(null)}
         />
       )}
