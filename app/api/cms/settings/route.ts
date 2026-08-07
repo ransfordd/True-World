@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { revalidatePath } from "next/cache";
 import { getSession } from "@/lib/cms/auth";
 import { ensureCmsSeeded } from "@/lib/cms/seed";
 import { readStore, writeStore } from "@/lib/cms/store";
@@ -31,5 +32,6 @@ export async function PATCH(req: Request) {
     ),
   } as CmsSiteSettings;
   writeStore(store);
+  revalidatePath("/", "layout");
   return NextResponse.json({ settings: store.settings });
 }

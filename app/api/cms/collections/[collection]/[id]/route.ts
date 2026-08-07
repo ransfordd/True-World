@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { revalidatePath } from "next/cache";
 import { getSession } from "@/lib/cms/auth";
 import { ensureCmsSeeded } from "@/lib/cms/seed";
 import { readStore, writeStore } from "@/lib/cms/store";
@@ -17,6 +18,16 @@ const KEYS: CollectionKey[] = [
   "coachingPackages",
   "courseTiers",
 ];
+
+function revalidatePublic() {
+  revalidatePath("/");
+  revalidatePath("/testimonials");
+  revalidatePath("/resources");
+  revalidatePath("/coaching");
+  revalidatePath("/journey");
+  revalidatePath("/get-in-touch");
+  revalidatePath("/contact");
+}
 
 export async function PATCH(
   req: Request,
@@ -42,6 +53,7 @@ export async function PATCH(
   }
   items[idx] = { ...items[idx], ...body, id };
   writeStore(store);
+  revalidatePublic();
   return NextResponse.json({ item: items[idx] });
 }
 
@@ -68,5 +80,6 @@ export async function DELETE(
     return NextResponse.json({ error: "Not found" }, { status: 404 });
   }
   writeStore(store);
+  revalidatePublic();
   return NextResponse.json({ ok: true });
 }

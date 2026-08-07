@@ -1,8 +1,17 @@
 import { NextResponse } from "next/server";
+import { revalidatePath } from "next/cache";
 import { getSession } from "@/lib/cms/auth";
 import { ensureCmsSeeded } from "@/lib/cms/seed";
 import { readStore, writeStore } from "@/lib/cms/store";
 import type { CmsArticle } from "@/lib/cms/types";
+
+function revalidateArticles(slugs: string[]) {
+  revalidatePath("/");
+  revalidatePath("/articles");
+  for (const slug of slugs) {
+    if (slug) revalidatePath(`/articles/${slug}`);
+  }
+}
 
 type Ctx = { params: Promise<{ id: string }> };
 
@@ -64,6 +73,7 @@ export async function PATCH(req: Request, ctx: Ctx) {
   };
   store.articles[idx] = article;
   writeStore(store);
+  revalidateArticles([prev.slug, article.slug]);
   return NextResponse.json({ article });
 }
 
@@ -75,11 +85,12 @@ export async function DELETE(_req: Request, ctx: Ctx) {
   await ensureCmsSeeded();
   const { id } = await ctx.params;
   const store = readStore();
-  const before = store.articles.length;
-  store.articles = store.articles.filter((a) => a.id !== id);
-  if (store.articles.length === before) {
+  const existing = store.articles.find((a) => a.id === id);
+  if (!existing) {
     return NextResponse.json({ error: "Not found" }, { status: 404 });
   }
+  store.articles = store.articles.filter((a) => a.id !== id);
   writeStore(store);
+  revalidateArticles([existing.slug]);
   return NextResponse.json({ ok: true });
 }

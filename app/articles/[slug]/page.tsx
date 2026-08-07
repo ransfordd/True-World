@@ -2,21 +2,14 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { getAllArticles, getArticle } from "@/lib/articles";
+import { getArticle } from "@/lib/articles";
 import { FadeIn } from "@/components/ui/FadeIn";
 
 type Props = { params: Promise<{ slug: string }> };
 
+/** Always read live CMS store so staff edits appear without redeploy. */
 export const dynamic = "force-dynamic";
-
-export async function generateStaticParams() {
-  try {
-    const articles = await getAllArticles();
-    return articles.map((a) => ({ slug: a.slug }));
-  } catch {
-    return [];
-  }
-}
+export const revalidate = 0;
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;

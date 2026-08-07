@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { revalidatePath } from "next/cache";
 import { getSession } from "@/lib/cms/auth";
 import { ensureCmsSeeded } from "@/lib/cms/seed";
 import { readStore, writeStore, newId } from "@/lib/cms/store";
@@ -51,5 +52,8 @@ export async function POST(req: Request) {
   };
   store.articles.push(article);
   writeStore(store);
+  revalidatePath("/");
+  revalidatePath("/articles");
+  revalidatePath(`/articles/${article.slug}`);
   return NextResponse.json({ article }, { status: 201 });
 }

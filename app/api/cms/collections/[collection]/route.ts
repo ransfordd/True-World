@@ -1,7 +1,18 @@
 import { NextResponse } from "next/server";
+import { revalidatePath } from "next/cache";
 import { getSession } from "@/lib/cms/auth";
 import { ensureCmsSeeded } from "@/lib/cms/seed";
 import { readStore, writeStore, newId } from "@/lib/cms/store";
+
+function revalidatePublic() {
+  revalidatePath("/");
+  revalidatePath("/testimonials");
+  revalidatePath("/resources");
+  revalidatePath("/coaching");
+  revalidatePath("/journey");
+  revalidatePath("/get-in-touch");
+  revalidatePath("/contact");
+}
 import type {
   CmsCoachingPackage,
   CmsCourseTier,
@@ -64,6 +75,7 @@ export async function POST(
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   (store[key] as any[]).push(item);
   writeStore(store);
+  revalidatePublic();
   return NextResponse.json({ item }, { status: 201 });
 }
 
@@ -90,6 +102,7 @@ export async function PUT(
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   (store as any)[key] = body.items;
   writeStore(store);
+  revalidatePublic();
   return NextResponse.json({ items: store[key] });
 }
 
