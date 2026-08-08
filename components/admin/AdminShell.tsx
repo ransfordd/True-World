@@ -16,9 +16,17 @@ import {
   Settings,
   Sparkles,
   X,
+  type LucideIcon,
 } from "lucide-react";
 
-const NAV = [
+type NavItem = {
+  href: string;
+  label: string;
+  icon: LucideIcon;
+  exact?: boolean;
+};
+
+const NAV: NavItem[] = [
   { href: "/admin", label: "Dashboard", icon: LayoutDashboard, exact: true },
   { href: "/admin/articles", label: "Articles", icon: FileText },
   { href: "/admin/testimonials", label: "Testimonials", icon: MessageSquareQuote },
@@ -27,7 +35,7 @@ const NAV = [
   { href: "/admin/coaching", label: "Coaching", icon: Heart },
   { href: "/admin/journey", label: "Journey", icon: Compass },
   { href: "/admin/settings", label: "Settings", icon: Settings },
-] as const;
+];
 
 export function AdminShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
