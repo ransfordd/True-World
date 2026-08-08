@@ -2,6 +2,7 @@
 
 import { FormEvent, useEffect, useState } from "react";
 import type { CmsSiteSettings } from "@/lib/cms/types";
+import { PasswordField } from "@/components/admin/PasswordField";
 
 export default function AdminSettingsPage() {
   const [settings, setSettings] = useState<CmsSiteSettings | null>(null);
@@ -138,42 +139,33 @@ export default function AdminSettingsPage() {
         <p className="cms-page-sub mb-5">
           Update the password you use to sign in to this CMS.
         </p>
-        <div className="field">
-          <label htmlFor="currentPassword">Current password</label>
-          <input
-            id="currentPassword"
-            type="password"
-            autoComplete="current-password"
-            value={currentPassword}
-            onChange={(e) => setCurrentPassword(e.target.value)}
-            required
-          />
-        </div>
-        <div className="field">
-          <label htmlFor="newPassword">New password</label>
-          <input
-            id="newPassword"
-            type="password"
-            autoComplete="new-password"
-            value={newPassword}
-            onChange={(e) => setNewPassword(e.target.value)}
-            required
-            minLength={8}
-          />
-          <span className="field-help">At least 8 characters</span>
-        </div>
-        <div className="field">
-          <label htmlFor="confirmPassword">Confirm new password</label>
-          <input
-            id="confirmPassword"
-            type="password"
-            autoComplete="new-password"
-            value={confirmPassword}
-            onChange={(e) => setConfirmPassword(e.target.value)}
-            required
-            minLength={8}
-          />
-        </div>
+        <PasswordField
+          id="currentPassword"
+          label="Current password"
+          autoComplete="current-password"
+          value={currentPassword}
+          onChange={setCurrentPassword}
+          required
+        />
+        <PasswordField
+          id="newPassword"
+          label="New password"
+          autoComplete="new-password"
+          value={newPassword}
+          onChange={setNewPassword}
+          required
+          minLength={8}
+          helpText="At least 8 characters"
+        />
+        <PasswordField
+          id="confirmPassword"
+          label="Confirm new password"
+          autoComplete="new-password"
+          value={confirmPassword}
+          onChange={setConfirmPassword}
+          required
+          minLength={8}
+        />
         {pwError ? <p className="text-red-400 text-sm mb-2">{pwError}</p> : null}
         {pwMsg ? <p className="text-ttw-gold text-sm mb-2">{pwMsg}</p> : null}
         <button type="submit" className="btn btn-primary" disabled={pwBusy}>

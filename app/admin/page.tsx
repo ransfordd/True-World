@@ -11,6 +11,7 @@ import {
   MessageSquareQuote,
   Sparkles,
 } from "lucide-react";
+import { PasswordField } from "@/components/admin/PasswordField";
 
 const STATS = [
   {
@@ -133,17 +134,14 @@ export default function AdminHomePage() {
                 required
               />
             </div>
-            <div className="field">
-              <label htmlFor="password">Password</label>
-              <input
-                id="password"
-                type="password"
-                autoComplete="current-password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                required
-              />
-            </div>
+            <PasswordField
+              id="password"
+              label="Password"
+              autoComplete="current-password"
+              value={password}
+              onChange={setPassword}
+              required
+            />
             {error ? <p className="text-red-400 text-sm mb-3">{error}</p> : null}
             <button type="submit" className="btn btn-primary" disabled={busy}>
               {busy ? "Signing in…" : "Sign in"}

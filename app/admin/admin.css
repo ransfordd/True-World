@@ -281,6 +281,37 @@
   font-weight: 400;
 }
 
+.cms-admin .cms-password-field {
+  position: relative;
+}
+
+.cms-admin .cms-password-field input {
+  padding-right: 2.75rem;
+}
+
+.cms-admin .cms-password-toggle {
+  position: absolute;
+  right: 0.4rem;
+  top: 50%;
+  transform: translateY(-50%);
+  width: auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.35rem;
+  border: none;
+  background: transparent;
+  color: var(--cms-muted);
+  cursor: pointer;
+  border-radius: 0.35rem;
+  line-height: 0;
+}
+
+.cms-admin .cms-password-toggle:hover {
+  color: var(--cms-gold);
+  background: var(--cms-gold-soft);
+}
+
 .cms-admin .btn {
   display: inline-flex;
   align-items: center;
