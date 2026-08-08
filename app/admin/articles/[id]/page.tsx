@@ -85,14 +85,21 @@ export default function AdminArticleEditPage() {
     router.refresh();
   }
 
-  if (loading) return <p className="text-gray-400">Loading…</p>;
+  if (loading) return <p className="cms-loading">Loading…</p>;
 
   return (
     <div className="max-w-3xl">
-      <h1 className="font-cinzel text-3xl text-ttw-gold mb-6">
-        {isNew ? "New article" : "Edit article"}
-      </h1>
-      <form onSubmit={onSave}>
+      <div className="cms-page-header">
+        <div>
+          <h1 className="cms-page-title">
+            {isNew ? "New article" : "Edit article"}
+          </h1>
+          <p className="cms-page-sub">
+            Write the body with the formatting toolbar — no code required.
+          </p>
+        </div>
+      </div>
+      <form onSubmit={onSave} className="cms-panel p-5 md:p-6">
         <div className="field">
           <label>Title</label>
           <input

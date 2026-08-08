@@ -2,6 +2,60 @@
 
 import { FormEvent, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import {
+  Compass,
+  FileText,
+  Heart,
+  Info,
+  Library,
+  MessageSquareQuote,
+  Sparkles,
+} from "lucide-react";
+
+const STATS = [
+  {
+    label: "Articles",
+    key: "articles" as const,
+    href: "/admin/articles",
+    icon: FileText,
+    hint: "Edit & publish teachings",
+  },
+  {
+    label: "Testimonials",
+    key: "testimonials" as const,
+    href: "/admin/testimonials",
+    icon: MessageSquareQuote,
+    hint: "Client stories",
+  },
+  {
+    label: "Resources",
+    key: "resources" as const,
+    href: "/admin/resources",
+    icon: Library,
+    hint: "Books & links",
+  },
+  {
+    label: "Daily Truths",
+    key: "dailyTruths" as const,
+    href: "/admin/daily-truths",
+    icon: Sparkles,
+    hint: "Homepage rotation",
+  },
+  {
+    label: "Coaching packages",
+    key: "coachingPackages" as const,
+    href: "/admin/coaching",
+    icon: Heart,
+    hint: "Paths & offers",
+  },
+  {
+    label: "Journey tiers",
+    key: "courseTiers" as const,
+    href: "/admin/journey",
+    icon: Compass,
+    hint: "Course structure",
+  },
+];
 
 export default function AdminHomePage() {
   const router = useRouter();
@@ -56,55 +110,64 @@ export default function AdminHomePage() {
   }
 
   if (loading) {
-    return <p className="text-gray-400">Loading…</p>;
+    return <p className="cms-loading">Loading dashboard…</p>;
   }
 
   if (!user) {
     return (
-      <div className="max-w-md mx-auto mt-10">
-        <h1 className="font-cinzel text-3xl text-ttw-gold mb-2">Staff login</h1>
-        <p className="text-gray-400 text-sm mb-6">
-          Manage articles, resources, coaching, and site settings.
-        </p>
-        <form onSubmit={onLogin} className="space-y-4">
-          <div className="field">
-            <label htmlFor="email">Email</label>
-            <input
-              id="email"
-              type="email"
-              autoComplete="username"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-            />
-          </div>
-          <div className="field">
-            <label htmlFor="password">Password</label>
-            <input
-              id="password"
-              type="password"
-              autoComplete="current-password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-            />
-          </div>
-          {error ? <p className="text-red-400 text-sm">{error}</p> : null}
-          <button type="submit" className="btn btn-primary" disabled={busy}>
-            {busy ? "Signing in…" : "Sign in"}
-          </button>
-        </form>
+      <div className="cms-login-wrap">
+        <div className="cms-login-card">
+          <h1>Staff login</h1>
+          <p className="cms-page-sub">
+            Manage articles, resources, coaching, and site settings.
+          </p>
+          <form onSubmit={onLogin}>
+            <div className="field">
+              <label htmlFor="email">Email</label>
+              <input
+                id="email"
+                type="email"
+                autoComplete="username"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+              />
+            </div>
+            <div className="field">
+              <label htmlFor="password">Password</label>
+              <input
+                id="password"
+                type="password"
+                autoComplete="current-password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+              />
+            </div>
+            {error ? <p className="text-red-400 text-sm mb-3">{error}</p> : null}
+            <button type="submit" className="btn btn-primary" disabled={busy}>
+              {busy ? "Signing in…" : "Sign in"}
+            </button>
+          </form>
+        </div>
       </div>
     );
   }
 
+  const total =
+    (counts.articles || 0) +
+    (counts.testimonials || 0) +
+    (counts.resources || 0);
+
   return (
     <div>
-      <div className="flex flex-wrap items-center justify-between gap-4 mb-8">
+      <div className="cms-page-header">
         <div>
-          <h1 className="font-cinzel text-3xl text-ttw-gold">Dashboard</h1>
-          <p className="text-gray-400 text-sm">
-            Signed in as {user.email} ({user.role})
+          <h1 className="cms-page-title">Dashboard</h1>
+          <p className="cms-page-sub">
+            Signed in as <strong className="text-gray-300">{user.email}</strong>
+            {" · "}
+            <span className="cms-badge cms-badge-muted">{user.role}</span>
           </p>
         </div>
         <button type="button" className="btn btn-ghost" onClick={onLogout}>
@@ -112,32 +175,38 @@ export default function AdminHomePage() {
         </button>
       </div>
 
-      <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-10">
-        {[
-          ["Articles", counts.articles, "/admin/articles"],
-          ["Testimonials", counts.testimonials, "/admin/testimonials"],
-          ["Resources", counts.resources, "/admin/resources"],
-          ["Daily Truths", counts.dailyTruths, "/admin/daily-truths"],
-          ["Coaching packages", counts.coachingPackages, "/admin/coaching"],
-          ["Journey tiers", counts.courseTiers, "/admin/journey"],
-        ].map(([label, n, href]) => (
+      <p className="cms-page-sub mb-5">
+        {total} content items ready to edit. Choose a section below.
+      </p>
+
+      <div className="cms-stat-grid">
+        {STATS.map(({ label, key, href, icon: Icon, hint }) => (
           <button
-            key={String(href)}
+            key={href}
             type="button"
-            className="text-left p-5 rounded-xl border border-ttw-gold/20 bg-black/40 hover:border-ttw-gold/50"
-            onClick={() => router.push(String(href))}
+            className="cms-stat-card"
+            onClick={() => router.push(href)}
           >
-            <p className="text-ttw-gold font-cinzel text-lg">{label}</p>
-            <p className="text-3xl font-bold mt-2">{n ?? 0}</p>
+            <div className="cms-stat-top">
+              <span className="cms-stat-label">{label}</span>
+              <span className="cms-stat-icon">
+                <Icon size={18} strokeWidth={1.75} />
+              </span>
+            </div>
+            <p className="cms-stat-value">{counts[key] ?? 0}</p>
+            <p className="cms-stat-cta">{hint} →</p>
           </button>
         ))}
       </div>
 
-      <p className="text-gray-500 text-sm">
-        Tip: uploads are saved under <code className="text-ttw-gold">/uploads</code>.
-        Persist the <code className="text-ttw-gold">data/cms</code> and{" "}
-        <code className="text-ttw-gold">public/uploads</code> volumes in Coolify.
-      </p>
+      <div className="cms-callout">
+        <Info className="cms-callout-icon" size={18} />
+        <p>
+          Uploads save under <code>/uploads</code>. On Coolify, persist{" "}
+          <code>data/cms</code> and <code>public/uploads</code> so content and
+          images survive redeploys.
+        </p>
+      </div>
     </div>
   );
 }

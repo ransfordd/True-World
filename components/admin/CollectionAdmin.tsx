@@ -92,19 +92,23 @@ export function CollectionAdmin({ title, collection, fields, defaults }: Props) 
     load();
   }
 
-  if (loading) return <p className="text-gray-400">Loading…</p>;
+  if (loading) return <p className="cms-loading">Loading…</p>;
 
   return (
-    <div className="grid lg:grid-cols-2 gap-10">
+    <div className="grid lg:grid-cols-2 gap-8 lg:gap-10">
       <div>
-        <h1 className="font-cinzel text-3xl text-ttw-gold mb-6">{title}</h1>
-        <ul className="space-y-3">
+        <div className="cms-page-header mb-5">
+          <div>
+            <h1 className="cms-page-title">{title}</h1>
+            <p className="cms-page-sub">
+              {items.length} item{items.length === 1 ? "" : "s"}
+            </p>
+          </div>
+        </div>
+        <ul className="cms-item-list">
           {items.map((item) => (
-            <li
-              key={String(item.id)}
-              className="p-4 rounded-xl border border-ttw-gold/20 bg-black/40"
-            >
-              <p className="font-medium text-ttw-gold">
+            <li key={String(item.id)} className="cms-item-card">
+              <p className="cms-item-card-title">
                 {String(
                   item.name ||
                     item.title ||
@@ -114,7 +118,7 @@ export function CollectionAdmin({ title, collection, fields, defaults }: Props) 
                     item.id
                 ).slice(0, 80)}
               </p>
-              <div className="mt-2 flex gap-2">
+              <div className="flex gap-2">
                 <button
                   type="button"
                   className="btn btn-ghost"
@@ -132,23 +136,29 @@ export function CollectionAdmin({ title, collection, fields, defaults }: Props) 
               </div>
             </li>
           ))}
+          {items.length === 0 ? (
+            <li className="cms-item-card text-gray-500 text-sm">
+              No items yet — add one on the right.
+            </li>
+          ) : null}
         </ul>
       </div>
-      <div>
-        <h2 className="font-cinzel text-xl text-ttw-gold mb-4">
+      <div className="cms-panel p-5 md:p-6">
+        <h2 className="cms-page-title text-xl mb-4">
           {editingId ? "Edit item" : "Add item"}
         </h2>
         <form onSubmit={onSave}>
           {fields.map((f) => (
             <div className="field" key={f.key}>
               {f.type === "checkbox" ? (
-                <label className="flex items-center gap-2">
+                <label className="flex items-center gap-2 !normal-case !tracking-normal !text-gray-300 !text-sm !font-medium">
                   <input
                     type="checkbox"
                     checked={Boolean(form[f.key])}
                     onChange={(e) =>
                       setForm((prev) => ({ ...prev, [f.key]: e.target.checked }))
                     }
+                    className="!w-auto"
                   />
                   <span>{f.label}</span>
                 </label>

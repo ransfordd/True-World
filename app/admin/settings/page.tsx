@@ -40,7 +40,7 @@ export default function AdminSettingsPage() {
     setMsg("Settings saved.");
   }
 
-  if (!settings) return <p className="text-gray-400">Loading…</p>;
+  if (!settings) return <p className="cms-loading">Loading…</p>;
 
   function field(key: keyof CmsSiteSettings, label: string) {
     return (
@@ -58,8 +58,15 @@ export default function AdminSettingsPage() {
 
   return (
     <div className="max-w-xl">
-      <h1 className="font-cinzel text-3xl text-ttw-gold mb-6">Site settings</h1>
-      <form onSubmit={onSave}>
+      <div className="cms-page-header">
+        <div>
+          <h1 className="cms-page-title">Site settings</h1>
+          <p className="cms-page-sub">
+            Name, contact links, and featured YouTube video
+          </p>
+        </div>
+      </div>
+      <form onSubmit={onSave} className="cms-panel p-5 md:p-6">
         {field("name", "Site name")}
         {field("tagline", "Tagline")}
         {field("email", "Email")}
