@@ -64,12 +64,13 @@ Church staff manage **almost all site content** through `/admin`:
 
 - Set a long random `CMS_SECRET` (32+ characters).
 - Set strong `CMS_ADMIN_EMAIL` / `CMS_ADMIN_PASSWORD` before production.
+- After login, staff can change their password under **Settings → Change password** (current + new password, min 8 characters).
 - Sessions use httpOnly cookies (7 days).
 - On **plain HTTP** (e.g. temporary Coolify sslip URL), set `CMS_COOKIE_SECURE=false` or browsers will drop the login cookie and you will bounce back to the login form. After HTTPS is enabled, use `CMS_COOKIE_SECURE=true` or remove the override (production default is secure).
 - Do not expose `/admin` in public navigation (not linked from the main site header).
 - Prefer HTTPS only in production (cookies use `secure` when `NODE_ENV=production` unless overridden).
 
-To reset a forgotten password: stop the app, delete the user entry in `store.json` (or delete the store and re-seed), set new `CMS_ADMIN_*` env vars, and start again.
+If a password is forgotten and Settings cannot be used: stop the app, delete the user entry in `store.json` (or delete the store and re-seed), set new `CMS_ADMIN_*` env vars, and start again.
 
 ## Email / forms (SMTP)
 
