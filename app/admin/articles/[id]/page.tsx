@@ -3,6 +3,7 @@
 import { FormEvent, useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 import type { CmsArticle } from "@/lib/cms/types";
+import { ArticleBodyEditor } from "@/components/admin/ArticleBodyEditor";
 
 const empty: Partial<CmsArticle> = {
   title: "",
@@ -191,12 +192,14 @@ export default function AdminArticleEditPage() {
           </label>
         </div>
         <div className="field">
-          <label>Body (HTML)</label>
-          <textarea
-            rows={14}
+          <label>Article body</label>
+          <span className="field-help">
+            Write and format the article here. Bold, headings, and lists are
+            available from the toolbar.
+          </span>
+          <ArticleBodyEditor
             value={form.bodyHtml || ""}
-            onChange={(e) => set("bodyHtml", e.target.value)}
-            className="font-mono text-sm"
+            onChange={(html) => set("bodyHtml", html)}
           />
         </div>
         {error ? <p className="text-red-400 text-sm mb-3">{error}</p> : null}

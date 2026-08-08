@@ -9,6 +9,10 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@tiptap/extension-link": "^3.29.2",
+    "@tiptap/pm": "^3.29.2",
+    "@tiptap/react": "^3.29.2",
+    "@tiptap/starter-kit": "^3.29.2",
     "@types/bcryptjs": "^2.4.6",
     "bcryptjs": "^3.0.3",
     "framer-motion": "^12.43.0",

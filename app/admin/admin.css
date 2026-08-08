@@ -70,3 +70,127 @@
   font-size: 0.75rem;
   text-transform: uppercase;
 }
+
+/* Rich text (article body) editor — WYSIWYG, no raw HTML for staff */
+.cms-admin .cms-rich-editor {
+  border: 1px solid rgba(192, 160, 76, 0.35);
+  border-radius: 0.5rem;
+  overflow: hidden;
+  background: #121212;
+}
+
+.cms-admin .cms-rich-editor--loading {
+  padding: 1.25rem;
+  color: #9ca3af;
+  font-size: 0.9rem;
+}
+
+.cms-admin .cms-rich-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  padding: 0.5rem;
+  border-bottom: 1px solid rgba(192, 160, 76, 0.2);
+  background: #0a0a0a;
+}
+
+.cms-admin .cms-rich-toolbar button {
+  width: auto;
+  background: transparent;
+  border: 1px solid rgba(192, 160, 76, 0.3);
+  border-radius: 0.35rem;
+  color: #e5e7eb;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.35rem 0.55rem;
+  cursor: pointer;
+}
+
+.cms-admin .cms-rich-toolbar button:hover:not(:disabled) {
+  border-color: #c0a04c;
+  color: #c0a04c;
+}
+
+.cms-admin .cms-rich-toolbar button.is-active {
+  background: rgba(192, 160, 76, 0.2);
+  border-color: #c0a04c;
+  color: #c0a04c;
+}
+
+.cms-admin .cms-rich-toolbar button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.cms-admin .cms-rich-toolbar-sep {
+  width: 1px;
+  align-self: stretch;
+  background: rgba(192, 160, 76, 0.25);
+  margin: 0 0.15rem;
+}
+
+.cms-admin .cms-rich-editor .ProseMirror {
+  min-height: 16rem;
+  padding: 0.85rem 1rem;
+  outline: none;
+  color: #f3f4f6;
+  font-size: 0.95rem;
+  line-height: 1.65;
+}
+
+.cms-admin .cms-rich-editor .ProseMirror p {
+  margin: 0 0 0.75rem;
+}
+
+.cms-admin .cms-rich-editor .ProseMirror h2,
+.cms-admin .cms-rich-editor .ProseMirror h3 {
+  color: #c0a04c;
+  font-family: var(--font-cinzel), serif;
+  margin: 1rem 0 0.5rem;
+}
+
+.cms-admin .cms-rich-editor .ProseMirror h2 {
+  font-size: 1.35rem;
+}
+
+.cms-admin .cms-rich-editor .ProseMirror h3 {
+  font-size: 1.15rem;
+}
+
+.cms-admin .cms-rich-editor .ProseMirror ul,
+.cms-admin .cms-rich-editor .ProseMirror ol {
+  margin: 0 0 0.75rem 1.25rem;
+  padding: 0;
+}
+
+.cms-admin .cms-rich-editor .ProseMirror blockquote {
+  border-left: 3px solid rgba(192, 160, 76, 0.55);
+  margin: 0.75rem 0;
+  padding-left: 0.85rem;
+  color: #d1d5db;
+  font-style: italic;
+}
+
+.cms-admin .cms-rich-editor .ProseMirror a {
+  color: #c0a04c;
+  text-decoration: underline;
+}
+
+.cms-admin .cms-rich-editor .ProseMirror p.is-editor-empty:first-child::before {
+  content: attr(data-placeholder);
+  float: left;
+  color: #6b7280;
+  pointer-events: none;
+  height: 0;
+}
+
+.cms-admin .field-help {
+  display: block;
+  font-size: 0.8rem;
+  color: #9ca3af;
+  margin: -0.15rem 0 0.5rem;
+  text-transform: none;
+  letter-spacing: normal;
+  font-weight: 400;
+}
+
