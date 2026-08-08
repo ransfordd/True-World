@@ -1,8 +1,8 @@
 import { NextResponse } from "next/server";
 import {
+  applySessionCookie,
   createSessionToken,
   findUserByEmail,
-  setSessionCookie,
   verifyPassword,
 } from "@/lib/cms/auth";
 import { ensureCmsSeeded } from "@/lib/cms/seed";
@@ -26,9 +26,9 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: "Invalid credentials" }, { status: 401 });
   }
   const token = await createSessionToken(user);
-  await setSessionCookie(token);
-  return NextResponse.json({
+  const res = NextResponse.json({
     ok: true,
     user: { email: user.email, role: user.role, name: user.name },
   });
+  return applySessionCookie(res, token);
 }

@@ -65,8 +65,9 @@ Church staff manage **almost all site content** through `/admin`:
 - Set a long random `CMS_SECRET` (32+ characters).
 - Set strong `CMS_ADMIN_EMAIL` / `CMS_ADMIN_PASSWORD` before production.
 - Sessions use httpOnly cookies (7 days).
+- On **plain HTTP** (e.g. temporary Coolify sslip URL), set `CMS_COOKIE_SECURE=false` or browsers will drop the login cookie and you will bounce back to the login form. After HTTPS is enabled, use `CMS_COOKIE_SECURE=true` or remove the override (production default is secure).
 - Do not expose `/admin` in public navigation (not linked from the main site header).
-- Prefer HTTPS only in production (cookies use `secure` when `NODE_ENV=production`).
+- Prefer HTTPS only in production (cookies use `secure` when `NODE_ENV=production` unless overridden).
 
 To reset a forgotten password: stop the app, delete the user entry in `store.json` (or delete the store and re-seed), set new `CMS_ADMIN_*` env vars, and start again.
 
@@ -86,6 +87,7 @@ Contact, prayer, coaching, and subscribe forms `POST` to App Router API routes a
 | `MAIL_FROM` | From header (e.g. `The True Word <noreply@…>`) |
 | `NEXT_PUBLIC_MAIL_TO` | Client `mailto:` fallback address |
 | `CMS_SECRET` | CMS session signing key |
+| `CMS_COOKIE_SECURE` | `false` on plain HTTP Coolify; `true` or unset with HTTPS |
 | `CMS_ADMIN_EMAIL` | Bootstrap admin email |
 | `CMS_ADMIN_PASSWORD` | Bootstrap admin password |
 | `CMS_DATA_DIR` | Optional path for CMS JSON store |
@@ -96,12 +98,14 @@ If SMTP is not fully configured, the API returns an error and the UI opens a `ma
 
 1. Deploy with **Dockerfile** build pack (repo root).
 2. Set SMTP + CMS variables in Coolify **Environment**.
+   - **HTTP-only preview URLs:** set `CMS_COOKIE_SECURE=false` or staff login will not stick.
+   - **With HTTPS:** omit or set `CMS_COOKIE_SECURE=true`.
 3. **Persist volumes** (otherwise content/images reset on redeploy):
    - `/app/data/cms` → CMS store
    - `/app/public/uploads` → media uploads
 4. Redeploy after changing env vars.
 5. Container listens on port **3000** (Coolify proxies this).
-6. Staff URL: `https://your-domain/admin`
+6. Staff URL: `https://your-domain/admin` (or `http://…` on temporary sslip).
 
 ### Docker (local)
 

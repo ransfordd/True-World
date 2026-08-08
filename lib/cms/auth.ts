@@ -1,10 +1,11 @@
 import { SignJWT, jwtVerify } from "jose";
 import { cookies } from "next/headers";
+import type { NextResponse } from "next/server";
 import bcrypt from "bcryptjs";
 import type { CmsRole, CmsUser } from "./types";
 import { readStore } from "./store";
 
-const COOKIE = "ttw_cms_session";
+export const CMS_SESSION_COOKIE = "ttw_cms_session";
 const MAX_AGE = 60 * 60 * 24 * 7; // 7 days
 
 function secretKey() {
@@ -13,6 +14,30 @@ function secretKey() {
     process.env.PAYLOAD_SECRET ||
     "dev-only-change-me-true-word-cms-secret-32b";
   return new TextEncoder().encode(s);
+}
+
+/**
+ * Secure cookies only work on HTTPS. On plain-HTTP Coolify (sslip), set
+ * CMS_COOKIE_SECURE=false so the browser will store the session cookie.
+ * Default: secure in production, off in development.
+ */
+export function cookieSecure(): boolean {
+  const override = process.env.CMS_COOKIE_SECURE?.trim().toLowerCase();
+  if (override === "true" || override === "1") return true;
+  if (override === "false" || override === "0") return false;
+  return process.env.NODE_ENV === "production";
+}
+
+export function sessionCookieOptions(token: string) {
+  return {
+    name: CMS_SESSION_COOKIE,
+    value: token,
+    httpOnly: true,
+    sameSite: "lax" as const,
+    secure: cookieSecure(),
+    path: "/",
+    maxAge: MAX_AGE,
+  };
 }
 
 export type SessionPayload = {
@@ -60,25 +85,57 @@ export async function verifySessionToken(
   }
 }
 
+/** Prefer applying the cookie on the Route Handler response (see applySessionCookie). */
 export async function setSessionCookie(token: string) {
   const jar = await cookies();
-  jar.set(COOKIE, token, {
-    httpOnly: true,
-    sameSite: "lax",
-    secure: process.env.NODE_ENV === "production",
-    path: "/",
-    maxAge: MAX_AGE,
+  const opts = sessionCookieOptions(token);
+  jar.set(opts.name, opts.value, {
+    httpOnly: opts.httpOnly,
+    sameSite: opts.sameSite,
+    secure: opts.secure,
+    path: opts.path,
+    maxAge: opts.maxAge,
   });
+}
+
+/** Attach session cookie to the login response (reliable behind reverse proxies). */
+export function applySessionCookie(res: NextResponse, token: string) {
+  const opts = sessionCookieOptions(token);
+  res.cookies.set(opts.name, opts.value, {
+    httpOnly: opts.httpOnly,
+    sameSite: opts.sameSite,
+    secure: opts.secure,
+    path: opts.path,
+    maxAge: opts.maxAge,
+  });
+  return res;
 }
 
 export async function clearSessionCookie() {
   const jar = await cookies();
-  jar.delete(COOKIE);
+  jar.set(CMS_SESSION_COOKIE, "", {
+    httpOnly: true,
+    sameSite: "lax",
+    secure: cookieSecure(),
+    path: "/",
+    maxAge: 0,
+  });
+}
+
+export function applyClearSessionCookie(res: NextResponse) {
+  res.cookies.set(CMS_SESSION_COOKIE, "", {
+    httpOnly: true,
+    sameSite: "lax",
+    secure: cookieSecure(),
+    path: "/",
+    maxAge: 0,
+  });
+  return res;
 }
 
 export async function getSession(): Promise<SessionPayload | null> {
   const jar = await cookies();
-  const token = jar.get(COOKIE)?.value;
+  const token = jar.get(CMS_SESSION_COOKIE)?.value;
   if (!token) return null;
   return verifySessionToken(token);
 }
