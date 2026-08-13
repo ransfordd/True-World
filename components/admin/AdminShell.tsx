@@ -1,8 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { useState } from "react";
+import { usePathname, useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 import {
   BookOpen,
   Compass,
@@ -18,6 +18,7 @@ import {
   X,
   type LucideIcon,
 } from "lucide-react";
+import { useCmsAuth } from "@/components/admin/CmsAuthProvider";
 
 type NavItem = {
   href: string;
@@ -39,11 +40,27 @@ const NAV: NavItem[] = [
 
 export function AdminShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
+  const router = useRouter();
+  const { status } = useCmsAuth();
   const [open, setOpen] = useState(false);
+
+  useEffect(() => {
+    if (status === "guest" && pathname !== "/admin") {
+      router.replace("/admin");
+    }
+  }, [status, pathname, router]);
 
   function isActive(href: string, exact?: boolean) {
     if (exact) return pathname === href;
     return pathname === href || pathname.startsWith(`${href}/`);
+  }
+
+  if (status === "loading") {
+    return <p className="cms-loading">Loading…</p>;
+  }
+
+  if (status === "guest") {
+    return <>{children}</>;
   }
 
   const nav = (

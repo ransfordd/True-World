@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { AdminShell } from "@/components/admin/AdminShell";
+import { CmsAuthProvider } from "@/components/admin/CmsAuthProvider";
 import "./admin.css";
 
 export const metadata: Metadata = {
@@ -14,7 +15,9 @@ export default function AdminLayout({
 }) {
   return (
     <div className="cms-admin">
-      <AdminShell>{children}</AdminShell>
+      <CmsAuthProvider>
+        <AdminShell>{children}</AdminShell>
+      </CmsAuthProvider>
     </div>
   );
 }

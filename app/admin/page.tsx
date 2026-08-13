@@ -12,6 +12,7 @@ import {
   Sparkles,
 } from "lucide-react";
 import { PasswordField } from "@/components/admin/PasswordField";
+import { useCmsAuth } from "@/components/admin/CmsAuthProvider";
 
 const STATS = [
   {
@@ -60,6 +61,7 @@ const STATS = [
 
 export default function AdminHomePage() {
   const router = useRouter();
+  const { refresh, markGuest } = useCmsAuth();
   const [loading, setLoading] = useState(true);
   const [user, setUser] = useState<{ email: string; role: string } | null>(
     null
@@ -103,11 +105,14 @@ export default function AdminHomePage() {
       return;
     }
     await loadMe();
+    await refresh();
   }
 
   async function onLogout() {
     await fetch("/api/cms/logout", { method: "POST" });
     setUser(null);
+    setCounts({});
+    markGuest();
   }
 
   if (loading) {
