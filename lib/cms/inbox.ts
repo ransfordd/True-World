@@ -9,6 +9,7 @@ export async function appendInboxMessage(input: {
   phone?: string;
   body?: string;
   package?: string;
+  topic?: string;
   isPrivate?: boolean;
 }): Promise<CmsMessage> {
   await ensureCmsSeeded();
@@ -22,6 +23,7 @@ export async function appendInboxMessage(input: {
     phone: input.phone || "",
     body: input.body || "",
     package: input.package || "",
+    topic: input.topic || "",
     isPrivate: Boolean(input.isPrivate),
     read: false,
     createdAt: new Date().toISOString(),

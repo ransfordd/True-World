@@ -30,9 +30,18 @@ export function ContactForm({ variant = "question", packageName }: Props) {
         ""
     ).trim();
 
+    const topic = String(fd.get("topic") || "").trim();
+
     if (variant === "question" || variant === "prayer") {
       if (message.length < 10) {
         showToast("Please enter at least 10 characters.", "warning");
+        return;
+      }
+    }
+
+    if (variant === "question") {
+      if (!name || !email.includes("@")) {
+        showToast("Please enter your name and a valid email so we can reply.", "error");
         return;
       }
     }
@@ -54,7 +63,7 @@ export function ContactForm({ variant = "question", packageName }: Props) {
 
     const body =
       variant === "prayer"
-        ? { name, request: message, private: privateRequest }
+        ? { name, email, phone, request: message, private: privateRequest }
         : variant === "contact"
           ? {
               name,
@@ -64,7 +73,7 @@ export function ContactForm({ variant = "question", packageName }: Props) {
               package: packageName || "",
               type: "enrollment",
             }
-          : { name, email, message, type: "question" };
+          : { name, email, phone, message, topic, type: "question" };
 
     const subject =
       variant === "prayer"
@@ -169,15 +178,65 @@ export function ContactForm({ variant = "question", packageName }: Props) {
 
       {variant === "question" && (
         <>
-          <div>
-            <label className="block text-sm text-gray-400 mb-1" htmlFor="questionName">
-              Name
-            </label>
-            <input
-              id="questionName"
-              name="name"
-              className="w-full theme-surface theme-input border border-ttw-gold/30 rounded-lg px-3 py-2 focus:outline-none focus:border-ttw-gold"
-            />
+          <div className="grid sm:grid-cols-2 gap-4">
+            <div>
+              <label className="block text-sm text-gray-400 mb-1" htmlFor="questionName">
+                Name *
+              </label>
+              <input
+                id="questionName"
+                name="name"
+                required
+                autoComplete="name"
+                className="w-full theme-surface theme-input border border-ttw-gold/30 rounded-lg px-3 py-2 focus:outline-none focus:border-ttw-gold"
+              />
+            </div>
+            <div>
+              <label className="block text-sm text-gray-400 mb-1" htmlFor="questionEmail">
+                Email *
+              </label>
+              <input
+                id="questionEmail"
+                name="email"
+                type="email"
+                required
+                autoComplete="email"
+                className="w-full theme-surface theme-input border border-ttw-gold/30 rounded-lg px-3 py-2 focus:outline-none focus:border-ttw-gold"
+              />
+            </div>
+          </div>
+          <div className="grid sm:grid-cols-2 gap-4">
+            <div>
+              <label className="block text-sm text-gray-400 mb-1" htmlFor="questionPhone">
+                Phone
+              </label>
+              <input
+                id="questionPhone"
+                name="phone"
+                type="tel"
+                autoComplete="tel"
+                className="w-full theme-surface theme-input border border-ttw-gold/30 rounded-lg px-3 py-2 focus:outline-none focus:border-ttw-gold"
+              />
+            </div>
+            <div>
+              <label className="block text-sm text-gray-400 mb-1" htmlFor="questionTopic">
+                Topic
+              </label>
+              <select
+                id="questionTopic"
+                name="topic"
+                defaultValue=""
+                className="w-full theme-surface theme-input border border-ttw-gold/30 rounded-lg px-3 py-2 focus:outline-none focus:border-ttw-gold"
+              >
+                <option value="">Select a topic</option>
+                <option value="Teaching">Teaching</option>
+                <option value="Faith & Scripture">Faith & Scripture</option>
+                <option value="Coaching">Coaching</option>
+                <option value="Prayer">Prayer</option>
+                <option value="Community">Community</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
           </div>
           <div>
             <label className="block text-sm text-gray-400 mb-1" htmlFor="questionText">
@@ -189,6 +248,7 @@ export function ContactForm({ variant = "question", packageName }: Props) {
               required
               minLength={10}
               rows={5}
+              placeholder="Write your question here…"
               className="w-full theme-surface theme-input border border-ttw-gold/30 rounded-lg px-3 py-2 focus:outline-none focus:border-ttw-gold"
             />
           </div>
@@ -197,13 +257,40 @@ export function ContactForm({ variant = "question", packageName }: Props) {
 
       {variant === "prayer" && (
         <>
+          <div className="grid sm:grid-cols-2 gap-4">
+            <div>
+              <label className="block text-sm text-gray-400 mb-1" htmlFor="prayerName">
+                Name
+              </label>
+              <input
+                id="prayerName"
+                name="name"
+                autoComplete="name"
+                className="w-full theme-surface theme-input border border-ttw-gold/30 rounded-lg px-3 py-2 focus:outline-none focus:border-ttw-gold"
+              />
+            </div>
+            <div>
+              <label className="block text-sm text-gray-400 mb-1" htmlFor="prayerEmail">
+                Email
+              </label>
+              <input
+                id="prayerEmail"
+                name="email"
+                type="email"
+                autoComplete="email"
+                className="w-full theme-surface theme-input border border-ttw-gold/30 rounded-lg px-3 py-2 focus:outline-none focus:border-ttw-gold"
+              />
+            </div>
+          </div>
           <div>
-            <label className="block text-sm text-gray-400 mb-1" htmlFor="prayerName">
-              Name
+            <label className="block text-sm text-gray-400 mb-1" htmlFor="prayerPhone">
+              Phone
             </label>
             <input
-              id="prayerName"
-              name="name"
+              id="prayerPhone"
+              name="phone"
+              type="tel"
+              autoComplete="tel"
               className="w-full theme-surface theme-input border border-ttw-gold/30 rounded-lg px-3 py-2 focus:outline-none focus:border-ttw-gold"
             />
           </div>

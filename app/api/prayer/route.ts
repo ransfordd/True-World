@@ -5,6 +5,14 @@ import { appendInboxMessage } from "@/lib/cms/inbox";
 
 const schema = z.object({
   name: z.string().optional().default(""),
+  email: z
+    .string()
+    .optional()
+    .default("")
+    .refine((v) => !v || z.string().email().safeParse(v).success, {
+      message: "Invalid email",
+    }),
+  phone: z.string().optional().default(""),
   request: z.string().min(10),
   private: z.boolean().optional().default(false),
 });
@@ -17,6 +25,8 @@ export async function POST(request: Request) {
     await appendInboxMessage({
       type: "prayer",
       name: data.name,
+      email: data.email,
+      phone: data.phone,
       body: data.request,
       isPrivate: data.private,
     });
@@ -26,6 +36,8 @@ export async function POST(request: Request) {
         subject: data.private ? "Private Prayer Request" : "Prayer Request",
         text: [
           `Name: ${data.name || "(anonymous)"}`,
+          `Email: ${data.email || "(not provided)"}`,
+          `Phone: ${data.phone || "(not provided)"}`,
           `Private: ${data.private ? "yes" : "no"}`,
           "",
           data.request,

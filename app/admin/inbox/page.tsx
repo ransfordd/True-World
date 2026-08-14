@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState, type ReactNode } from "react";
 import type { CmsMessage, CmsMessageType } from "@/lib/cms/types";
 
 const TYPES: { value: "all" | CmsMessageType; label: string }[] = [
@@ -10,6 +10,16 @@ const TYPES: { value: "all" | CmsMessageType; label: string }[] = [
   { value: "coaching", label: "Coaching" },
   { value: "subscribe", label: "Subscribe" },
 ];
+
+function Detail({ label, children }: { label: string; children: ReactNode }) {
+  if (!children) return null;
+  return (
+    <p className="text-sm text-gray-400">
+      <span className="text-gray-500">{label}: </span>
+      <span className="text-gray-200">{children}</span>
+    </p>
+  );
+}
 
 export default function AdminInboxPage() {
   const [messages, setMessages] = useState<CmsMessage[]>([]);
@@ -89,31 +99,24 @@ export default function AdminInboxPage() {
         {shown.map((m) => (
           <li
             key={m.id}
-            className={`cms-panel p-4 ${m.read ? "opacity-80" : ""}`}
+            className={`cms-panel p-4 md:p-5 ${m.read ? "opacity-80" : ""}`}
           >
-            <div className="flex flex-wrap items-start justify-between gap-3">
-              <div>
-                <p className="font-medium text-gray-100">
-                  {!m.read ? (
-                    <span className="cms-badge cms-badge-published mr-2">
-                      Unread
-                    </span>
-                  ) : null}
-                  <span className="cms-badge cms-badge-muted mr-2">{m.type}</span>
-                  {m.name || m.email || "(no name)"}
-                </p>
-                <p className="text-xs text-gray-500 mt-1">
-                  {m.email || "—"} {m.phone ? `· ${m.phone}` : ""}{" "}
-                  {m.package ? `· ${m.package}` : ""}{" "}
-                  {m.isPrivate ? "· private" : ""} ·{" "}
-                  {new Date(m.createdAt).toLocaleString()}
-                </p>
-                {m.body ? (
-                  <p className="text-sm text-gray-300 mt-3 whitespace-pre-wrap">
-                    {m.body}
-                  </p>
+            <div className="flex flex-wrap items-start justify-between gap-3 mb-3">
+              <p className="font-medium text-gray-100">
+                {!m.read ? (
+                  <span className="cms-badge cms-badge-published mr-2">
+                    Unread
+                  </span>
                 ) : null}
-              </div>
+                <span className="cms-badge cms-badge-muted mr-2">{m.type}</span>
+                {m.topic ? (
+                  <span className="cms-badge cms-badge-muted mr-2">{m.topic}</span>
+                ) : null}
+                {m.isPrivate ? (
+                  <span className="cms-badge cms-badge-draft mr-2">Private</span>
+                ) : null}
+                {m.name || m.email || "(no name)"}
+              </p>
               <div className="flex gap-2 shrink-0">
                 <button
                   type="button"
@@ -131,6 +134,35 @@ export default function AdminInboxPage() {
                 </button>
               </div>
             </div>
+            <div className="grid sm:grid-cols-2 gap-1 mb-3">
+              <Detail label="Email">
+                {m.email ? (
+                  <a href={`mailto:${m.email}`} className="text-ttw-gold hover:underline">
+                    {m.email}
+                  </a>
+                ) : (
+                  "—"
+                )}
+              </Detail>
+              <Detail label="Phone">
+                {m.phone ? (
+                  <a href={`tel:${m.phone}`} className="text-ttw-gold hover:underline">
+                    {m.phone}
+                  </a>
+                ) : (
+                  "—"
+                )}
+              </Detail>
+              {m.package ? <Detail label="Package">{m.package}</Detail> : null}
+              <Detail label="Received">
+                {new Date(m.createdAt).toLocaleString()}
+              </Detail>
+            </div>
+            {m.body ? (
+              <p className="text-sm text-gray-300 whitespace-pre-wrap border-t border-white/10 pt-3">
+                {m.body}
+              </p>
+            ) : null}
           </li>
         ))}
         {shown.length === 0 ? (

@@ -15,6 +15,7 @@ const schema = z.object({
   phone: z.string().optional().default(""),
   message: z.string().optional().default(""),
   package: z.string().optional().default(""),
+  topic: z.string().optional().default(""),
   type: z.enum(["question", "enrollment"]).optional().default("question"),
 });
 
@@ -23,11 +24,19 @@ export async function POST(request: Request) {
     const body = await request.json();
     const data = schema.parse(body);
 
-    if (data.type === "question" && data.message.trim().length < 1) {
-      return NextResponse.json(
-        { ok: false, error: "Invalid input", details: { message: ["Required"] } },
-        { status: 400 }
-      );
+    if (data.type === "question") {
+      if (!data.name.trim() || !data.email) {
+        return NextResponse.json(
+          { ok: false, error: "Name and email are required" },
+          { status: 400 }
+        );
+      }
+      if (data.message.trim().length < 1) {
+        return NextResponse.json(
+          { ok: false, error: "Invalid input", details: { message: ["Required"] } },
+          { status: 400 }
+        );
+      }
     }
 
     const subject =
@@ -48,6 +57,7 @@ export async function POST(request: Request) {
       phone: data.phone,
       body: messageBody,
       package: data.package,
+      topic: data.topic,
     });
 
     try {
@@ -59,6 +69,7 @@ export async function POST(request: Request) {
           `Name: ${data.name || "(not provided)"}`,
           `Email: ${data.email || "(not provided)"}`,
           `Phone: ${data.phone || "(not provided)"}`,
+          data.topic ? `Topic: ${data.topic}` : "",
           data.package ? `Package: ${data.package}` : "",
           "",
           messageBody,

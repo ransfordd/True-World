@@ -161,6 +161,7 @@ export type CmsMessage = {
   phone: string;
   body: string;
   package: string;
+  topic?: string;
   isPrivate: boolean;
   read: boolean;
   createdAt: string;
