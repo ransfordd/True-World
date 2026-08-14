@@ -1,13 +1,18 @@
 import type { Metadata } from "next";
 import { FaqAccordion } from "@/components/faq/FaqAccordion";
 import { FadeIn } from "@/components/ui/FadeIn";
+import { getCmsFaqs } from "@/lib/cms/queries";
 
 export const metadata: Metadata = {
   title: "FAQ",
   description: "Frequently asked questions about The True Word, awakening, and faith.",
 };
 
-export default function FaqPage() {
+export const dynamic = "force-dynamic";
+
+export default async function FaqPage() {
+  const items = await getCmsFaqs();
+
   return (
     <div className="max-w-4xl mx-auto px-6 py-16 md:py-24">
       <FadeIn className="text-center mb-12">
@@ -19,7 +24,7 @@ export default function FaqPage() {
         </p>
         <p className="text-gray-400">Awakening, transformation, and community</p>
       </FadeIn>
-      <FaqAccordion />
+      <FaqAccordion items={items} />
     </div>
   );
 }

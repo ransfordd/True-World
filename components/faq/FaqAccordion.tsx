@@ -1,22 +1,24 @@
 "use client";
 
-import { FormEvent, useMemo, useState } from "react";
-import { FAQ_ITEMS } from "@/lib/site-data";
+import { useMemo, useState } from "react";
 import { FadeIn } from "@/components/ui/FadeIn";
+import type { CmsFaq } from "@/lib/cms/types";
 
-export function FaqAccordion() {
+export function FaqAccordion({ items }: { items: CmsFaq[] }) {
   const [query, setQuery] = useState("");
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase();
-    if (!q) return FAQ_ITEMS.map((item, index) => ({ item, index }));
-    return FAQ_ITEMS.map((item, index) => ({ item, index })).filter(
+    const withIndex = items.map((item, index) => ({ item, index }));
+    if (!q) return withIndex;
+    return withIndex.filter(
       ({ item }) =>
         item.question.toLowerCase().includes(q) ||
-        item.answer.toLowerCase().includes(q)
+        item.answer.toLowerCase().includes(q) ||
+        item.category.toLowerCase().includes(q)
     );
-  }, [query]);
+  }, [query, items]);
 
   return (
     <div>
@@ -42,7 +44,7 @@ export function FaqAccordion() {
           {filtered.map(({ item, index }) => {
             const open = openIndex === index;
             return (
-              <FadeIn key={item.question}>
+              <FadeIn key={item.id}>
                 <div className="border border-ttw-gold/20 rounded-xl overflow-hidden theme-surface">
                   <button
                     type="button"

@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { z } from "zod";
 import { sendMail } from "@/lib/email";
+import { appendInboxMessage } from "@/lib/cms/inbox";
 
 const schema = z.object({
   name: z.string().min(1),
@@ -16,19 +17,32 @@ export async function POST(request: Request) {
     const body = await request.json();
     const data = schema.parse(body);
 
-    await sendMail({
-      subject: `Coaching Inquiry: ${data.package}`,
-      replyTo: data.email,
-      text: [
-        `Name: ${data.name}`,
-        `Email: ${data.email}`,
-        `Phone: ${data.phone}`,
-        `Package: ${data.package}`,
-        `Action: ${data.action}`,
-        "",
-        data.message || "(no message)",
-      ].join("\n"),
+    await appendInboxMessage({
+      type: "coaching",
+      name: data.name,
+      email: data.email,
+      phone: data.phone,
+      body: data.message || "",
+      package: data.package,
     });
+
+    try {
+      await sendMail({
+        subject: `Coaching Inquiry: ${data.package}`,
+        replyTo: data.email,
+        text: [
+          `Name: ${data.name}`,
+          `Email: ${data.email}`,
+          `Phone: ${data.phone}`,
+          `Package: ${data.package}`,
+          `Action: ${data.action}`,
+          "",
+          data.message || "(no message)",
+        ].join("\n"),
+      });
+    } catch (mailError) {
+      console.error("coaching-contact mail:", mailError);
+    }
 
     return NextResponse.json({ ok: true });
   } catch (error) {

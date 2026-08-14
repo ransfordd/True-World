@@ -2,14 +2,18 @@
 
 import { FormEvent, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 import {
   Compass,
   FileText,
   Heart,
+  Inbox,
   Info,
   Library,
   MessageSquareQuote,
+  Plus,
   Sparkles,
+  Video,
 } from "lucide-react";
 import { PasswordField } from "@/components/admin/PasswordField";
 import { useCmsAuth } from "@/components/admin/CmsAuthProvider";
@@ -67,6 +71,16 @@ export default function AdminHomePage() {
     null
   );
   const [counts, setCounts] = useState<Record<string, number>>({});
+  const [recent, setRecent] = useState<
+    {
+      id: string;
+      title: string;
+      slug: string;
+      status: string;
+      updatedAt: string;
+    }[]
+  >([]);
+  const [youtubeId, setYoutubeId] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -79,6 +93,8 @@ export default function AdminHomePage() {
       const data = await res.json();
       setUser(data.user);
       setCounts(data.counts || {});
+      setRecent(data.recentArticles || []);
+      setYoutubeId(data.youtubeFeaturedVideoId || "");
     } else {
       setUser(null);
     }
@@ -200,6 +216,97 @@ export default function AdminHomePage() {
             <p className="cms-stat-cta">{hint} →</p>
           </button>
         ))}
+      </div>
+
+      <div className="cms-stat-grid mt-4">
+        <button
+          type="button"
+          className="cms-stat-card"
+          onClick={() => router.push("/admin/inbox")}
+        >
+          <div className="cms-stat-top">
+            <span className="cms-stat-label">Unread inbox</span>
+            <span className="cms-stat-icon">
+              <Inbox size={18} strokeWidth={1.75} />
+            </span>
+          </div>
+          <p className="cms-stat-value">{counts.unreadMessages ?? 0}</p>
+          <p className="cms-stat-cta">Open inbox →</p>
+        </button>
+        <button
+          type="button"
+          className="cms-stat-card"
+          onClick={() => router.push("/admin/articles?status=draft")}
+        >
+          <div className="cms-stat-top">
+            <span className="cms-stat-label">Drafts</span>
+            <span className="cms-stat-icon">
+              <FileText size={18} strokeWidth={1.75} />
+            </span>
+          </div>
+          <p className="cms-stat-value">{counts.drafts ?? 0}</p>
+          <p className="cms-stat-cta">View drafts →</p>
+        </button>
+        <button
+          type="button"
+          className="cms-stat-card"
+          onClick={() => router.push("/admin/settings")}
+        >
+          <div className="cms-stat-top">
+            <span className="cms-stat-label">Featured YouTube</span>
+            <span className="cms-stat-icon">
+              <Video size={18} strokeWidth={1.75} />
+            </span>
+          </div>
+          <p className="cms-stat-value text-lg">
+            {youtubeId.trim() ? "Set" : "Empty"}
+          </p>
+          <p className="cms-stat-cta">
+            {youtubeId.trim() ? youtubeId : "Add a video ID in Settings"} →
+          </p>
+        </button>
+      </div>
+
+      <div className="flex flex-wrap gap-2 mt-6 mb-6">
+        <Link href="/admin/articles/new" className="btn btn-primary">
+          <Plus size={16} />
+          New article
+        </Link>
+        <Link href="/admin/daily-truths" className="btn btn-ghost">
+          Daily Truth
+        </Link>
+        <Link href="/admin/inbox" className="btn btn-ghost">
+          Inbox
+        </Link>
+      </div>
+
+      <div className="cms-panel p-5 mb-6">
+        <h2 className="cms-page-title text-xl mb-3">Recent articles</h2>
+        {recent.length === 0 ? (
+          <p className="text-gray-500 text-sm">No articles yet.</p>
+        ) : (
+          <ul className="space-y-2">
+            {recent.map((a) => (
+              <li key={a.id} className="flex justify-between gap-3 text-sm">
+                <Link
+                  href={`/admin/articles/${a.id}`}
+                  className="text-gray-200 hover:text-ttw-gold"
+                >
+                  {a.title}
+                </Link>
+                <span
+                  className={`cms-badge ${
+                    a.status === "published"
+                      ? "cms-badge-published"
+                      : "cms-badge-draft"
+                  }`}
+                >
+                  {a.status}
+                </span>
+              </li>
+            ))}
+          </ul>
+        )}
       </div>
 
       <div className="cms-callout">

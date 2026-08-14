@@ -16,6 +16,13 @@ import type {
 } from "./types";
 import { hashPassword } from "./auth";
 import {
+  defaultAbout,
+  defaultExaltationLines,
+  defaultFaqs,
+  defaultHomepage,
+  DEFAULT_CREED,
+} from "./defaults";
+import {
   COACHING_PACKAGES,
   COURSE_TIERS,
   DAILY_TRUTHS,
@@ -23,6 +30,46 @@ import {
   SITE,
   TESTIMONIALS,
 } from "@/lib/site-data";
+
+/** Fill v2 page copy / inbox if missing. Never resets articles or users. */
+function migrateStoreV2(store: CmsStore): boolean {
+  let dirty = false;
+  const raw = store as CmsStore & { version?: number };
+
+  if (!Array.isArray(store.faqs)) {
+    store.faqs = defaultFaqs();
+    dirty = true;
+  }
+  if (!store.about) {
+    store.about = defaultAbout();
+    dirty = true;
+  }
+  if (!store.homepage) {
+    store.homepage = defaultHomepage();
+    dirty = true;
+  }
+  if (!Array.isArray(store.exaltationLines)) {
+    store.exaltationLines = defaultExaltationLines();
+    dirty = true;
+  }
+  if (typeof store.creed !== "string") {
+    store.creed = DEFAULT_CREED;
+    dirty = true;
+  }
+  if (!Array.isArray(store.messages)) {
+    store.messages = [];
+    dirty = true;
+  }
+  if (!Array.isArray(store.media)) {
+    store.media = [];
+    dirty = true;
+  }
+  if (raw.version !== 2) {
+    store.version = 2;
+    dirty = true;
+  }
+  return dirty;
+}
 
 function stripMdxToHtml(content: string): string {
   return content
@@ -148,6 +195,17 @@ export async function ensureCmsSeeded(): Promise<CmsStore> {
         sortOrder: i,
       })
     );
+    store.faqs = defaultFaqs();
+    store.about = defaultAbout();
+    store.homepage = defaultHomepage();
+    store.exaltationLines = defaultExaltationLines();
+    store.creed = DEFAULT_CREED;
+    store.messages = [];
+    store.version = 2;
+    dirty = true;
+  }
+
+  if (migrateStoreV2(store)) {
     dirty = true;
   }
 

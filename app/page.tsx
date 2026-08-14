@@ -13,21 +13,17 @@ import {
   getCmsCoachingPackages,
   getCmsCourseTiers,
   getCmsDailyTruths,
+  getCmsHomepage,
   getCmsSettings,
   getCmsTestimonials,
 } from "@/lib/cms/queries";
 
-const PILLARS = [
-  { name: "Faith", line: "Trust rooted in the living Word", Icon: Cross },
-  { name: "Truth", line: "Revelation beyond tradition", Icon: Eye },
-  { name: "Transformation", line: "Renewed mind, renewed life", Icon: Flame },
-  { name: "Impact", line: "Awakening that multiplies", Icon: Heart },
-] as const;
+const PILLAR_ICONS = [Cross, Eye, Flame, Heart];
 
 export const dynamic = "force-dynamic";
 
 export default async function HomePage() {
-  const [featured, settings, dailyTruths, courseTiers, coaching, testimonials] =
+  const [featured, settings, dailyTruths, courseTiers, coaching, testimonials, homepage] =
     await Promise.all([
       getFeaturedArticles(3),
       getCmsSettings(),
@@ -35,6 +31,7 @@ export default async function HomePage() {
       getCmsCourseTiers(),
       getCmsCoachingPackages(),
       getCmsTestimonials(),
+      getCmsHomepage(),
     ]);
 
   const videoId = (settings.youtubeFeaturedVideoId || "").trim();
@@ -73,7 +70,11 @@ export default async function HomePage() {
   }));
 
   return (
-    <HomeWelcomeGate>
+    <HomeWelcomeGate
+      logo={settings.logo}
+      title={homepage.welcomeTitle}
+      subtitle={homepage.welcomeSubtitle}
+    >
       <header className="relative min-h-[88vh] sm:min-h-[90vh] flex items-center justify-center overflow-hidden border-b border-ttw-gold/20">
         <Image
           src="/images/pr.jpg"
@@ -98,10 +99,10 @@ export default async function HomePage() {
               />
             </div>
             <h1 className="font-cinzel text-4xl sm:text-5xl lg:text-7xl font-black mb-5 tracking-tighter text-ttw-gold uppercase gold-glow">
-              Spreading Light. Speaking Truth.
+              {homepage.heroHeadline}
             </h1>
             <p className="text-lg sm:text-xl lg:text-2xl text-gray-200 max-w-3xl mx-auto mb-10">
-              Awakening the Divine Within Humanity.
+              {homepage.heroSub}
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
               <a
@@ -137,20 +138,22 @@ export default async function HomePage() {
               </div>
               <div>
                 <h2 className="font-cinzel text-4xl sm:text-5xl font-extrabold mb-4 text-ttw-gold uppercase gold-glow">
-                  About Us
+                  {homepage.aboutHeading}
                 </h2>
-                <p className="text-xl text-gray-300 mb-6">
-                  A global faith-based movement unveiling divine truth, igniting purpose,
-                  and empowering lives through prophetic insight and spiritual teaching.
-                </p>
-                <p className="text-base text-gray-400 leading-relaxed mb-4">
-                  Founded by Eric Paddy Boso, we restore the unfiltered Word of God beyond
-                  religious tradition—so believers walk in full identity and destiny.
-                </p>
-                <p className="text-base text-gray-400 leading-relaxed mb-8">
-                  Not an institution: a living community united to remember and embody the
-                  True Word Yahushua lived and taught.
-                </p>
+                {homepage.aboutParagraphs.map((p, i) => (
+                  <p
+                    key={i}
+                    className={
+                      i === 0
+                        ? "text-xl text-gray-300 mb-6"
+                        : i === homepage.aboutParagraphs.length - 1
+                          ? "text-base text-gray-400 leading-relaxed mb-8"
+                          : "text-base text-gray-400 leading-relaxed mb-4"
+                    }
+                  >
+                    {p}
+                  </p>
+                ))}
                 <Link
                   href="/about"
                   className="inline-block border border-ttw-gold text-ttw-gold px-6 py-3 rounded-full hover:bg-ttw-gold/10 transition"
@@ -265,16 +268,19 @@ export default async function HomePage() {
             </p>
           </div>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            {PILLARS.map(({ name, line, Icon }) => (
-              <div
-                key={name}
-                className="p-5 text-center rounded-xl border border-ttw-gold/20 bg-[var(--surface)]"
-              >
-                <Icon className="mx-auto mb-3 text-ttw-gold" size={26} />
-                <p className="font-cinzel text-ttw-gold text-lg mb-1">{name}</p>
-                <p className="text-xs text-gray-400 leading-snug">{line}</p>
-              </div>
-            ))}
+            {homepage.pillars.map((pillar, i) => {
+              const Icon = PILLAR_ICONS[i] || Heart;
+              return (
+                <div
+                  key={pillar.name}
+                  className="p-5 text-center rounded-xl border border-ttw-gold/20 bg-[var(--surface)]"
+                >
+                  <Icon className="mx-auto mb-3 text-ttw-gold" size={26} />
+                  <p className="font-cinzel text-ttw-gold text-lg mb-1">{pillar.name}</p>
+                  <p className="text-xs text-gray-400 leading-snug">{pillar.line}</p>
+                </div>
+              );
+            })}
           </div>
         </FadeIn>
 

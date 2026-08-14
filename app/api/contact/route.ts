@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { z } from "zod";
 import { sendMail } from "@/lib/email";
+import { appendInboxMessage } from "@/lib/cms/inbox";
 
 const schema = z.object({
   name: z.string().optional().default(""),
@@ -40,21 +41,34 @@ export async function POST(request: Request) {
         ? "(No additional message provided)"
         : data.message);
 
-    await sendMail({
-      subject,
-      replyTo: data.email || undefined,
-      text: [
-        `Type: ${data.type}`,
-        `Name: ${data.name || "(not provided)"}`,
-        `Email: ${data.email || "(not provided)"}`,
-        `Phone: ${data.phone || "(not provided)"}`,
-        data.package ? `Package: ${data.package}` : "",
-        "",
-        messageBody,
-      ]
-        .filter(Boolean)
-        .join("\n"),
+    await appendInboxMessage({
+      type: data.type === "enrollment" ? "coaching" : "question",
+      name: data.name,
+      email: data.email,
+      phone: data.phone,
+      body: messageBody,
+      package: data.package,
     });
+
+    try {
+      await sendMail({
+        subject,
+        replyTo: data.email || undefined,
+        text: [
+          `Type: ${data.type}`,
+          `Name: ${data.name || "(not provided)"}`,
+          `Email: ${data.email || "(not provided)"}`,
+          `Phone: ${data.phone || "(not provided)"}`,
+          data.package ? `Package: ${data.package}` : "",
+          "",
+          messageBody,
+        ]
+          .filter(Boolean)
+          .join("\n"),
+      });
+    } catch (mailError) {
+      console.error("contact mail:", mailError);
+    }
 
     return NextResponse.json({ ok: true });
   } catch (error) {

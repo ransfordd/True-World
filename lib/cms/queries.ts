@@ -1,10 +1,14 @@
 import { ensureCmsSeeded } from "./seed";
 import { readStore } from "./store";
 import type {
+  CmsAbout,
   CmsArticle,
   CmsCoachingPackage,
   CmsCourseTier,
   CmsDailyTruth,
+  CmsExaltationLine,
+  CmsFaq,
+  CmsHomepage,
   CmsResource,
   CmsSiteSettings,
   CmsTestimonial,
@@ -74,4 +78,31 @@ export async function getCmsCourseTiers(): Promise<CmsCourseTier[]> {
   return [...readStore().courseTiers].sort(
     (a, b) => a.sortOrder - b.sortOrder
   );
+}
+
+export async function getCmsFaqs(): Promise<CmsFaq[]> {
+  await ensureCmsSeeded();
+  return [...readStore().faqs].sort((a, b) => a.sortOrder - b.sortOrder);
+}
+
+export async function getCmsAbout(): Promise<CmsAbout> {
+  await ensureCmsSeeded();
+  return readStore().about;
+}
+
+export async function getCmsHomepage(): Promise<CmsHomepage> {
+  await ensureCmsSeeded();
+  return readStore().homepage;
+}
+
+export async function getCmsExaltationLines(): Promise<CmsExaltationLine[]> {
+  await ensureCmsSeeded();
+  return [...readStore().exaltationLines].sort(
+    (a, b) => a.sortOrder - b.sortOrder
+  );
+}
+
+export async function getCmsCreed(): Promise<string> {
+  await ensureCmsSeeded();
+  return readStore().creed;
 }

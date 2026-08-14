@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { z } from "zod";
 import { sendMail } from "@/lib/email";
+import { appendInboxMessage } from "@/lib/cms/inbox";
 
 const schema = z.object({
   name: z.string().optional().default(""),
@@ -13,15 +14,26 @@ export async function POST(request: Request) {
     const body = await request.json();
     const data = schema.parse(body);
 
-    await sendMail({
-      subject: data.private ? "Private Prayer Request" : "Prayer Request",
-      text: [
-        `Name: ${data.name || "(anonymous)"}`,
-        `Private: ${data.private ? "yes" : "no"}`,
-        "",
-        data.request,
-      ].join("\n"),
+    await appendInboxMessage({
+      type: "prayer",
+      name: data.name,
+      body: data.request,
+      isPrivate: data.private,
     });
+
+    try {
+      await sendMail({
+        subject: data.private ? "Private Prayer Request" : "Prayer Request",
+        text: [
+          `Name: ${data.name || "(anonymous)"}`,
+          `Private: ${data.private ? "yes" : "no"}`,
+          "",
+          data.request,
+        ].join("\n"),
+      });
+    } catch (mailError) {
+      console.error("prayer mail:", mailError);
+    }
 
     return NextResponse.json({ ok: true });
   } catch (error) {

@@ -1,14 +1,26 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useMemo, useState } from "react";
+import { useSearchParams } from "next/navigation";
 import type { CmsArticle } from "@/lib/cms/types";
-import { Plus } from "lucide-react";
+import { ExternalLink, Plus } from "lucide-react";
 
 export default function AdminArticlesPage() {
+  return (
+    <Suspense fallback={<p className="cms-loading">Loading articles…</p>}>
+      <AdminArticlesInner />
+    </Suspense>
+  );
+}
+
+function AdminArticlesInner() {
+  const searchParams = useSearchParams();
   const [articles, setArticles] = useState<CmsArticle[]>([]);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(true);
+  const [query, setQuery] = useState("");
+  const [status, setStatus] = useState(searchParams.get("status") || "all");
 
   async function load() {
     setLoading(true);
@@ -37,6 +49,17 @@ export default function AdminArticlesPage() {
     if (res.ok) load();
   }
 
+  const filtered = useMemo(() => {
+    const q = query.trim().toLowerCase();
+    return articles.filter((a) => {
+      if (status !== "all" && a.status !== status) return false;
+      if (!q) return true;
+      return (
+        a.title.toLowerCase().includes(q) || a.slug.toLowerCase().includes(q)
+      );
+    });
+  }, [articles, query, status]);
+
   if (loading) return <p className="cms-loading">Loading articles…</p>;
   if (error) return <p className="text-red-400">{error}</p>;
 
@@ -46,14 +69,32 @@ export default function AdminArticlesPage() {
         <div>
           <h1 className="cms-page-title">Articles</h1>
           <p className="cms-page-sub">
-            {articles.length} teaching{articles.length === 1 ? "" : "s"} in the
-            library
+            {filtered.length} of {articles.length} teaching
+            {articles.length === 1 ? "" : "s"}
           </p>
         </div>
         <Link href="/admin/articles/new" className="btn btn-primary">
           <Plus size={16} strokeWidth={2.5} />
           New article
         </Link>
+      </div>
+      <div className="flex flex-col sm:flex-row gap-3 mb-5">
+        <input
+          type="search"
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
+          placeholder="Search title or slug…"
+          className="flex-1"
+        />
+        <select
+          value={status}
+          onChange={(e) => setStatus(e.target.value)}
+          className="sm:w-48"
+        >
+          <option value="all">All statuses</option>
+          <option value="published">Published</option>
+          <option value="draft">Draft</option>
+        </select>
       </div>
       <div className="cms-panel overflow-x-auto">
         <table>
@@ -67,7 +108,7 @@ export default function AdminArticlesPage() {
             </tr>
           </thead>
           <tbody>
-            {articles.map((a) => (
+            {filtered.map((a) => (
               <tr key={a.id}>
                 <td>
                   <div className="font-medium text-gray-100">{a.title}</div>
@@ -97,6 +138,17 @@ export default function AdminArticlesPage() {
                   >
                     Edit
                   </Link>
+                  {a.status === "published" && a.slug ? (
+                    <a
+                      href={`/articles/${a.slug}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="btn btn-ghost inline-flex items-center gap-1"
+                    >
+                      View on site
+                      <ExternalLink size={12} />
+                    </a>
+                  ) : null}
                   <button
                     type="button"
                     className="btn btn-danger"
@@ -109,6 +161,9 @@ export default function AdminArticlesPage() {
             ))}
           </tbody>
         </table>
+        {filtered.length === 0 ? (
+          <p className="p-6 text-gray-500 text-sm">No articles match.</p>
+        ) : null}
       </div>
     </div>
   );

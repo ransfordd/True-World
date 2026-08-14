@@ -4,17 +4,21 @@ import Image from "next/image";
 import { ReactNode, useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import { AnimatePresence, motion } from "framer-motion";
-import { SITE } from "@/lib/site-data";
 
 const DISPLAY_MS = 1600;
 const SEEN_KEY = "ttw-welcome-seen";
 
-/**
- * Shows the welcome overlay alone first (once per browser session),
- * then reveals homepage content after the overlay has fully faded out.
- * Shorter dwell + skip control so the page is not blocked long.
- */
-export function HomeWelcomeGate({ children }: { children: ReactNode }) {
+export function HomeWelcomeGate({
+  children,
+  logo,
+  title,
+  subtitle,
+}: {
+  children: ReactNode;
+  logo: string;
+  title: string;
+  subtitle: string;
+}) {
   const [mounted, setMounted] = useState(false);
   const [overlayVisible, setOverlayVisible] = useState(false);
   const [contentReady, setContentReady] = useState(false);
@@ -79,7 +83,7 @@ export function HomeWelcomeGate({ children }: { children: ReactNode }) {
             transition={{ duration: 0.55, ease: [0.2, 0.9, 0.2, 1] }}
           >
             <Image
-              src={SITE.logo}
+              src={logo}
               alt="TTW Logo"
               width={200}
               height={200}
@@ -87,9 +91,9 @@ export function HomeWelcomeGate({ children }: { children: ReactNode }) {
               priority
             />
             <h1 className="font-cinzel text-4xl sm:text-5xl font-black text-ttw-gold gold-glow mb-4 uppercase tracking-tight">
-              Welcome TO
+              {title}
               <br />
-              THE TRUE WORD
+              {subtitle}
             </h1>
             <button
               type="button"

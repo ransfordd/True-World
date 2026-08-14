@@ -102,8 +102,72 @@ export type CmsSiteSettings = {
   logo: string;
 };
 
+export type CmsFaq = {
+  id: string;
+  category: string;
+  question: string;
+  answer: string;
+  sortOrder: number;
+};
+
+export type CmsTextItem = {
+  title: string;
+  text: string;
+};
+
+export type CmsAbout = {
+  introLead: string;
+  introSub: string;
+  story: string[];
+  founderName: string;
+  founderLead: string;
+  founderBody: string;
+  uniqueItems: CmsTextItem[];
+  impactItems: CmsTextItem[];
+  vision: string;
+  missionLines: string[];
+  joinTitle: string;
+  joinBody: string;
+};
+
+export type CmsHomepagePillar = {
+  name: string;
+  line: string;
+};
+
+export type CmsHomepage = {
+  heroHeadline: string;
+  heroSub: string;
+  aboutHeading: string;
+  aboutParagraphs: string[];
+  pillars: CmsHomepagePillar[];
+  welcomeTitle: string;
+  welcomeSubtitle: string;
+};
+
+export type CmsExaltationLine = {
+  id: string;
+  text: string;
+  sortOrder: number;
+};
+
+export type CmsMessageType = "question" | "prayer" | "coaching" | "subscribe";
+
+export type CmsMessage = {
+  id: string;
+  type: CmsMessageType;
+  name: string;
+  email: string;
+  phone: string;
+  body: string;
+  package: string;
+  isPrivate: boolean;
+  read: boolean;
+  createdAt: string;
+};
+
 export type CmsStore = {
-  version: 1;
+  version: 1 | 2;
   users: CmsUser[];
   media: CmsMedia[];
   articles: CmsArticle[];
@@ -113,4 +177,10 @@ export type CmsStore = {
   coachingPackages: CmsCoachingPackage[];
   courseTiers: CmsCourseTier[];
   settings: CmsSiteSettings;
+  faqs: CmsFaq[];
+  about: CmsAbout;
+  homepage: CmsHomepage;
+  exaltationLines: CmsExaltationLine[];
+  creed: string;
+  messages: CmsMessage[];
 };

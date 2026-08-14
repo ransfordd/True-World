@@ -1,32 +1,17 @@
 import { NextResponse } from "next/server";
-import { revalidatePath } from "next/cache";
 import { getSession } from "@/lib/cms/auth";
 import { ensureCmsSeeded } from "@/lib/cms/seed";
-import { readStore, writeStore, newId } from "@/lib/cms/store";
-
-function revalidatePublic() {
-  revalidatePath("/");
-  revalidatePath("/testimonials");
-  revalidatePath("/resources");
-  revalidatePath("/coaching");
-  revalidatePath("/journey");
-  revalidatePath("/get-in-touch");
-  revalidatePath("/contact");
-}
-import type {
-  CmsCoachingPackage,
-  CmsCourseTier,
-  CmsDailyTruth,
-  CmsResource,
-  CmsTestimonial,
-} from "@/lib/cms/types";
+import { newId, readStore, writeStore } from "@/lib/cms/store";
+import { revalidateCmsPublic } from "@/lib/cms/revalidate";
 
 type CollectionKey =
   | "testimonials"
   | "resources"
   | "dailyTruths"
   | "coachingPackages"
-  | "courseTiers";
+  | "courseTiers"
+  | "faqs"
+  | "exaltationLines";
 
 const KEYS: CollectionKey[] = [
   "testimonials",
@@ -34,6 +19,8 @@ const KEYS: CollectionKey[] = [
   "dailyTruths",
   "coachingPackages",
   "courseTiers",
+  "faqs",
+  "exaltationLines",
 ];
 
 export async function GET(
@@ -75,7 +62,7 @@ export async function POST(
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   (store[key] as any[]).push(item);
   writeStore(store);
-  revalidatePublic();
+  revalidateCmsPublic();
   return NextResponse.json({ item }, { status: 201 });
 }
 
@@ -98,18 +85,9 @@ export async function PUT(
     return NextResponse.json({ error: "items array required" }, { status: 400 });
   }
   const store = readStore();
-  // full replace for batch edits
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   (store as any)[key] = body.items;
   writeStore(store);
-  revalidatePublic();
+  revalidateCmsPublic();
   return NextResponse.json({ items: store[key] });
 }
-
-export type {
-  CmsTestimonial,
-  CmsResource,
-  CmsDailyTruth,
-  CmsCoachingPackage,
-  CmsCourseTier,
-};

@@ -1,9 +1,11 @@
 "use client";
 
-import { FormEvent, useEffect, useState } from "react";
+import { FormEvent, useEffect, useRef, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 import type { CmsArticle } from "@/lib/cms/types";
 import { ArticleBodyEditor } from "@/components/admin/ArticleBodyEditor";
+import { MediaLibraryPicker } from "@/components/admin/MediaLibraryPicker";
+import { ExternalLink } from "lucide-react";
 
 const empty: Partial<CmsArticle> = {
   title: "",
@@ -26,9 +28,15 @@ export default function AdminArticleEditPage() {
   const [error, setError] = useState("");
   const [busy, setBusy] = useState(false);
   const [loading, setLoading] = useState(!isNew);
+  const [pickerOpen, setPickerOpen] = useState(false);
+  const snapshot = useRef(JSON.stringify(empty));
+  const dirtyRef = useRef(false);
 
   useEffect(() => {
-    if (isNew) return;
+    if (isNew) {
+      snapshot.current = JSON.stringify(empty);
+      return;
+    }
     (async () => {
       const res = await fetch(`/api/cms/articles/${id}`);
       if (res.status === 401) {
@@ -42,9 +50,24 @@ export default function AdminArticleEditPage() {
       }
       const data = await res.json();
       setForm(data.article);
+      snapshot.current = JSON.stringify(data.article);
       setLoading(false);
     })();
   }, [id, isNew]);
+
+  useEffect(() => {
+    dirtyRef.current = JSON.stringify(form) !== snapshot.current;
+  }, [form]);
+
+  useEffect(() => {
+    function onLeave(e: BeforeUnloadEvent) {
+      if (!dirtyRef.current) return;
+      e.preventDefault();
+      e.returnValue = "";
+    }
+    window.addEventListener("beforeunload", onLeave);
+    return () => window.removeEventListener("beforeunload", onLeave);
+  }, []);
 
   function set<K extends keyof CmsArticle>(key: K, value: CmsArticle[K]) {
     setForm((f) => ({ ...f, [key]: value }));
@@ -81,6 +104,8 @@ export default function AdminArticleEditPage() {
       setError(data.error || "Save failed");
       return;
     }
+    snapshot.current = JSON.stringify(form);
+    dirtyRef.current = false;
     router.push("/admin/articles");
     router.refresh();
   }
@@ -98,6 +123,17 @@ export default function AdminArticleEditPage() {
             Write the body with the formatting toolbar — no code required.
           </p>
         </div>
+        {form.status === "published" && form.slug ? (
+          <a
+            href={`/articles/${form.slug}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn btn-ghost inline-flex items-center gap-1"
+          >
+            View on site
+            <ExternalLink size={14} />
+          </a>
+        ) : null}
       </div>
       <form onSubmit={onSave} className="cms-panel p-5 md:p-6">
         <div className="field">
@@ -188,6 +224,15 @@ export default function AdminArticleEditPage() {
           />
         </div>
         <div className="field">
+          <button
+            type="button"
+            className="btn btn-ghost"
+            onClick={() => setPickerOpen(true)}
+          >
+            Choose from library
+          </button>
+        </div>
+        <div className="field">
           <label className="flex items-center gap-2 normal-case tracking-normal text-gray-300">
             <input
               type="checkbox"
@@ -209,6 +254,13 @@ export default function AdminArticleEditPage() {
             onChange={(html) => set("bodyHtml", html)}
           />
         </div>
+        <div className="field">
+          <label>Preview</label>
+          <div
+            className="prose-article rounded-xl border border-white/10 p-4 bg-black/40"
+            dangerouslySetInnerHTML={{ __html: form.bodyHtml || "" }}
+          />
+        </div>
         {error ? <p className="text-red-400 text-sm mb-3">{error}</p> : null}
         <div className="flex gap-3">
           <button type="submit" className="btn btn-primary" disabled={busy}>
@@ -223,6 +275,12 @@ export default function AdminArticleEditPage() {
           </button>
         </div>
       </form>
+      {pickerOpen ? (
+        <MediaLibraryPicker
+          onSelect={(url) => set("coverImageUrl", url)}
+          onClose={() => setPickerOpen(false)}
+        />
+      ) : null}
     </div>
   );
 }

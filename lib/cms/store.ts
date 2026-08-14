@@ -1,5 +1,6 @@
 import fs from "fs";
 import path from "path";
+import { defaultAbout, defaultHomepage } from "./defaults";
 import type { CmsStore } from "./types";
 
 const DATA_DIR = process.env.CMS_DATA_DIR
@@ -28,7 +29,7 @@ export function getStorePath() {
 
 export function defaultEmptyStore(): CmsStore {
   return {
-    version: 1,
+    version: 2,
     users: [],
     media: [],
     articles: [],
@@ -48,6 +49,12 @@ export function defaultEmptyStore(): CmsStore {
       youtubeFeaturedVideoId: "",
       logo: "/images/logo.png.png",
     },
+    faqs: [],
+    about: defaultAbout(),
+    homepage: defaultHomepage(),
+    exaltationLines: [],
+    creed: "",
+    messages: [],
   };
 }
 

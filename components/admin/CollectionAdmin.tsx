@@ -113,6 +113,7 @@ export function CollectionAdmin({ title, collection, fields, defaults }: Props) 
                   item.name ||
                     item.title ||
                     item.names ||
+                    item.question ||
                     item.reference ||
                     item.text ||
                     item.id

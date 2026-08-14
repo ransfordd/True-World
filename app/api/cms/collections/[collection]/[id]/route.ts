@@ -1,15 +1,17 @@
 import { NextResponse } from "next/server";
-import { revalidatePath } from "next/cache";
 import { getSession } from "@/lib/cms/auth";
 import { ensureCmsSeeded } from "@/lib/cms/seed";
 import { readStore, writeStore } from "@/lib/cms/store";
+import { revalidateCmsPublic } from "@/lib/cms/revalidate";
 
 type CollectionKey =
   | "testimonials"
   | "resources"
   | "dailyTruths"
   | "coachingPackages"
-  | "courseTiers";
+  | "courseTiers"
+  | "faqs"
+  | "exaltationLines";
 
 const KEYS: CollectionKey[] = [
   "testimonials",
@@ -17,17 +19,9 @@ const KEYS: CollectionKey[] = [
   "dailyTruths",
   "coachingPackages",
   "courseTiers",
+  "faqs",
+  "exaltationLines",
 ];
-
-function revalidatePublic() {
-  revalidatePath("/");
-  revalidatePath("/testimonials");
-  revalidatePath("/resources");
-  revalidatePath("/coaching");
-  revalidatePath("/journey");
-  revalidatePath("/get-in-touch");
-  revalidatePath("/contact");
-}
 
 export async function PATCH(
   req: Request,
@@ -53,7 +47,7 @@ export async function PATCH(
   }
   items[idx] = { ...items[idx], ...body, id };
   writeStore(store);
-  revalidatePublic();
+  revalidateCmsPublic();
   return NextResponse.json({ item: items[idx] });
 }
 
@@ -80,6 +74,6 @@ export async function DELETE(
     return NextResponse.json({ error: "Not found" }, { status: 404 });
   }
   writeStore(store);
-  revalidatePublic();
+  revalidateCmsPublic();
   return NextResponse.json({ ok: true });
 }
