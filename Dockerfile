@@ -10,7 +10,7 @@ WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 # Bust cache when CMS / app sources change
-ARG CACHE_BUST=cms-self-hosted-20260807
+ARG CACHE_BUST=cms-admin-polish-20260906
 ENV NEXT_TELEMETRY_DISABLED=1
 RUN npm run build
 

@@ -16,7 +16,7 @@ const empty: Partial<CmsArticle> = {
   coverImageUrl: "/images/logo.png.png",
   bodyHtml: "<p></p>",
   featured: false,
-  status: "published",
+  status: "draft",
 };
 
 export default function AdminArticleEditPage() {
@@ -165,6 +165,9 @@ export default function AdminArticleEditPage() {
         </div>
         <div className="field">
           <label>Description</label>
+          <span className="field-help">
+            SEO / meta description shown in search results.
+          </span>
           <textarea
             rows={2}
             value={form.description || ""}
@@ -173,6 +176,9 @@ export default function AdminArticleEditPage() {
         </div>
         <div className="field">
           <label>Excerpt</label>
+          <span className="field-help">
+            Short blurb on article cards and listings.
+          </span>
           <textarea
             rows={2}
             value={form.excerpt || ""}
@@ -195,13 +201,13 @@ export default function AdminArticleEditPage() {
           <div className="field">
             <label>Status</label>
             <select
-              value={form.status || "published"}
+              value={form.status || "draft"}
               onChange={(e) =>
                 set("status", e.target.value as CmsArticle["status"])
               }
             >
-              <option value="published">Published</option>
               <option value="draft">Draft</option>
+              <option value="published">Published</option>
             </select>
           </div>
         </div>
@@ -211,6 +217,16 @@ export default function AdminArticleEditPage() {
             value={form.coverImageUrl || ""}
             onChange={(e) => set("coverImageUrl", e.target.value)}
           />
+          {form.coverImageUrl ? (
+            <div className="mt-3 rounded-lg overflow-hidden border border-white/10 max-w-xs">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={form.coverImageUrl}
+                alt="Cover preview"
+                className="w-full h-36 object-cover bg-black"
+              />
+            </div>
+          ) : null}
         </div>
         <div className="field">
           <label>Upload cover</label>

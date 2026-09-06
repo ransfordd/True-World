@@ -2,6 +2,7 @@
 
 import { FormEvent, useEffect, useState } from "react";
 import type { CmsSiteSettings } from "@/lib/cms/types";
+import { extractYoutubeVideoId } from "@/lib/cms/youtube";
 import { PasswordField } from "@/components/admin/PasswordField";
 
 export default function AdminSettingsPage() {
@@ -33,10 +34,16 @@ export default function AdminSettingsPage() {
     if (!settings) return;
     setMsg("");
     setError("");
+    const payload = {
+      ...settings,
+      youtubeFeaturedVideoId: extractYoutubeVideoId(
+        settings.youtubeFeaturedVideoId
+      ),
+    };
     const res = await fetch("/api/cms/settings", {
       method: "PATCH",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(settings),
+      body: JSON.stringify(payload),
     });
     if (!res.ok) {
       const data = await res.json().catch(() => ({}));
@@ -125,7 +132,35 @@ export default function AdminSettingsPage() {
         {field("instagram", "Instagram URL")}
         {field("instagramHandle", "Instagram handle")}
         {field("youtube", "YouTube channel URL")}
-        {field("youtubeFeaturedVideoId", "Featured YouTube video ID")}
+        <div className="field">
+          <label>Featured YouTube video ID</label>
+          <span className="field-help">
+            Paste the video ID only (example{" "}
+            <code className="text-ttw-gold">dQw4w9WgXcQ</code>), not the channel
+            URL. A full watch link is OK — we extract the ID on save.
+          </span>
+          <input
+            value={settings.youtubeFeaturedVideoId}
+            onChange={(e) =>
+              setSettings((s) =>
+                s ? { ...s, youtubeFeaturedVideoId: e.target.value } : s
+              )
+            }
+            onBlur={() =>
+              setSettings((s) =>
+                s
+                  ? {
+                      ...s,
+                      youtubeFeaturedVideoId: extractYoutubeVideoId(
+                        s.youtubeFeaturedVideoId
+                      ),
+                    }
+                  : s
+              )
+            }
+            placeholder="e.g. dQw4w9WgXcQ"
+          />
+        </div>
         {field("logo", "Logo path")}
         {error ? <p className="text-red-400 text-sm mb-2">{error}</p> : null}
         {msg ? <p className="text-ttw-gold text-sm mb-2">{msg}</p> : null}

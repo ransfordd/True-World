@@ -1,6 +1,6 @@
 "use client";
 
-import { FormEvent, useEffect, useState } from "react";
+import { FormEvent, useEffect, useRef, useState } from "react";
 
 type Field =
   | { key: string; label: string; type?: "text" | "textarea" | "number" | "checkbox" }
@@ -18,13 +18,21 @@ export function CollectionAdmin({ title, collection, fields, defaults }: Props) 
   const [form, setForm] = useState<Record<string, unknown>>(defaults);
   const [editingId, setEditingId] = useState<string | null>(null);
   const [error, setError] = useState("");
+  const [msg, setMsg] = useState("");
+  const [busy, setBusy] = useState(false);
   const [loading, setLoading] = useState(true);
+  const formPanelRef = useRef<HTMLDivElement>(null);
 
   async function load() {
     setLoading(true);
     const res = await fetch(`/api/cms/collections/${collection}`);
     if (res.status === 401) {
       window.location.href = "/admin";
+      return;
+    }
+    if (!res.ok) {
+      setError("Failed to load items");
+      setLoading(false);
       return;
     }
     const data = await res.json();
@@ -38,6 +46,8 @@ export function CollectionAdmin({ title, collection, fields, defaults }: Props) 
 
   function startEdit(item: Record<string, unknown>) {
     setEditingId(String(item.id));
+    setError("");
+    setMsg("");
     const next = { ...item };
     for (const f of fields) {
       if (f.type === "list" && Array.isArray(item[f.key])) {
@@ -45,16 +55,22 @@ export function CollectionAdmin({ title, collection, fields, defaults }: Props) 
       }
     }
     setForm(next);
+    window.setTimeout(() => {
+      formPanelRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+    }, 50);
   }
 
   function resetForm() {
     setEditingId(null);
     setForm(defaults);
+    setError("");
   }
 
   async function onSave(e: FormEvent) {
     e.preventDefault();
     setError("");
+    setMsg("");
+    setBusy(true);
     const payload: Record<string, unknown> = { ...form };
     for (const f of fields) {
       if (f.type === "list") {
@@ -75,20 +91,30 @@ export function CollectionAdmin({ title, collection, fields, defaults }: Props) 
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(payload),
         });
+    setBusy(false);
     if (!res.ok) {
       const data = await res.json().catch(() => ({}));
       setError(data.error || "Save failed");
       return;
     }
     resetForm();
+    setMsg("Saved.");
     load();
   }
 
   async function remove(id: string) {
     if (!confirm("Delete this item?")) return;
-    await fetch(`/api/cms/collections/${collection}/${id}`, {
+    setError("");
+    const res = await fetch(`/api/cms/collections/${collection}/${id}`, {
       method: "DELETE",
     });
+    if (!res.ok) {
+      const data = await res.json().catch(() => ({}));
+      setError(data.error || "Delete failed");
+      return;
+    }
+    if (editingId === id) resetForm();
+    setMsg("Deleted.");
     load();
   }
 
@@ -106,37 +132,44 @@ export function CollectionAdmin({ title, collection, fields, defaults }: Props) 
           </div>
         </div>
         <ul className="cms-item-list">
-          {items.map((item) => (
-            <li key={String(item.id)} className="cms-item-card">
-              <p className="cms-item-card-title">
-                {String(
-                  item.name ||
-                    item.title ||
-                    item.names ||
-                    item.question ||
-                    item.reference ||
-                    item.text ||
-                    item.id
-                ).slice(0, 80)}
-              </p>
-              <div className="flex gap-2">
-                <button
-                  type="button"
-                  className="btn btn-ghost"
-                  onClick={() => startEdit(item)}
-                >
-                  Edit
-                </button>
-                <button
-                  type="button"
-                  className="btn btn-danger"
-                  onClick={() => remove(String(item.id))}
-                >
-                  Delete
-                </button>
-              </div>
-            </li>
-          ))}
+          {items.map((item) => {
+            const id = String(item.id);
+            const active = editingId === id;
+            return (
+              <li
+                key={id}
+                className={`cms-item-card${active ? " is-editing" : ""}`}
+              >
+                <p className="cms-item-card-title">
+                  {String(
+                    item.name ||
+                      item.title ||
+                      item.names ||
+                      item.question ||
+                      item.reference ||
+                      item.text ||
+                      item.id
+                  ).slice(0, 80)}
+                </p>
+                <div className="flex gap-2">
+                  <button
+                    type="button"
+                    className="btn btn-ghost"
+                    onClick={() => startEdit(item)}
+                  >
+                    Edit
+                  </button>
+                  <button
+                    type="button"
+                    className="btn btn-danger"
+                    onClick={() => remove(id)}
+                  >
+                    Delete
+                  </button>
+                </div>
+              </li>
+            );
+          })}
           {items.length === 0 ? (
             <li className="cms-item-card text-gray-500 text-sm">
               No items yet — add one on the right.
@@ -144,7 +177,7 @@ export function CollectionAdmin({ title, collection, fields, defaults }: Props) 
           ) : null}
         </ul>
       </div>
-      <div className="cms-panel p-5 md:p-6">
+      <div className="cms-panel p-5 md:p-6" ref={formPanelRef}>
         <h2 className="cms-page-title text-xl mb-4">
           {editingId ? "Edit item" : "Add item"}
         </h2>
@@ -197,9 +230,10 @@ export function CollectionAdmin({ title, collection, fields, defaults }: Props) 
             </div>
           ))}
           {error ? <p className="text-red-400 text-sm mb-2">{error}</p> : null}
+          {msg ? <p className="text-ttw-gold text-sm mb-2">{msg}</p> : null}
           <div className="flex gap-2">
-            <button type="submit" className="btn btn-primary">
-              Save
+            <button type="submit" className="btn btn-primary" disabled={busy}>
+              {busy ? "Saving…" : "Save"}
             </button>
             {editingId ? (
               <button type="button" className="btn btn-ghost" onClick={resetForm}>

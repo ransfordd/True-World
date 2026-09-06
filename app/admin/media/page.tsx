@@ -11,6 +11,7 @@ export default function AdminMediaPage() {
 
   async function load() {
     setLoading(true);
+    setError("");
     const res = await fetch("/api/cms/media");
     if (res.status === 401) {
       window.location.href = "/admin";
@@ -31,15 +32,16 @@ export default function AdminMediaPage() {
   }, []);
 
   async function onUpload(file: File) {
+    setError("");
     const fd = new FormData();
     fd.set("file", file);
     fd.set("alt", file.name);
     const res = await fetch("/api/cms/upload", { method: "POST", body: fd });
     if (!res.ok) {
-      setError("Upload failed");
+      setError("Upload failed. Try again or use a smaller image.");
       return;
     }
-    load();
+    await load();
   }
 
   async function copyUrl(url: string) {
@@ -50,19 +52,27 @@ export default function AdminMediaPage() {
 
   async function remove(id: string) {
     if (!confirm("Delete this file from the library?")) return;
-    await fetch(`/api/cms/media/${id}`, { method: "DELETE" });
-    load();
+    setError("");
+    const res = await fetch(`/api/cms/media/${id}`, { method: "DELETE" });
+    if (!res.ok) {
+      setError("Delete failed");
+      return;
+    }
+    await load();
   }
 
-  if (loading) return <p className="cms-loading">Loading media…</p>;
-  if (error) return <p className="text-red-400">{error}</p>;
+  if (loading && media.length === 0) {
+    return <p className="cms-loading">Loading media…</p>;
+  }
 
   return (
     <div>
       <div className="cms-page-header">
         <div>
           <h1 className="cms-page-title">Media library</h1>
-          <p className="cms-page-sub">{media.length} file{media.length === 1 ? "" : "s"}</p>
+          <p className="cms-page-sub">
+            {media.length} file{media.length === 1 ? "" : "s"}
+          </p>
         </div>
         <label className="btn btn-primary cursor-pointer">
           Upload
@@ -78,6 +88,9 @@ export default function AdminMediaPage() {
           />
         </label>
       </div>
+      {error ? (
+        <p className="text-red-400 text-sm mb-4 cms-panel p-3">{error}</p>
+      ) : null}
       <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
         {media.map((item) => (
           <div key={item.id} className="cms-panel overflow-hidden">

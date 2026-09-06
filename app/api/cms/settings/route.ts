@@ -3,6 +3,7 @@ import { revalidatePath } from "next/cache";
 import { getSession } from "@/lib/cms/auth";
 import { ensureCmsSeeded } from "@/lib/cms/seed";
 import { readStore, writeStore } from "@/lib/cms/store";
+import { extractYoutubeVideoId } from "@/lib/cms/youtube";
 import type { CmsSiteSettings } from "@/lib/cms/types";
 
 export async function GET() {
@@ -25,12 +26,18 @@ export async function PATCH(req: Request) {
   await ensureCmsSeeded();
   const body = (await req.json()) as Partial<CmsSiteSettings>;
   const store = readStore();
-  store.settings = {
+  const next = {
     ...store.settings,
     ...Object.fromEntries(
       Object.entries(body).filter(([, v]) => typeof v === "string")
     ),
   } as CmsSiteSettings;
+  if (typeof body.youtubeFeaturedVideoId === "string") {
+    next.youtubeFeaturedVideoId = extractYoutubeVideoId(
+      body.youtubeFeaturedVideoId
+    );
+  }
+  store.settings = next;
   writeStore(store);
   revalidatePath("/", "layout");
   return NextResponse.json({ settings: store.settings });

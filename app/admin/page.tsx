@@ -65,7 +65,7 @@ const STATS = [
 
 export default function AdminHomePage() {
   const router = useRouter();
-  const { refresh, markGuest } = useCmsAuth();
+  const { refresh } = useCmsAuth();
   const [loading, setLoading] = useState(true);
   const [user, setUser] = useState<{ email: string; role: string } | null>(
     null
@@ -122,13 +122,6 @@ export default function AdminHomePage() {
     }
     await loadMe();
     await refresh();
-  }
-
-  async function onLogout() {
-    await fetch("/api/cms/logout", { method: "POST" });
-    setUser(null);
-    setCounts({});
-    markGuest();
   }
 
   if (loading) {
@@ -189,9 +182,6 @@ export default function AdminHomePage() {
             <span className="cms-badge cms-badge-muted">{user.role}</span>
           </p>
         </div>
-        <button type="button" className="btn btn-ghost" onClick={onLogout}>
-          Sign out
-        </button>
       </div>
 
       <p className="cms-page-sub mb-5">
@@ -262,7 +252,9 @@ export default function AdminHomePage() {
             {youtubeId.trim() ? "Set" : "Empty"}
           </p>
           <p className="cms-stat-cta">
-            {youtubeId.trim() ? youtubeId : "Add a video ID in Settings"} →
+            {youtubeId.trim()
+              ? "Configured — edit in Settings →"
+              : "Add a video ID in Settings →"}
           </p>
         </button>
       </div>

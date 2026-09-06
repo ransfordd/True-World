@@ -13,6 +13,8 @@ export function ContactForm({ variant = "question", packageName }: Props) {
   const { showToast } = useToast();
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
+  const [submitError, setSubmitError] = useState("");
+  const [mailtoHref, setMailtoHref] = useState("");
   const [privateRequest, setPrivateRequest] = useState(false);
 
   async function onSubmit(e: FormEvent<HTMLFormElement>) {
@@ -32,6 +34,9 @@ export function ContactForm({ variant = "question", packageName }: Props) {
 
     const topic = String(fd.get("topic") || "").trim();
 
+    setSubmitError("");
+    setMailtoHref("");
+
     if (variant === "question" || variant === "prayer") {
       if (message.length < 10) {
         showToast("Please enter at least 10 characters.", "warning");
@@ -41,7 +46,10 @@ export function ContactForm({ variant = "question", packageName }: Props) {
 
     if (variant === "question") {
       if (!name || !email.includes("@")) {
-        showToast("Please enter your name and a valid email so we can reply.", "error");
+        showToast(
+          "Please enter your name and a valid email so we can reply.",
+          "error"
+        );
         return;
       }
     }
@@ -82,6 +90,13 @@ export function ContactForm({ variant = "question", packageName }: Props) {
           ? `Enrollment: ${packageName || "Coaching"}`
           : "Ask a Question";
 
+    const mailto = mailtoFallbackUrl(
+      subject,
+      Object.entries(body)
+        .map(([k, v]) => `${k}: ${v}`)
+        .join("\n")
+    );
+
     try {
       const res = await fetch(endpoint, {
         method: "POST",
@@ -93,31 +108,39 @@ export function ContactForm({ variant = "question", packageName }: Props) {
       showToast("Submitted successfully. Thank you!", "success");
       form.reset();
     } catch {
-      window.location.href = mailtoFallbackUrl(
-        subject,
-        Object.entries(body)
-          .map(([k, v]) => `${k}: ${v}`)
-          .join("\n")
+      setMailtoHref(mailto);
+      setSubmitError(
+        "We could not send your message right now. Your answers are still in the form — try again, or open email instead."
       );
-      showToast("Opening email client as fallback…", "warning");
+      showToast("Could not submit. You can open email instead.", "warning");
     } finally {
       setLoading(false);
     }
   }
 
-  if (success && variant === "contact") {
+  if (success) {
+    const thankYouBody =
+      variant === "prayer"
+        ? "We received your prayer request and will lift it up."
+        : variant === "contact"
+          ? `We received your request${
+              packageName ? ` for ${packageName}` : ""
+            }. We'll be in touch soon.`
+          : "We received your question and will reply by email when we can.";
+
     return (
-      <div className="text-center p-8 border border-ttw-gold/30 rounded-2xl theme-surface">
+      <div className="text-center p-8 border border-ttw-gold/30 rounded-2xl theme-surface max-w-xl mx-auto">
         <h3 className="font-cinzel text-2xl text-ttw-gold mb-2">Thank you!</h3>
         <p className="text-gray-300">
-          We received your request
-          {packageName ? (
+          {variant === "contact" && packageName ? (
             <>
-              {" "}
-              for <span className="text-ttw-gold">{packageName}</span>
+              We received your request for{" "}
+              <span className="text-ttw-gold">{packageName}</span>. We&apos;ll
+              be in touch soon.
             </>
-          ) : null}
-          . We&apos;ll be in touch soon.
+          ) : (
+            thankYouBody
+          )}
         </p>
       </div>
     );
@@ -317,6 +340,20 @@ export function ContactForm({ variant = "question", packageName }: Props) {
           </label>
         </>
       )}
+
+      {submitError ? (
+        <div className="rounded-xl border border-red-500/40 bg-red-500/10 px-4 py-3 text-sm text-red-200">
+          <p>{submitError}</p>
+          {mailtoHref ? (
+            <a
+              href={mailtoHref}
+              className="inline-block mt-2 text-ttw-gold underline-offset-2 hover:underline"
+            >
+              Open email instead
+            </a>
+          ) : null}
+        </div>
+      ) : null}
 
       <button
         type="submit"

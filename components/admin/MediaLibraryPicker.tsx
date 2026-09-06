@@ -23,9 +23,27 @@ export function MediaLibraryPicker({ onSelect, onClose }: Props) {
     })();
   }, []);
 
+  useEffect(() => {
+    function onKey(e: KeyboardEvent) {
+      if (e.key === "Escape") onClose();
+    }
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [onClose]);
+
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70">
-      <div className="cms-panel max-w-3xl w-full max-h-[80vh] overflow-y-auto p-5">
+    <div
+      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70"
+      onClick={onClose}
+      role="presentation"
+    >
+      <div
+        className="cms-panel max-w-3xl w-full max-h-[80vh] overflow-y-auto p-5"
+        onClick={(e) => e.stopPropagation()}
+        role="dialog"
+        aria-modal="true"
+        aria-label="Choose from library"
+      >
         <div className="flex justify-between items-center mb-4">
           <h2 className="cms-page-title text-xl">Choose from library</h2>
           <button type="button" className="btn btn-ghost" onClick={onClose}>

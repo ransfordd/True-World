@@ -15,6 +15,7 @@ import {
   Inbox,
   LayoutDashboard,
   Library,
+  LogOut,
   Menu,
   MessageSquareQuote,
   Quote,
@@ -34,28 +35,46 @@ type NavItem = {
   exact?: boolean;
 };
 
-const NAV: NavItem[] = [
-  { href: "/admin", label: "Dashboard", icon: LayoutDashboard, exact: true },
-  { href: "/admin/articles", label: "Articles", icon: FileText },
-  { href: "/admin/inbox", label: "Inbox", icon: Inbox },
-  { href: "/admin/media", label: "Media", icon: ImageIcon },
-  { href: "/admin/testimonials", label: "Testimonials", icon: MessageSquareQuote },
-  { href: "/admin/resources", label: "Resources", icon: Library },
-  { href: "/admin/daily-truths", label: "Daily Truth", icon: Sparkles },
-  { href: "/admin/coaching", label: "Coaching", icon: Heart },
-  { href: "/admin/journey", label: "Journey", icon: Compass },
-  { href: "/admin/faq", label: "FAQ", icon: HelpCircle },
-  { href: "/admin/about", label: "About", icon: User },
-  { href: "/admin/homepage", label: "Homepage", icon: Home },
-  { href: "/admin/exaltation", label: "Exaltation", icon: Quote },
-  { href: "/admin/creed", label: "Creed", icon: ScrollText },
-  { href: "/admin/settings", label: "Settings", icon: Settings },
+type NavSection = {
+  title: string;
+  items: NavItem[];
+};
+
+const NAV_SECTIONS: NavSection[] = [
+  {
+    title: "Content",
+    items: [
+      { href: "/admin", label: "Dashboard", icon: LayoutDashboard, exact: true },
+      { href: "/admin/articles", label: "Articles", icon: FileText },
+      { href: "/admin/inbox", label: "Inbox", icon: Inbox },
+      { href: "/admin/media", label: "Media", icon: ImageIcon },
+      { href: "/admin/testimonials", label: "Testimonials", icon: MessageSquareQuote },
+      { href: "/admin/resources", label: "Resources", icon: Library },
+      { href: "/admin/daily-truths", label: "Daily Truth", icon: Sparkles },
+      { href: "/admin/coaching", label: "Coaching", icon: Heart },
+      { href: "/admin/journey", label: "Journey", icon: Compass },
+    ],
+  },
+  {
+    title: "Pages",
+    items: [
+      { href: "/admin/faq", label: "FAQ", icon: HelpCircle },
+      { href: "/admin/about", label: "About", icon: User },
+      { href: "/admin/homepage", label: "Homepage", icon: Home },
+      { href: "/admin/exaltation", label: "Exaltation", icon: Quote },
+      { href: "/admin/creed", label: "Creed", icon: ScrollText },
+    ],
+  },
+  {
+    title: "Account",
+    items: [{ href: "/admin/settings", label: "Settings", icon: Settings }],
+  },
 ];
 
 export function AdminShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   const router = useRouter();
-  const { status } = useCmsAuth();
+  const { status, email, markGuest } = useCmsAuth();
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
@@ -67,6 +86,13 @@ export function AdminShell({ children }: { children: React.ReactNode }) {
   function isActive(href: string, exact?: boolean) {
     if (exact) return pathname === href;
     return pathname === href || pathname.startsWith(`${href}/`);
+  }
+
+  async function onLogout() {
+    await fetch("/api/cms/logout", { method: "POST" });
+    markGuest();
+    setOpen(false);
+    router.replace("/admin");
   }
 
   if (status === "loading") {
@@ -90,21 +116,30 @@ export function AdminShell({ children }: { children: React.ReactNode }) {
       </div>
 
       <nav className="cms-sidebar-nav" aria-label="CMS navigation">
-        <p className="cms-sidebar-section">Manage</p>
-        {NAV.map(({ href, label, icon: Icon, exact }) => (
-          <Link
-            key={href}
-            href={href}
-            className={`cms-nav-link${isActive(href, exact) ? " is-active" : ""}`}
-            onClick={() => setOpen(false)}
-          >
-            <Icon size={18} strokeWidth={1.75} />
-            <span>{label}</span>
-          </Link>
+        {NAV_SECTIONS.map((section) => (
+          <div key={section.title} className="cms-sidebar-group">
+            <p className="cms-sidebar-section">{section.title}</p>
+            {section.items.map(({ href, label, icon: Icon, exact }) => (
+              <Link
+                key={href}
+                href={href}
+                className={`cms-nav-link${isActive(href, exact) ? " is-active" : ""}`}
+                onClick={() => setOpen(false)}
+              >
+                <Icon size={18} strokeWidth={1.75} />
+                <span>{label}</span>
+              </Link>
+            ))}
+          </div>
         ))}
       </nav>
 
       <div className="cms-sidebar-footer">
+        {email ? (
+          <p className="cms-sidebar-email" title={email}>
+            {email}
+          </p>
+        ) : null}
         <Link
           href="/"
           className="cms-nav-link cms-nav-link-external"
@@ -114,6 +149,14 @@ export function AdminShell({ children }: { children: React.ReactNode }) {
           <ExternalLink size={18} strokeWidth={1.75} />
           <span>View site</span>
         </Link>
+        <button
+          type="button"
+          className="cms-nav-link cms-nav-link-external w-full text-left"
+          onClick={onLogout}
+        >
+          <LogOut size={18} strokeWidth={1.75} />
+          <span>Sign out</span>
+        </button>
       </div>
     </>
   );
