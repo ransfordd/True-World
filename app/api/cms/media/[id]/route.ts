@@ -1,9 +1,9 @@
 import { unlink } from "fs/promises";
-import path from "path";
 import { NextResponse } from "next/server";
 import { getSession } from "@/lib/cms/auth";
 import { ensureCmsSeeded } from "@/lib/cms/seed";
 import { readStore, writeStore } from "@/lib/cms/store";
+import { uploadUrlToFilePath } from "@/lib/cms/uploads";
 
 export async function DELETE(
   _req: Request,
@@ -23,8 +23,8 @@ export async function DELETE(
   store.media = store.media.filter((m) => m.id !== id);
   writeStore(store);
 
-  if (item.url.startsWith("/uploads/")) {
-    const filePath = path.join(process.cwd(), "public", item.url);
+  const filePath = uploadUrlToFilePath(item.url);
+  if (filePath) {
     try {
       await unlink(filePath);
     } catch {

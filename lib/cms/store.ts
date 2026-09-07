@@ -2,6 +2,7 @@ import fs from "fs";
 import path from "path";
 import { defaultAbout, defaultHomepage } from "./defaults";
 import type { CmsStore } from "./types";
+import { getUploadsDir } from "./uploads";
 
 const DATA_DIR = process.env.CMS_DATA_DIR
   ? path.resolve(process.env.CMS_DATA_DIR)
@@ -13,7 +14,7 @@ function ensureDir() {
   if (!fs.existsSync(DATA_DIR)) {
     fs.mkdirSync(DATA_DIR, { recursive: true });
   }
-  const uploads = path.join(process.cwd(), "public", "uploads");
+  const uploads = getUploadsDir();
   if (!fs.existsSync(uploads)) {
     fs.mkdirSync(uploads, { recursive: true });
   }

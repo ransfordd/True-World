@@ -37,12 +37,16 @@ type NavItem = {
 
 type NavSection = {
   title: string;
+  collapsible?: boolean;
+  storageKey?: string;
   items: NavItem[];
 };
 
 const NAV_SECTIONS: NavSection[] = [
   {
     title: "Content",
+    collapsible: true,
+    storageKey: "cms-nav-content-open",
     items: [
       { href: "/admin", label: "Dashboard", icon: LayoutDashboard, exact: true },
       { href: "/admin/articles", label: "Articles", icon: FileText },
@@ -57,6 +61,8 @@ const NAV_SECTIONS: NavSection[] = [
   },
   {
     title: "Pages",
+    collapsible: true,
+    storageKey: "cms-nav-pages-open",
     items: [
       { href: "/admin/faq", label: "FAQ", icon: HelpCircle },
       { href: "/admin/about", label: "About", icon: User },
@@ -70,6 +76,91 @@ const NAV_SECTIONS: NavSection[] = [
     items: [{ href: "/admin/settings", label: "Settings", icon: Settings }],
   },
 ];
+
+function useSectionOpen(
+  storageKey: string | undefined,
+  defaultOpen: boolean
+) {
+  const [open, setOpen] = useState(defaultOpen);
+
+  useEffect(() => {
+    if (!storageKey || typeof window === "undefined") return;
+    try {
+      const raw = localStorage.getItem(storageKey);
+      if (raw === "0") setOpen(false);
+      if (raw === "1") setOpen(true);
+    } catch {
+      /* ignore */
+    }
+  }, [storageKey]);
+
+  function toggle() {
+    setOpen((prev) => {
+      const next = !prev;
+      if (storageKey) {
+        try {
+          localStorage.setItem(storageKey, next ? "1" : "0");
+        } catch {
+          /* ignore */
+        }
+      }
+      return next;
+    });
+  }
+
+  return { open, toggle };
+}
+
+function NavSectionBlock({
+  section,
+  isActive,
+  onNavigate,
+}: {
+  section: NavSection;
+  isActive: (href: string, exact?: boolean) => boolean;
+  onNavigate: () => void;
+}) {
+  const { open, toggle } = useSectionOpen(
+    section.storageKey,
+    true
+  );
+  const showItems = !section.collapsible || open;
+
+  return (
+    <div className="cms-sidebar-group">
+      {section.collapsible ? (
+        <button
+          type="button"
+          className="cms-sidebar-section-btn"
+          onClick={toggle}
+          aria-expanded={open}
+        >
+          <span>{section.title}</span>
+          <span className="cms-sidebar-section-chevron" aria-hidden>
+            {open ? "▾" : "▸"}
+          </span>
+        </button>
+      ) : (
+        <p className="cms-sidebar-section">{section.title}</p>
+      )}
+      {showItems ? (
+        <div className="cms-sidebar-group-items">
+          {section.items.map(({ href, label, icon: Icon, exact }) => (
+            <Link
+              key={href}
+              href={href}
+              className={`cms-nav-link${isActive(href, exact) ? " is-active" : ""}`}
+              onClick={onNavigate}
+            >
+              <Icon size={18} strokeWidth={1.75} />
+              <span>{label}</span>
+            </Link>
+          ))}
+        </div>
+      ) : null}
+    </div>
+  );
+}
 
 export function AdminShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
@@ -117,20 +208,12 @@ export function AdminShell({ children }: { children: React.ReactNode }) {
 
       <nav className="cms-sidebar-nav" aria-label="CMS navigation">
         {NAV_SECTIONS.map((section) => (
-          <div key={section.title} className="cms-sidebar-group">
-            <p className="cms-sidebar-section">{section.title}</p>
-            {section.items.map(({ href, label, icon: Icon, exact }) => (
-              <Link
-                key={href}
-                href={href}
-                className={`cms-nav-link${isActive(href, exact) ? " is-active" : ""}`}
-                onClick={() => setOpen(false)}
-              >
-                <Icon size={18} strokeWidth={1.75} />
-                <span>{label}</span>
-              </Link>
-            ))}
-          </div>
+          <NavSectionBlock
+            key={section.title}
+            section={section}
+            isActive={isActive}
+            onNavigate={() => setOpen(false)}
+          />
         ))}
       </nav>
 

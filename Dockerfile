@@ -10,7 +10,7 @@ WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 # Bust cache when CMS / app sources change
-ARG CACHE_BUST=cms-admin-polish-20260906
+ARG CACHE_BUST=cms-uploads-route-20260907
 ENV NEXT_TELEMETRY_DISABLED=1
 RUN npm run build
 
@@ -25,11 +25,11 @@ ENV CMS_DATA_DIR=/app/data/cms
 RUN addgroup --system --gid 1001 nodejs \
   && adduser --system --uid 1001 nextjs
 
-COPY --from=builder /app/public ./public
 COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
+COPY --from=builder --chown=nextjs:nodejs /app/public ./public
 COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
 # Seed source for first-boot CMS import (MDX + static defaults use these at runtime)
-COPY --from=builder /app/content ./content
+COPY --from=builder --chown=nextjs:nodejs /app/content ./content
 
 RUN mkdir -p /app/data/cms /app/public/uploads \
   && chown -R nextjs:nodejs /app/data /app/public/uploads

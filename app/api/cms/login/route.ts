@@ -5,6 +5,12 @@ import {
   findUserByEmail,
   verifyPassword,
 } from "@/lib/cms/auth";
+import {
+  clearLoginFailures,
+  getClientIp,
+  getLoginLockout,
+  recordLoginFailure,
+} from "@/lib/cms/login-rate-limit";
 import { ensureCmsSeeded } from "@/lib/cms/seed";
 
 export async function POST(req: Request) {
@@ -21,10 +27,41 @@ export async function POST(req: Request) {
       { status: 400 }
     );
   }
+
+  const ip = getClientIp(req);
+  const rateKey = `${ip}:${email.toLowerCase()}`;
+  const lockout = getLoginLockout(rateKey);
+  if (lockout.locked) {
+    return NextResponse.json(
+      {
+        error: `Too many attempts. Try again in ${lockout.retryAfterMinutes} minute${
+          lockout.retryAfterMinutes === 1 ? "" : "s"
+        }.`,
+      },
+      { status: 429 }
+    );
+  }
+
   const user = findUserByEmail(email);
   if (!user || !(await verifyPassword(password, user.passwordHash))) {
-    return NextResponse.json({ error: "Invalid credentials" }, { status: 401 });
+    const afterFail = recordLoginFailure(rateKey);
+    if (afterFail.locked) {
+      return NextResponse.json(
+        {
+          error: `Too many attempts. Try again in ${afterFail.retryAfterMinutes} minute${
+            afterFail.retryAfterMinutes === 1 ? "" : "s"
+          }.`,
+        },
+        { status: 429 }
+      );
+    }
+    return NextResponse.json(
+      { error: "Incorrect email or password" },
+      { status: 401 }
+    );
   }
+
+  clearLoginFailures(rateKey);
   const token = await createSessionToken(user);
   const res = NextResponse.json({
     ok: true,

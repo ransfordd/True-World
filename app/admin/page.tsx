@@ -8,7 +8,6 @@ import {
   FileText,
   Heart,
   Inbox,
-  Info,
   Library,
   MessageSquareQuote,
   Plus,
@@ -117,7 +116,13 @@ export default function AdminHomePage() {
     setBusy(false);
     if (!res.ok) {
       const data = await res.json().catch(() => ({}));
-      setError(data.error || "Login failed");
+      if (res.status === 429) {
+        setError(data.error || "Too many attempts. Try again later.");
+      } else if (res.status === 401) {
+        setError("Incorrect email or password");
+      } else {
+        setError(data.error || "Login failed");
+      }
       return;
     }
     await loadMe();
@@ -130,37 +135,63 @@ export default function AdminHomePage() {
 
   if (!user) {
     return (
-      <div className="cms-login-wrap">
-        <div className="cms-login-card">
-          <h1>Staff login</h1>
-          <p className="cms-page-sub">
-            Manage articles, resources, coaching, and site settings.
-          </p>
-          <form onSubmit={onLogin}>
-            <div className="field">
-              <label htmlFor="email">Email</label>
-              <input
-                id="email"
-                type="email"
-                autoComplete="username"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
+      <div className="cms-login-screen">
+        <div className="cms-login-atmosphere" aria-hidden>
+          <span className="cms-login-orb cms-login-orb-a" />
+          <span className="cms-login-orb cms-login-orb-b" />
+          <span className="cms-login-grid" />
+        </div>
+
+        <Link href="/" className="cms-login-site-link">
+          ← Back to site
+        </Link>
+
+        <div className="cms-login-stage">
+          <header className="cms-login-brand">
+            <p className="cms-login-brand-name">True Word</p>
+            <p className="cms-login-brand-tag">Content management</p>
+          </header>
+
+          <div className="cms-login-panel">
+            <h1 className="cms-login-heading">Sign in</h1>
+            <p className="cms-login-lede">
+              Access articles, inbox, and site settings.
+            </p>
+            <form className="cms-login-form" onSubmit={onLogin}>
+              <div className="field">
+                <label htmlFor="email">Email</label>
+                <input
+                  id="email"
+                  type="email"
+                  autoComplete="username"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  required
+                  placeholder="you@example.com"
+                />
+              </div>
+              <PasswordField
+                id="password"
+                label="Password"
+                autoComplete="current-password"
+                value={password}
+                onChange={setPassword}
                 required
               />
-            </div>
-            <PasswordField
-              id="password"
-              label="Password"
-              autoComplete="current-password"
-              value={password}
-              onChange={setPassword}
-              required
-            />
-            {error ? <p className="text-red-400 text-sm mb-3">{error}</p> : null}
-            <button type="submit" className="btn btn-primary" disabled={busy}>
-              {busy ? "Signing in…" : "Sign in"}
-            </button>
-          </form>
+              {error ? (
+                <p className="cms-login-error" role="alert">
+                  {error}
+                </p>
+              ) : null}
+              <button
+                type="submit"
+                className="cms-login-submit"
+                disabled={busy}
+              >
+                {busy ? "Signing in…" : "Sign in"}
+              </button>
+            </form>
+          </div>
         </div>
       </div>
     );
@@ -170,6 +201,8 @@ export default function AdminHomePage() {
     (counts.articles || 0) +
     (counts.testimonials || 0) +
     (counts.resources || 0);
+  const unread = counts.unreadMessages ?? 0;
+  const youtubeSet = Boolean(youtubeId.trim());
 
   return (
     <div>
@@ -211,16 +244,21 @@ export default function AdminHomePage() {
       <div className="cms-stat-grid mt-4">
         <button
           type="button"
-          className="cms-stat-card"
+          className={`cms-stat-card${unread > 0 ? " cms-stat-card-urgent" : ""}`}
           onClick={() => router.push("/admin/inbox")}
         >
           <div className="cms-stat-top">
-            <span className="cms-stat-label">Unread inbox</span>
+            <span className="cms-stat-label">
+              Unread inbox
+              {unread > 0 ? (
+                <span className="cms-urgent-dot" aria-hidden />
+              ) : null}
+            </span>
             <span className="cms-stat-icon">
               <Inbox size={18} strokeWidth={1.75} />
             </span>
           </div>
-          <p className="cms-stat-value">{counts.unreadMessages ?? 0}</p>
+          <p className="cms-stat-value">{unread}</p>
           <p className="cms-stat-cta">Open inbox →</p>
         </button>
         <button
@@ -239,7 +277,7 @@ export default function AdminHomePage() {
         </button>
         <button
           type="button"
-          className="cms-stat-card"
+          className={`cms-stat-card${youtubeSet ? "" : " cms-stat-card-muted"}`}
           onClick={() => router.push("/admin/settings")}
         >
           <div className="cms-stat-top">
@@ -249,10 +287,10 @@ export default function AdminHomePage() {
             </span>
           </div>
           <p className="cms-stat-value text-lg">
-            {youtubeId.trim() ? "Set" : "Empty"}
+            {youtubeSet ? "Set" : "Not set up yet"}
           </p>
           <p className="cms-stat-cta">
-            {youtubeId.trim()
+            {youtubeSet
               ? "Configured — edit in Settings →"
               : "Add a video ID in Settings →"}
           </p>
@@ -301,14 +339,14 @@ export default function AdminHomePage() {
         )}
       </div>
 
-      <div className="cms-callout">
-        <Info className="cms-callout-icon" size={18} />
+      <details className="cms-system-info">
+        <summary>System info</summary>
         <p>
           Uploads save under <code>/uploads</code>. On Coolify, persist{" "}
           <code>data/cms</code> and <code>public/uploads</code> so content and
           images survive redeploys.
         </p>
-      </div>
+      </details>
     </div>
   );
 }

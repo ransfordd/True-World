@@ -4,6 +4,7 @@ import path from "path";
 import { getSession } from "@/lib/cms/auth";
 import { ensureCmsSeeded } from "@/lib/cms/seed";
 import { newId, readStore, writeStore } from "@/lib/cms/store";
+import { getUploadsDir } from "@/lib/cms/uploads";
 
 export async function POST(req: Request) {
   const session = await getSession();
@@ -25,7 +26,7 @@ export async function POST(req: Request) {
   const buf = Buffer.from(await file.arrayBuffer());
   const ext = path.extname(file.name) || ".jpg";
   const safe = `${Date.now()}-${Math.random().toString(36).slice(2, 8)}${ext}`;
-  const dir = path.join(process.cwd(), "public", "uploads");
+  const dir = getUploadsDir();
   await mkdir(dir, { recursive: true });
   await writeFile(path.join(dir, safe), buf);
 

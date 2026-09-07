@@ -2,6 +2,7 @@
 
 import { FormEvent, useEffect, useRef, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
+import Link from "next/link";
 import type { CmsArticle } from "@/lib/cms/types";
 import { ArticleBodyEditor } from "@/components/admin/ArticleBodyEditor";
 import { MediaLibraryPicker } from "@/components/admin/MediaLibraryPicker";
@@ -116,6 +117,15 @@ export default function AdminArticleEditPage() {
     <div className="max-w-3xl">
       <div className="cms-page-header">
         <div>
+          <nav className="cms-breadcrumb" aria-label="Breadcrumb">
+            <Link href="/admin/articles">Articles</Link>
+            <span className="cms-breadcrumb-sep" aria-hidden>
+              /
+            </span>
+            <span className="cms-breadcrumb-current">
+              {isNew ? "New" : form.title?.trim() || "Untitled"}
+            </span>
+          </nav>
           <h1 className="cms-page-title">
             {isNew ? "New article" : "Edit article"}
           </h1>
